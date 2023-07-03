@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -38,8 +39,20 @@ public class ItemListeners implements Listener
         }
     }
 
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent e)
+    {
+        Player p = (Player) e.getWhoClicked();
+        if (core.getInLobby().contains(p))
+        {
+            e.setCancelled(true);
+        }
+    }
+
     public static void getLobbyItems(Player p)
     {
+        p.getInventory().clear();
+
         ItemStack unranked = new ItemStack(Material.IRON_SWORD, 1);
         ItemMeta unrankedM = unranked.getItemMeta();
         unrankedM.setDisplayName("§f§lUnranked §7• Clique");
@@ -55,7 +68,7 @@ public class ItemListeners implements Listener
         ItemStack kitEditor = new ItemStack(Material.BOOK, 1);
         ItemMeta kitEditorM = kitEditor.getItemMeta();
         kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
-        kitEditor.setItemMeta(rankedM);
+        kitEditor.setItemMeta(kitEditorM);
         p.getInventory().setItem(8, kitEditor);
     }
 }
