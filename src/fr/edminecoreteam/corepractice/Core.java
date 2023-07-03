@@ -57,13 +57,13 @@ public class Core extends JavaPlugin implements PluginMessageListener
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this::onPluginMessageReceived);
 
         MySQLConnect();
+        ScoreboardManager();
+        loadListeners();
     }
 
     @Override
     public void onDisable() {
         MySQLDisconnect();
-        ScoreboardManager();
-        loadListeners();
 
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
         this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
