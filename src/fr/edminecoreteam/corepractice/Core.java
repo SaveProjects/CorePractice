@@ -161,6 +161,6 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public ScheduledExecutorService getScheduledExecutorService() {
         return this.scheduledExecutorService;
     }
-    public static Core getInstance() { return Core.getInstance(); }
+    public static Core getInstance() { return Core.instance; }
     public static Plugin getPlugin() { return Core.getPlugin(); }
 }
