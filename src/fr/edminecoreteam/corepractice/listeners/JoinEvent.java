@@ -24,7 +24,7 @@ public class JoinEvent implements Listener
         }
 
         Location lobbySpawn = new Location(Bukkit.getWorld(core.getConfig().getString("Lobby.world")),
-                (float) core.getConfig().getDouble("Lobby.world.x")
+                (float) core.getConfig().getDouble("Lobby.x")
                 , (float) core.getConfig().getDouble("Lobby.y")
                 , (float) core.getConfig().getDouble("Lobby.z")
                 , (float) core.getConfig().getDouble("Lobby.t")
