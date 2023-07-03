@@ -1,0 +1,21 @@
+#
+# Fichier configuration du practice par Edmine Network.
+# Dev: EdmineCoreTeam
+# Version: 0.1
+#
+
+Lobby:
+  world: 'none'
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  t: 0.0
+  b: 0.0
+
+KitEditor:
+  world: 'none'
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  t: 0.0
+  b: 0.0
