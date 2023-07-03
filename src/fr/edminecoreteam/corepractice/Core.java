@@ -109,6 +109,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
      */
     private void loadListeners()
     {
+        instance = this;
+
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new QuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new EventListeners(), this);
