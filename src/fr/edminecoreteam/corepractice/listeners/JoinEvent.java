@@ -32,5 +32,7 @@ public class JoinEvent implements Listener
 
         p.teleport(lobbySpawn);
         ItemListeners.getLobbyItems(p);
+        p.sendTitle("§e§lPractice", "§7Par Edmine Network.");
+        e.setJoinMessage(null);
     }
 }

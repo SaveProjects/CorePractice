@@ -24,5 +24,6 @@ public class QuitEvent implements Listener
         }
 
         p.getInventory().clear();
+        e.setQuitMessage(null);
     }
 }
