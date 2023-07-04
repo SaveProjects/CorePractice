@@ -44,7 +44,7 @@ public class ItemListeners implements Listener
             }
             if (it.getType() == Material.BED && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique")) {
                 e.setCancelled(true);
-                GameCheck gameCheck = new GameCheck();
+                GameCheck gameCheck = core.getGameCheck();
                 gameCheck.removeSerchGame(p);
                 p.sendMessage("§cRecherche annulée...");
                 getLobbyItems(p);
@@ -66,7 +66,7 @@ public class ItemListeners implements Listener
         }
         if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
             e.setCancelled(true);
-            GameCheck gameCheck = new GameCheck();
+            GameCheck gameCheck = core.getGameCheck();
             gameCheck.removeSerchGame(p);
             p.sendMessage("§cRecherche annulée...");
             getLobbyItems(p);

@@ -26,7 +26,7 @@ public class UnrankedMatchMaking
 
     public void start(String game)
     {
-        GameCheck gameCheck = new GameCheck();
+        GameCheck gameCheck = core.getGameCheck();
 
         if (gameCheck.getGame(p) == null)
         {
