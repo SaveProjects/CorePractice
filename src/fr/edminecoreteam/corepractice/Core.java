@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import fr.edminecoreteam.corepractice.edorm.MySQL;
 import fr.edminecoreteam.corepractice.edorm.SQLState;
 import fr.edminecoreteam.corepractice.edorm.SQLTasks;
+import fr.edminecoreteam.corepractice.gui.UnrankedGui;
 import fr.edminecoreteam.corepractice.listeners.EventListeners;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.listeners.JoinEvent;
@@ -115,6 +116,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new QuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new EventListeners(), this);
         Bukkit.getPluginManager().registerEvents(new ItemListeners(), this);
+
+        Bukkit.getPluginManager().registerEvents(new UnrankedGui(), this);
     }
 
     /*

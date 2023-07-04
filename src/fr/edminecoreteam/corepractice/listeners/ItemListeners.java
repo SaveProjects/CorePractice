@@ -1,13 +1,17 @@
 package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
+import fr.edminecoreteam.corepractice.gui.UnrankedGui;
+import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -34,6 +38,42 @@ public class ItemListeners implements Listener
         if (core.getInLobby().contains(p))
         {
             e.setCancelled(true);
+            ItemStack it = e.getCurrentItem();
+            if (it == null) {
+                return;
+            }
+            if (it.getType() == Material.BED && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique")) {
+                e.setCancelled(true);
+                GameCheck gameCheck = new GameCheck();
+                gameCheck.removeSerchGame(p);
+                p.sendMessage("§cRecherche annulée...");
+                getLobbyItems(p);
+            }
+            if (it.getType() == Material.IRON_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique")) {
+                e.setCancelled(true);
+                UnrankedGui.gui(p);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+        Action a = e.getAction();
+        ItemStack it = e.getItem();
+        if (it == null) {
+            return;
+        }
+        if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            e.setCancelled(true);
+            GameCheck gameCheck = new GameCheck();
+            gameCheck.removeSerchGame(p);
+            p.sendMessage("§cRecherche annulée...");
+            getLobbyItems(p);
+        }
+        if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            e.setCancelled(true);
+            UnrankedGui.gui(p);
         }
     }
 
@@ -77,5 +117,17 @@ public class ItemListeners implements Listener
         kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
         kitEditor.setItemMeta(kitEditorM);
         p.getInventory().setItem(8, kitEditor);
+    }
+
+
+    public static void foundGameItems(Player p)
+    {
+        p.getInventory().clear();
+
+        ItemStack leave = new ItemStack(Material.BED, 1);
+        ItemMeta leaveM = leave.getItemMeta();
+        leaveM.setDisplayName("§c§lQuitter §7• Clique");
+        leave.setItemMeta(leaveM);
+        p.getInventory().setItem(8, leave);
     }
 }
