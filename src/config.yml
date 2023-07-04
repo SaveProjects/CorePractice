@@ -19,3 +19,7 @@ KitEditor:
   z: 0.0
   t: 0.0
   b: 0.0
+
+kits:
+  unranked:
+    nodebuff:
