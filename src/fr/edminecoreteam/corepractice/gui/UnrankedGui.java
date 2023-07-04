@@ -62,18 +62,14 @@ public class UnrankedGui implements Listener
         inv.setItem(0, deco); inv.setItem(8, deco); inv.setItem(9, deco); inv.setItem(17, deco);
         inv.setItem(45, deco); inv.setItem(53, deco); inv.setItem(36, deco); inv.setItem(44, deco);
 
-        /*ItemStack blocs = new ItemStack(Material.NAME_TAG, 1);
+        ItemStack blocs = new ItemStack(Material.PAPER, 1);
         ItemMeta blocsM = blocs.getItemMeta();
-        blocsM.setDisplayName("§a§lVos blocs");
+        blocsM.setDisplayName("§d§lNodebuff");
         ArrayList<String> loreblocs = new ArrayList<String>();
-        loreblocs.add("");
-        loreblocs.add(" §dInformation:");
-        loreblocs.add(" §f▶ §7Ici, visionnez vos articles");
-        loreblocs.add(" §f▶ §7débloqués et utilisez-les !");
         loreblocs.add("");
         blocsM.setLore(loreblocs);
         blocs.setItemMeta(blocsM);
-        inv.setItem(19, blocs);*/
+        inv.setItem(19, blocs);
 
         p.openInventory(inv);
         p.playSound(p.getLocation(), Sound.HORSE_ARMOR, 1.0f, 1.0f);
