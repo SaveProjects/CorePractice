@@ -32,7 +32,7 @@ public class EventListeners implements Listener
             Player p = ((Player) e.getEntity()).getPlayer();
             if (core.getInLobby().contains(p) || core.getInEditor().contains(p))
             {
-                p.setFoodLevel(20);
+                e.setFoodLevel(20);
             }
         }
     }

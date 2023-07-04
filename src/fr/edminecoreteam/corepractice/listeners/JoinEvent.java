@@ -32,6 +32,7 @@ public class JoinEvent implements Listener
                 , (float) core.getConfig().getDouble("Lobby.b"));
 
         p.setGameMode(GameMode.ADVENTURE);
+        p.setFoodLevel(20);
         p.teleport(lobbySpawn);
         ItemListeners.getLobbyItems(p);
         p.sendTitle("§e§lPractice", "§7Par Edmine Network.");
