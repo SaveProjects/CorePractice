@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class EventListeners implements Listener
 {
@@ -35,5 +36,11 @@ public class EventListeners implements Listener
                 e.setFoodLevel(20);
             }
         }
+    }
+
+    @EventHandler
+    private void weatherChangeEvent(WeatherChangeEvent e)
+    {
+        Core.getPlugin().getServer().dispatchCommand(Core.getPlugin().getServer().getConsoleSender(), "weather clear");
     }
 }
