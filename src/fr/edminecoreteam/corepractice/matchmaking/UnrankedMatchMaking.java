@@ -42,12 +42,15 @@ public class UnrankedMatchMaking
 
                     for (Player pGame : core.getInLobby())
                     {
-                        if (gameCheck.getGame(pGame) == gameCheck.getGame(p))
+                        if (pGame != p)
                         {
-                            p.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pGame + "§f vas commencer...");
-                            gameCheck.removeSerchGame(pGame);
-                            gameCheck.removeSerchGame(p);
-                            cancel();
+                            if (gameCheck.getGame(pGame) == gameCheck.getGame(p))
+                            {
+                                p.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pGame + "§f vas commencer...");
+                                gameCheck.removeSerchGame(pGame);
+                                gameCheck.removeSerchGame(p);
+                                cancel();
+                            }
                         }
                     }
 
