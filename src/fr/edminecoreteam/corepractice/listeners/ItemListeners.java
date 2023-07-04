@@ -17,19 +17,6 @@ public class ItemListeners implements Listener
     private static Core core = Core.getInstance();
 
     @EventHandler
-    public void onDamage(EntityDamageEvent e)
-    {
-        if (e.getEntity() instanceof Player)
-        {
-            Player p = ((Player) e.getEntity()).getPlayer();
-            if (core.getInLobby().contains(p) || core.getInEditor().contains(p))
-            {
-                e.setCancelled(true);
-            }
-        }
-    }
-
-    @EventHandler
     public void onDrop(PlayerDropItemEvent e)
     {
         Player p = e.getPlayer();

@@ -2,6 +2,7 @@ package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,6 +31,7 @@ public class JoinEvent implements Listener
                 , (float) core.getConfig().getDouble("Lobby.t")
                 , (float) core.getConfig().getDouble("Lobby.b"));
 
+        p.setGameMode(GameMode.ADVENTURE);
         p.teleport(lobbySpawn);
         ItemListeners.getLobbyItems(p);
         p.sendTitle("§e§lPractice", "§7Par Edmine Network.");
