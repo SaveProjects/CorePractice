@@ -54,10 +54,14 @@ public class PersonalScoreboard {
 
         objectiveSign.setLine(0, "§1");
         objectiveSign.setLine(1, " §f➡ §dInformations:");
-        objectiveSign.setLine(2, "  §8• §7Votre ping: §d" + ((CraftPlayer) player).getHandle().ping);
-        objectiveSign.setLine(3, "  §8• §7Joueurs: §a" + core.getServer().getOnlinePlayers().size());
-        objectiveSign.setLine(4, "§3");
-        objectiveSign.setLine(5, " §8➡ " + ip);
+        objectiveSign.setLine(2, "  §8• §7Compte: §f" + player.getName());
+        objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
+        objectiveSign.setLine(4, "  §8• §7Joueurs: §a" + core.getServer().getOnlinePlayers().size());
+        objectiveSign.setLine(5, "§2");
+        objectiveSign.setLine(6, "  §8• §7Elo: §e");
+        objectiveSign.setLine(7, "  §8• §7Classement: §f");
+        objectiveSign.setLine(8, "§3");
+        objectiveSign.setLine(9, " §8➡ " + ip);
 
         objectiveSign.updateLines();
     }
