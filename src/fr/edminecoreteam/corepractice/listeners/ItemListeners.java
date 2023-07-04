@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class ItemListeners implements Listener
 {
@@ -51,6 +52,19 @@ public class ItemListeners implements Listener
         rankedM.setDisplayName("§b§lRanked §7• Clique");
         ranked.setItemMeta(rankedM);
         p.getInventory().setItem(1, ranked);
+
+        ItemStack ffa = new ItemStack(Material.GOLD_AXE, 1);
+        ItemMeta ffaM = ffa.getItemMeta();
+        ffaM.setDisplayName("§e§lFFA §7• Clique");
+        ffa.setItemMeta(ffaM);
+        p.getInventory().setItem(3, ffa);
+
+        ItemStack party = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        SkullMeta partyM = (SkullMeta) party.getItemMeta();
+        partyM.setDisplayName("§a§lCréer une partie §7• Clique");
+        partyM.setOwner(p.getName());
+        party.setItemMeta(partyM);
+        p.getInventory().setItem(3, party);
 
         ItemStack kitEditor = new ItemStack(Material.BOOK, 1);
         ItemMeta kitEditorM = kitEditor.getItemMeta();
