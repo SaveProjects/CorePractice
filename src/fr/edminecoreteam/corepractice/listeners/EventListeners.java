@@ -54,6 +54,6 @@ public class EventListeners implements Listener
     @EventHandler
     private void weatherChangeEvent(WeatherChangeEvent e)
     {
-        Core.getPlugin().getServer().dispatchCommand(Core.getPlugin().getServer().getConsoleSender(), "weather clear");
+        e.setCancelled(true);
     }
 }
