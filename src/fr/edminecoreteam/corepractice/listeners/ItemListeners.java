@@ -66,7 +66,7 @@ public class ItemListeners implements Listener
         party.setItemMeta(partyM);
         p.getInventory().setItem(5, party);
 
-        ItemStack settings = new ItemStack(Material.REDSTONE_COMPARATOR_ON, 1);
+        ItemStack settings = new ItemStack(Material.REDSTONE_COMPARATOR, 1);
         ItemMeta settingsM = settings.getItemMeta();
         settingsM.setDisplayName("§9§lRéglages §7• Clique");
         settings.setItemMeta(settingsM);
