@@ -64,7 +64,7 @@ public class ItemListeners implements Listener
         partyM.setDisplayName("§a§lCréer une partie §7• Clique");
         partyM.setOwner(p.getName());
         party.setItemMeta(partyM);
-        p.getInventory().setItem(3, party);
+        p.getInventory().setItem(5, party);
 
         ItemStack kitEditor = new ItemStack(Material.BOOK, 1);
         ItemMeta kitEditorM = kitEditor.getItemMeta();
