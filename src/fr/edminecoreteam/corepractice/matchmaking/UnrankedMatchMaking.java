@@ -30,6 +30,7 @@ public class UnrankedMatchMaking
 
         if (gameCheck.getGame(p) == null)
         {
+            core.getInWaiting().add(p);
             gameCheck.searchGame(p, game);
             p.sendMessage("§fRecherche d'une partie en cours sur le mode §e§l" + game + "§f...");
             ItemListeners.foundGameItems(p);
@@ -40,18 +41,18 @@ public class UnrankedMatchMaking
 
                     if (gameCheck.getGame(p) == null) { cancel(); }
 
-                    for (Player pGame : core.getInLobby())
+                    for (Player pGame : core.getInWaiting())
                     {
                         if (pGame != p)
                         {
                             if (gameCheck.getGame(pGame) == gameCheck.getGame(p))
                             {
-                                if (gameCheck.getGame(p) == null) { cancel(); }
-                                if (gameCheck.getGame(pGame) == null) { cancel(); }
                                 p.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pGame.getName() + "§f va commencer...");
                                 pGame.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + p.getName() + "§f va commencer...");
                                 gameCheck.removeSerchGame(pGame);
                                 gameCheck.removeSerchGame(p);
+                                core.getInWaiting().remove(p);
+                                core.getInWaiting().remove(pGame);
                                 cancel();
                             }
                         }

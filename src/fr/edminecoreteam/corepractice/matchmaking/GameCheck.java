@@ -1,8 +1,11 @@
 package fr.edminecoreteam.corepractice.matchmaking;
 
+import fr.edminecoreteam.corepractice.Core;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GameCheck
 {
@@ -35,5 +38,18 @@ public class GameCheck
         }
 
         return i;
+    }
+
+    public List<Player> getInWaiting()
+    {
+        List<Player> list = new ArrayList<Player>();
+        for (Player pS : Core.getInstance().getInLobby())
+        {
+            if (gameCheck.get(pS) != null)
+            {
+                list.add(pS);
+            }
+        }
+        return list;
     }
 }
