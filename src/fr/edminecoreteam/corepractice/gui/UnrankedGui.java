@@ -89,7 +89,7 @@ public class UnrankedGui implements Listener
                     {
                         ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.unranked." + gameMode + ".icon")).getType(), 1, (short)core.getConfig().getInt("kits.unranked." + gameMode + ".potionid"));
                         ItemMeta gamemodeM = gamemode.getItemMeta();
-                        gamemodeM.setDisplayName(core.getConfig().getString("kits.unranked." + gameMode + ".name"));
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.unranked." + gameMode + ".name").replace("&", "§"));
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dInformation:");
@@ -105,7 +105,7 @@ public class UnrankedGui implements Listener
                     {
                         ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.unranked." + gameMode + ".icon")).getType(), 1);
                         ItemMeta gamemodeM = gamemode.getItemMeta();
-                        gamemodeM.setDisplayName(core.getConfig().getString("kits.unranked." + gameMode + ".name"));
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.unranked." + gameMode + ".name").replace("&", "§"));
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dInformation:");
