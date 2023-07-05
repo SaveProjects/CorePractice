@@ -45,6 +45,7 @@ public class UnrankedGui implements Listener
 
                 matchMaking.start("nodebuff");
                 ItemListeners.foundGameItems(p);
+                p.closeInventory();
             }
         }
     }
