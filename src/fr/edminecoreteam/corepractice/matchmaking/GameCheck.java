@@ -1,11 +1,14 @@
 package fr.edminecoreteam.corepractice.matchmaking;
 
+import fr.edminecoreteam.corepractice.Core;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
 public class GameCheck
 {
+    private static Core core = Core.getInstance();
+
     private HashMap<Player, String> gameCheck;
 
     public GameCheck() {
@@ -26,9 +29,9 @@ public class GameCheck
     {
         int i = 0;
 
-        for (String sGame : gameCheck.values())
+        for (Player sGame : core.getInLobby())
         {
-            if (sGame == game)
+            if (getGame(sGame).equalsIgnoreCase(game))
             {
                 i++;
             }
