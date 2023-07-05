@@ -83,6 +83,11 @@ public class ItemListeners implements Listener
     {
         p.getInventory().clear();
 
+        p.getInventory().setHelmet(null);
+        p.getInventory().setChestplate(null);
+        p.getInventory().setLeggings(null);
+        p.getInventory().setBoots(null);
+
         ItemStack unranked = new ItemStack(Material.IRON_SWORD, 1);
         ItemMeta unrankedM = unranked.getItemMeta();
         unrankedM.setDisplayName("§f§lUnranked §7• Clique");

@@ -46,6 +46,8 @@ public class FoundGame
                         p2Kit.equipUnrankedDefaultKit(gameCheck.getGame(p2));
                         gameCheck.removeSerchGame(p1);
                         gameCheck.removeSerchGame(p2);
+                        core.getInDuel().add(p1);
+                        core.getInDuel().add(p2);
                     }
                 }
 

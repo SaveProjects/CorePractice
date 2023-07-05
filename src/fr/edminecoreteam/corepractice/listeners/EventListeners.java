@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
@@ -34,6 +35,20 @@ public class EventListeners implements Listener
                     p.teleport(lobbySpawn);
                     ((Player) p).sendTitle("§c§lHop Hop Hop !", "§7Tu ne peux pas quitter la cité des dieux...");
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    private void onDamageByAnother(EntityDamageByEntityEvent e)
+    {
+        if (e.getEntity() instanceof Player)
+        {
+            Player p = ((Player) e.getEntity()).getPlayer();
+            Player pA = (Player) e.getDamager();
+            if (core.getInDuel().contains(p) && !core.getInDuel().contains(pA))
+            {
+                e.setCancelled(true);
             }
         }
     }

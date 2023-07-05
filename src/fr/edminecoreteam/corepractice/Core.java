@@ -43,18 +43,22 @@ public class Core extends JavaPlugin implements PluginMessageListener
     private List<Player> inEditor;
     private List<Player> inWaiting;
 
+    private List<Player> inDuel;
+
     private GameCheck gameCheck;
 
     public Core() {
         inLobby = new ArrayList<Player>();
         inEditor = new ArrayList<Player>();
         inWaiting = new ArrayList<Player>();
+        inDuel = new ArrayList<Player>();
         gameCheck = new GameCheck();
     }
 
     public List<Player> getInLobby() { return this.inLobby; }
     public List<Player> getInEditor() { return this.inEditor; }
     public List<Player> getInWaiting() { return this.inWaiting; }
+    public List<Player> getInDuel() { return this.inDuel; }
 
     @Override
     public void onEnable() {
