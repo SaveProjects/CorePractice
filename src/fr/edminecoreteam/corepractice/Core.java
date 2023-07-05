@@ -10,6 +10,7 @@ import fr.edminecoreteam.corepractice.listeners.EventListeners;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.listeners.JoinEvent;
 import fr.edminecoreteam.corepractice.listeners.QuitEvent;
+import fr.edminecoreteam.corepractice.matchmaking.FoundGame;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import fr.edminecoreteam.corepractice.scoreboard.JoinScoreboardEvent;
 import fr.edminecoreteam.corepractice.scoreboard.LeaveScoreboardEvent;
@@ -125,6 +126,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new ItemListeners(), this);
 
         Bukkit.getPluginManager().registerEvents(new UnrankedGui(), this);
+        FoundGame.start();
     }
 
     /*
