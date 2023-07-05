@@ -37,7 +37,7 @@ public class LoadKits
     public void equipUnrankedDefaultKit(String kitName)
     {
         for(String sKitName : core.getConfig().getConfigurationSection("kits.unranked").getKeys(false)) {
-            if (kitName == sKitName) {
+            if (kitName.equals(sKitName)) {
                 p.sendMessage(sKitName);
                 for (String content : core.getConfig().getConfigurationSection("kits.unranked." + sKitName + ".content.items").getKeys(false)) {
                     if (core.getConfig().getString("kits.unranked." + sKitName + ".content.items." + content + ".specialid").equalsIgnoreCase("no")) {
