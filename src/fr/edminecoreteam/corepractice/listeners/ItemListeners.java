@@ -46,6 +46,7 @@ public class ItemListeners implements Listener
                 e.setCancelled(true);
                 GameCheck gameCheck = core.getGameCheck();
                 gameCheck.removeSerchGame(p);
+                core.getInWaiting().remove(p);
                 p.sendMessage("§cRecherche annulée...");
                 getLobbyItems(p);
             }
@@ -68,6 +69,7 @@ public class ItemListeners implements Listener
             e.setCancelled(true);
             GameCheck gameCheck = core.getGameCheck();
             gameCheck.removeSerchGame(p);
+            core.getInWaiting().remove(p);
             p.sendMessage("§cRecherche annulée...");
             getLobbyItems(p);
         }
