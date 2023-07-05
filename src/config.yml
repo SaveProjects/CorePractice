@@ -29,9 +29,10 @@ kits:
       icon: 'potion'
       potionid: '16421'
       content:
-        helmet:
-          item: 'diamond_helmet'
-          isenchant: 'yes'
-          enchants:
-            - ''
-            - ''
+        armor:
+          helmet:
+            item: 'diamond_helmet'
+            isenchant: 'yes'
+            enchants:
+              - 'sharpness'
+              - ''
