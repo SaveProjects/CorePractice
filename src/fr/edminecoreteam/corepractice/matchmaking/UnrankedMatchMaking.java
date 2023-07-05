@@ -40,6 +40,7 @@ public class UnrankedMatchMaking
                 public void run() {
 
                     if (gameCheck.getGame(p) == null) { cancel(); }
+                    if (!core.getInWaiting().contains(p)) { cancel(); }
 
                     for (Player pGame : core.getInWaiting())
                     {
