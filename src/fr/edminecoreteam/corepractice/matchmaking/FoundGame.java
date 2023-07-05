@@ -25,7 +25,7 @@ public class FoundGame
                     List<Player> waitlist = new ArrayList<Player>();
                     for (Player pGame : core.getInWaiting())
                     {
-                        if (gameCheck.getGame(pGame).equalsIgnoreCase(gameMode))
+                        if (gameCheck.getGame(pGame) != null && gameCheck.getGame(pGame).equalsIgnoreCase(gameMode))
                         {
                             waitlist.add(pGame);
                         }
