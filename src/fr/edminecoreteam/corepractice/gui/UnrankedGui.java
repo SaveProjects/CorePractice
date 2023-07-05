@@ -68,12 +68,12 @@ public class UnrankedGui implements Listener
         inv.setItem(45, deco); inv.setItem(53, deco); inv.setItem(36, deco); inv.setItem(44, deco);
 
         p.openInventory(inv);
-        p.playSound(p.getLocation(), Sound.HORSE_ARMOR, 1.0f, 1.0f);
+        p.playSound(p.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
         new BukkitRunnable() {
             int t = 0;
             public void run() {
 
-                if (!p.getOpenInventory().getTitle().contains("§8Choix de votre bloc")) { cancel(); }
+                if (!p.getOpenInventory().getTitle().contains("§8Unranked")) { cancel(); }
                 LoadKits kits = new LoadKits(p);
 
                 for (String gameMode : kits.getUnrankedKitList())
