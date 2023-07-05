@@ -49,6 +49,7 @@ public class UnrankedMatchMaking
                                 if (gameCheck.getGame(p) == null) { cancel(); }
                                 if (gameCheck.getGame(pGame) == null) { cancel(); }
                                 p.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pGame.getName() + "§f va commencer...");
+                                pGame.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + p.getName() + "§f va commencer...");
                                 gameCheck.removeSerchGame(pGame);
                                 gameCheck.removeSerchGame(p);
                                 cancel();
