@@ -39,15 +39,18 @@ public class UnrankedGui implements Listener
         if (e.getView().getTopInventory().getTitle().equals("§8Unranked")) {
             if (it.getType() == Material.STAINED_GLASS_PANE) { e.setCancelled(true); }
 
-
-            if (it.getType() == Material.PAPER && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§d§lNodebuff"))
+            for (String gameMode : core.getConfig().getConfigurationSection("kits.unranked").getKeys(false))
             {
-                e.setCancelled(true);
-                UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
+                ItemMeta itM = it.getItemMeta();
+                if (core.getConfig().getString("kits.unranked." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
+                {
+                    e.setCancelled(true);
+                    UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
 
-                matchMaking.start("nodebuff");
-                ItemListeners.foundGameItems(p);
-                p.closeInventory();
+                    matchMaking.start(core.getConfig().getString("kits.unranked." + gameMode + ".id"));
+                    ItemListeners.foundGameItems(p);
+                    p.closeInventory();
+                }
             }
         }
     }
