@@ -21,4 +21,19 @@ public class GameCheck
     public void removeSerchGame(Player player) { gameCheck.remove(player); }
 
     public HashMap<Player, String> getGame() { return gameCheck; }
+
+    public int getListWhereGame(String game)
+    {
+        int i = 0;
+
+        for (String sGame : gameCheck.values())
+        {
+            if (sGame == game)
+            {
+                i++;
+            }
+        }
+
+        return i;
+    }
 }

@@ -27,12 +27,129 @@ kits:
       id: 'nodebuff'
       type: 'normal'
       icon: 'potion'
-      potionid: '16421'
+      potionid: 16421
       content:
+        items:
+          sword:
+            item: 'diamond_sword'
+            specialid: 'no'
+            amount: 1
+            isenchant: 'yes'
+            enchants:
+              enchant1:
+                enchant: 'damage-all'
+                level: 5
+              enchant2:
+                enchant: 'fire-aspect'
+                level: 2
+            slots:
+              - 0
+          enderpearl:
+            item: 'ender_pearl'
+            specialid: 'no'
+            amount: 16
+            isenchant: 'no'
+            slots:
+              - 1
+          cookedchicken:
+            item: 'cooked_chicken'
+            specialid: 'no'
+            amount: 32
+            isenchant: 'no'
+            slots:
+              - 2
+          speedpotion:
+            item: 'potion'
+            specialid: 'yes'
+            id: 8226
+            amount: 1
+            isenchant: 'no'
+            slots:
+              - 8
+              - 17
+              - 26
+              - 35
+          fireresistancepotion:
+            item: 'potion'
+            specialid: 'yes'
+            id: 8259
+            amount: 1
+            isenchant: 'no'
+            slots:
+              - 7
+          healingpotion:
+            item: 'potion'
+            specialid: 'yes'
+            id: 16421
+            amount: 1
+            isenchant: 'no'
+            slots:
+              - 3
+              - 4
+              - 5
+              - 6
+              - 9
+              - 10
+              - 11
+              - 12
+              - 13
+              - 14
+              - 15
+              - 16
+              - 18
+              - 19
+              - 20
+              - 21
+              - 22
+              - 23
+              - 24
+              - 25
+              - 27
+              - 28
+              - 29
+              - 30
+              - 31
+              - 32
+              - 33
+              - 34
         armor:
           helmet:
             item: 'diamond_helmet'
             isenchant: 'yes'
             enchants:
-              - 'sharpness'
-              - ''
+              enchant1:
+                enchant: 'protection'
+                level: 4
+              enchant2:
+                enchant: 'unbreaking'
+                level: 3
+          chestplate:
+            item: 'diamond_chestplate'
+            isenchant: 'yes'
+            enchants:
+              enchant1:
+                enchant: 'protection'
+                level: 4
+              enchant2:
+                enchant: 'unbreaking'
+                level: 3
+          leggings:
+            item: 'diamond_leggings'
+            isenchant: 'yes'
+            enchants:
+              enchant1:
+                enchant: 'protection'
+                level: 4
+              enchant2:
+                enchant: 'unbreaking'
+                level: 3
+          boots:
+            item: 'diamond_boots'
+            isenchant: 'yes'
+            enchants:
+              enchant1:
+                enchant: 'protection'
+                level: 4
+              enchant2:
+                enchant: 'unbreaking'
+                level: 3

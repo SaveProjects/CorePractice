@@ -1,8 +1,10 @@
 package fr.edminecoreteam.corepractice.gui;
 
 import fr.edminecoreteam.corepractice.Core;
+import fr.edminecoreteam.corepractice.kits.LoadKits;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.matchmaking.UnrankedMatchMaking;
+import fr.edminecoreteam.corepractice.utils.ItemStackSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -79,6 +81,43 @@ public class UnrankedGui implements Listener
             public void run() {
 
                 if (!p.getOpenInventory().getTitle().contains("§8Choix de votre bloc")) { cancel(); }
+                LoadKits kits = new LoadKits(p);
+
+                for (String gameMode : kits.getUnrankedKitList())
+                {
+                    if (core.getConfig().getString("kits.unranked." + gameMode + ".icon").equalsIgnoreCase("potion"))
+                    {
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.unranked." + gameMode + ".icon")).getType(), 1, (short)core.getConfig().getInt("kits.unranked." + gameMode + ".potionid"));
+                        ItemMeta gamemodeM = gamemode.getItemMeta();
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.unranked." + gameMode + ".name"));
+                        ArrayList<String> loregamemode = new ArrayList<String>();
+                        loregamemode.add("");
+                        loregamemode.add(" §dInformation:");
+                        loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.unranked." + gameMode + ".id")));
+                        loregamemode.add(" §f▶ §7En jeu: ");
+                        loregamemode.add("");
+                        loregamemode.add("§8➡ §fCliquez pour rejoindre.");
+                        gamemodeM.setLore(loregamemode);
+                        gamemode.setItemMeta(gamemodeM);
+                        inv.setItem(19, gamemode);
+                    }
+                    else
+                    {
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.unranked." + gameMode + ".icon")).getType(), 1);
+                        ItemMeta gamemodeM = gamemode.getItemMeta();
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.unranked." + gameMode + ".name"));
+                        ArrayList<String> loregamemode = new ArrayList<String>();
+                        loregamemode.add("");
+                        loregamemode.add(" §dInformation:");
+                        loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.unranked." + gameMode + ".id")));
+                        loregamemode.add(" §f▶ §7En jeu: ");
+                        loregamemode.add("");
+                        loregamemode.add("§8➡ §fCliquez pour rejoindre.");
+                        gamemodeM.setLore(loregamemode);
+                        gamemode.setItemMeta(gamemodeM);
+                        inv.setItem(19, gamemode);
+                    }
+                }
 
                 ++t;
                 if (t == 10) {
