@@ -22,6 +22,22 @@ public class QuitEvent implements Listener
         {
             core.getInLobby().remove(p);
         }
+        if (core.getInEditor().contains(p))
+        {
+            core.getInEditor().remove(p);
+        }
+        if (core.getInWaiting().contains(p))
+        {
+            core.getInWaiting().remove(p);
+            if (core.getGameCheck().getGame(p) != null)
+            {
+                core.getGameCheck().removeSerchGame(p);
+            }
+        }
+        if (core.getInDuel().contains(p))
+        {
+            core.getInDuel().remove(p);
+        }
 
         p.getInventory().clear();
         e.setQuitMessage(null);
