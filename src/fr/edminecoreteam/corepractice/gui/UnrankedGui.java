@@ -32,7 +32,7 @@ public class UnrankedGui implements Listener
     public void inventoryClick(InventoryClickEvent e) {
         Player p = (Player)e.getWhoClicked();
         ItemStack it = e.getCurrentItem();
-        if (it == null) {
+        if (e.getCurrentItem() == null) {
             return;
         }
         if (it.getType() == Material.IRON_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique")) { e.setCancelled(true); }
@@ -92,7 +92,7 @@ public class UnrankedGui implements Listener
                         loregamemode.add("§8➡ §fCliquez pour rejoindre.");
                         gamemodeM.setLore(loregamemode);
                         gamemode.setItemMeta(gamemodeM);
-                        inv.setItem(19, gamemode);
+                        inv.setItem(core.getConfig().getInt("kits.unranked." + gameMode + ".slot"), gamemode);
                     }
                     else
                     {
@@ -108,7 +108,7 @@ public class UnrankedGui implements Listener
                         loregamemode.add("§8➡ §fCliquez pour rejoindre.");
                         gamemodeM.setLore(loregamemode);
                         gamemode.setItemMeta(gamemodeM);
-                        inv.setItem(19, gamemode);
+                        inv.setItem(core.getConfig().getInt("kits.unranked." + gameMode + ".slot"), gamemode);
                     }
                 }
 

@@ -28,6 +28,7 @@ kits:
       type: 'normal'
       icon: 'potion'
       potionid: 16421
+      slot: 20
       content:
         items:
           sword:
