@@ -40,8 +40,6 @@ public class FoundGame
                         p2.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + p1.getName() + "§f va commencer...");
                         core.getInWaiting().remove(p1);
                         core.getInWaiting().remove(p2);
-                        gameCheck.removeSerchGame(p1);
-                        gameCheck.removeSerchGame(p2);
                         core.getInLobby().remove(p1);
                         core.getInLobby().remove(p2);
 
@@ -49,6 +47,8 @@ public class FoundGame
                         LoadKits p2Kit = new LoadKits(p2);
                         p1Kit.equipUnrankedDefaultKit(gameCheck.getGame(p1));
                         p2Kit.equipUnrankedDefaultKit(gameCheck.getGame(p2));
+                        gameCheck.removeSerchGame(p1);
+                        gameCheck.removeSerchGame(p2);
                         core.getInDuel().add(p1);
                         core.getInDuel().add(p2);
                     }
