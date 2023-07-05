@@ -33,8 +33,8 @@ public class FoundGame
                     if (waitlist.size() > 1)
                     {
                         List<Player> gameList = waitlist.subList(0, 2);
-                        Player p1 = gameList.get(1);
-                        Player p2 = gameList.get(2);
+                        Player p1 = gameList.get(0);
+                        Player p2 = gameList.get(1);
                         p1.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + p2.getName() + "§f va commencer...");
                         p2.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + p1.getName() + "§f va commencer...");
                         core.getInWaiting().remove(p1);
