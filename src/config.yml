@@ -23,3 +23,15 @@ KitEditor:
 kits:
   unranked:
     nodebuff:
+      name: '&d&lNodebuff'
+      id: 'nodebuff'
+      type: 'normal'
+      icon: 'potion'
+      potionid: '16421'
+      content:
+        helmet:
+          item: 'diamond_helmet'
+          isenchant: 'yes'
+          enchants:
+            - ''
+            - ''
