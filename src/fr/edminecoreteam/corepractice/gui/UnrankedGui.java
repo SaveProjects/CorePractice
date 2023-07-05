@@ -49,7 +49,6 @@ public class UnrankedGui implements Listener
 
                     matchMaking.start(core.getConfig().getString("kits.unranked." + gameMode + ".id"));
                     ItemListeners.foundGameItems(p);
-                    p.closeInventory();
                 }
             }
         }
