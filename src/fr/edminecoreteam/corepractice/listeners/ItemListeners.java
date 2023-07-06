@@ -128,7 +128,7 @@ public class ItemListeners implements Listener
             kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
             kitEditor.setItemMeta(kitEditorM);
             p.getInventory().setItem(8, kitEditor);
-        }, 10);
+        }, 5);
     }
 
 
