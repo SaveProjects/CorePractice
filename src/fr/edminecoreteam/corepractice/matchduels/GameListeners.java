@@ -101,6 +101,9 @@ public class GameListeners implements Listener
 
                 core.getGameID().removeFromGameID(pVictory);
                 core.getGameID().removeFromGameID(pDeath);
+
+                ItemListeners.getLobbyItems(pVictory);
+                ItemListeners.getLobbyItems(pDeath);
             }
         }
     }
@@ -124,7 +127,5 @@ public class GameListeners implements Listener
         p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
         p.teleport(lobbySpawn);
-
-        ItemListeners.getLobbyItems(p);
     }
 }
