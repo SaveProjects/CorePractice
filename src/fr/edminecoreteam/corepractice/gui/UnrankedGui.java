@@ -32,7 +32,7 @@ public class UnrankedGui implements Listener
     public void inventoryClick(InventoryClickEvent e) {
         Player p = (Player)e.getWhoClicked();
         ItemStack it = e.getCurrentItem();
-        if (e.getCurrentItem().equals(Material.AIR)) {
+        if (e.getCurrentItem().getType() == null || e.getCurrentItem().getType() == Material.AIR) {
             return;
         }
         if (it.getType() == Material.IRON_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique")) { e.setCancelled(true); }
