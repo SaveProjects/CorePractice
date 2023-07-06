@@ -63,6 +63,9 @@ public class GameListeners implements Listener
         p1.teleport(p1Spawn);
         p2.teleport(p2Spawn);
 
+        p1.setGameMode(GameMode.SURVIVAL);
+        p2.setGameMode(GameMode.SURVIVAL);
+
         LoadKits p1Kit = new LoadKits(p1);
         LoadKits p2Kit = new LoadKits(p2);
 
@@ -85,10 +88,12 @@ public class GameListeners implements Listener
 
                 Player pVictory = core.getMatchOppenant().getMatchOppenant(pDeath);
 
-                leaveGame(pDeath);
                 leaveGame(pVictory);
+                leaveGame(pDeath);
 
                 pDeath.sendTitle("§c§lDéfaite...", "§7Peut-être une prochaine fois.");
+                pDeath.playSound(pVictory.getLocation(), Sound.VILLAGER_NO, 1.0f, 1.0f);
+
                 pVictory.sendTitle("§a§lVictoire !", "§7C'étais moins une !");
                 pVictory.playSound(pVictory.getLocation(), Sound.FIREWORK_LAUNCH, 1.0f, 1.0f);
 
@@ -105,10 +110,8 @@ public class GameListeners implements Listener
         core.getWorldName().removeWorldName(p);
         core.getGameType().removeFromTypeGame(p);
         core.getInDuel().remove(p);
-        if (!core.getInLobby().contains(p))
-        {
-            core.getInLobby().add(p);
-        }
+
+        core.getInLobby().add(p);
 
         Location lobbySpawn = new Location(Bukkit.getWorld(core.getConfig().getString("Lobby.world")),
                 (float) core.getConfig().getDouble("Lobby.x")
@@ -117,9 +120,11 @@ public class GameListeners implements Listener
                 , (float) core.getConfig().getDouble("Lobby.t")
                 , (float) core.getConfig().getDouble("Lobby.b"));
 
+        p.getActivePotionEffects().clear();
         p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
         p.teleport(lobbySpawn);
+
         ItemListeners.getLobbyItems(p);
     }
 }
