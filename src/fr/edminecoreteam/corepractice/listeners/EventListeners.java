@@ -44,11 +44,14 @@ public class EventListeners implements Listener
     {
         if (e.getEntity() instanceof Player)
         {
-            Player p = ((Player) e.getEntity()).getPlayer();
-            Player pA = (Player) e.getDamager();
-            if (core.getInDuel().contains(p) && !core.getInDuel().contains(pA))
+            if (e.getDamager() instanceof Player)
             {
-                e.setCancelled(true);
+                Player p = ((Player) e.getEntity()).getPlayer();
+                Player pA = (Player) e.getDamager();
+                if (!core.getMatchOppenant().getMatchOppenant(p).equals(pA))
+                {
+                    e.setCancelled(true);
+                }
             }
         }
     }
