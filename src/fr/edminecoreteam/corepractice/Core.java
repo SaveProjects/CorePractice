@@ -10,8 +10,7 @@ import fr.edminecoreteam.corepractice.listeners.EventListeners;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.listeners.JoinEvent;
 import fr.edminecoreteam.corepractice.listeners.QuitEvent;
-import fr.edminecoreteam.corepractice.matchduels.GameID;
-import fr.edminecoreteam.corepractice.matchduels.TypeGame;
+import fr.edminecoreteam.corepractice.matchduels.*;
 import fr.edminecoreteam.corepractice.matchmaking.FoundGame;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import fr.edminecoreteam.corepractice.scoreboard.JoinScoreboardEvent;
@@ -50,6 +49,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     private GameCheck gameCheck;
     private TypeGame typeGame;
     private GameID gameID;
+    private WorldName worldName;
+    private MatchOppenant matchOppenant;
 
     public Core() {
         inLobby = new ArrayList<Player>();
@@ -59,6 +60,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
         gameCheck = new GameCheck();
         typeGame = new TypeGame();
         gameID = new GameID();
+        worldName = new WorldName();
+        matchOppenant = new MatchOppenant();
     }
 
     public List<Player> getInLobby() { return this.inLobby; }
@@ -134,6 +137,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new QuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new EventListeners(), this);
         Bukkit.getPluginManager().registerEvents(new ItemListeners(), this);
+        Bukkit.getPluginManager().registerEvents(new GameListeners(), this);
 
         Bukkit.getPluginManager().registerEvents(new UnrankedGui(), this);
         FoundGame.start();
@@ -175,6 +179,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public GameCheck getGameCheck() { return this.gameCheck; }
     public TypeGame getGameType() { return this.typeGame; }
     public GameID getGameID() { return this.gameID; }
+    public WorldName getWorldName() { return this.worldName; }
+    public MatchOppenant getMatchOppenant() { return this.matchOppenant; }
 
     public ScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;

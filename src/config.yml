@@ -20,6 +20,27 @@ KitEditor:
   t: 0.0
   b: 0.0
 
+Arenas:
+  Stone-Floor:
+    spec:
+      x: -17.5
+      y: 31.5
+      z: 0.0
+      t: -90.3
+      b: 33.7
+    team1:
+      x: 0.5
+      y: 19.5
+      z: -40.5
+      t: -0.1
+      b: -0.5
+    team2:
+      x: 0.5
+      y: 19.5
+      z: 42.5
+      t: -180.0
+      b: -1.5
+
 kits:
   unranked:
     nodebuff:

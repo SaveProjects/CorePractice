@@ -21,4 +21,6 @@ public class GameID
     public void removeFromGameID(Player player) { gameID.remove(player); }
 
     public HashMap<Player, Integer> getGameID() { return gameID; }
+
+    public String getIDString(Player player) { return gameID.get(player) + ""; }
 }
