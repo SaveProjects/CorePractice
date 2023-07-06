@@ -52,14 +52,14 @@ public class GameListeners implements Listener
         core.getWorldName().putWorldName(p1, world);
         core.getWorldName().putWorldName(p2, world);
 
-        Location p1Spawn = new Location(Bukkit.getWorld(core.getConfig().getString("Arenas." + core.getWorldName().getWorldName(p1))),
+        Location p1Spawn = new Location(Bukkit.getWorld(core.getGameID().getIDString(p1)),
                 (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.x")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.y")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.z")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.t")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.b"));
 
-        Location p2Spawn = new Location(Bukkit.getWorld(core.getConfig().getString("Arenas." + core.getWorldName().getWorldName(p2))),
+        Location p2Spawn = new Location(Bukkit.getWorld(core.getGameID().getIDString(p2)),
                 (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.x")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.y")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.z")
