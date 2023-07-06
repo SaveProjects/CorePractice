@@ -83,7 +83,7 @@ public class PersonalScoreboard {
 
             objectiveSign.setLine(0, "§1");
             objectiveSign.setLine(1, " §f➡ §b§lMatch en cours:");
-            objectiveSign.setLine(2, "  §8• §7Adversaire: §c" + oppenant);
+            objectiveSign.setLine(2, "  §8• §7Adversaire: §c" + oppenant.getName());
             objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
             objectiveSign.setLine(4, "  §8• §7Ping adversaire: §b" + ((CraftPlayer) oppenant).getHandle().ping);
             objectiveSign.setLine(5, "§2");
