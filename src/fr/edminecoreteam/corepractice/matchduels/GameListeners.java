@@ -81,14 +81,15 @@ public class GameListeners implements Listener
     @EventHandler
     public void onDeath(PlayerDeathEvent e)
     {
-        Player pDeath = (Player) e.getEntity();
+        Player pDeathEvent = (Player) e.getEntity();
         if (core.getGameID() != null)
         {
-            if (core.getInDuel().contains(pDeath))
+            if (core.getInDuel().contains(pDeathEvent))
             {
                 e.getEntity().spigot().respawn();
 
-                Player pVictory = core.getMatchOppenant().getMatchOppenant(pDeath);
+                Player pVictory = core.getMatchOppenant().getMatchOppenant(pDeathEvent);
+                Player pDeath = core.getMatchOppenant().getMatchOppenant(pVictory);
 
                 leaveGame(pVictory);
                 leaveGame(pDeath);
@@ -107,16 +108,6 @@ public class GameListeners implements Listener
                 ItemListeners.getLobbyItems(pVictory);
                 ItemListeners.getLobbyItems(pDeath);
             }
-        }
-    }
-
-    @EventHandler
-    public void onRespawn(EntitySpawnEvent e)
-    {
-        if (e.getEntity() instanceof Player)
-        {
-            Player p = (Player) e.getEntity();
-            ItemListeners.getLobbyItems(p);
         }
     }
 
