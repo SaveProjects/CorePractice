@@ -13,6 +13,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -103,8 +104,17 @@ public class GameListeners implements Listener
                 core.getGameID().removeFromGameID(pDeath);
 
                 ItemListeners.getLobbyItems(pVictory);
-                ItemListeners.getLobbyItems(pDeath);
             }
+        }
+    }
+
+    @EventHandler
+    public void onRespawn(EntitySpawnEvent e)
+    {
+        if (e.getEntity() instanceof Player)
+        {
+            Player p = (Player) e.getEntity();
+            ItemListeners.getLobbyItems(p);
         }
     }
 
