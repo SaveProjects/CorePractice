@@ -22,7 +22,6 @@ public class GameListeners implements Listener
     private static Core core = Core.getInstance();
     public static void startGame(Player p1, Player p2)
     {
-        GameCheck gameCheck = core.getGameCheck();
         core.getInWaiting().remove(p1);
         core.getInWaiting().remove(p2);
         core.getInLobby().remove(p1);
@@ -30,22 +29,17 @@ public class GameListeners implements Listener
 
         int randomID = ThreadLocalRandom.current().nextInt(100000000, 999999999);
 
-        LoadKits p1Kit = new LoadKits(p1);
-        LoadKits p2Kit = new LoadKits(p2);
-
         core.getMatchOppenant().putMatchOppenant(p1, p2);
         core.getMatchOppenant().putMatchOppenant(p2, p1);
 
-        core.getGameType().putInGame(p1, gameCheck.getGame(p1));
-        core.getGameType().putInGame(p2, gameCheck.getGame(p2));
+        core.getGameType().putInGame(p1, core.getGameCheck().getGame(p1));
+        core.getGameType().putInGame(p2, core.getGameCheck().getGame(p2));
 
         core.getGameID().putGameID(p1, randomID);
         core.getGameID().putGameID(p2, randomID);
 
         core.getInDuel().add(p1);
         core.getInDuel().add(p2);
-        gameCheck.removeSerchGame(p1);
-        gameCheck.removeSerchGame(p2);
 
         String world = LoadWorld.getRandomSubfolderName("gameTemplate/");
         LoadWorld.createGameWorld(world, core.getGameID().getIDString(p1));
@@ -69,8 +63,14 @@ public class GameListeners implements Listener
         p1.teleport(p1Spawn);
         p2.teleport(p2Spawn);
 
-        p1Kit.equipUnrankedDefaultKit(gameCheck.getGame(p1));
-        p2Kit.equipUnrankedDefaultKit(gameCheck.getGame(p2));
+        LoadKits p1Kit = new LoadKits(p1);
+        LoadKits p2Kit = new LoadKits(p2);
+
+        p1Kit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p1));
+        p2Kit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p2));
+
+        core.getGameCheck().removeSerchGame(p1);
+        core.getGameCheck().removeSerchGame(p2);
     }
 
     @EventHandler
