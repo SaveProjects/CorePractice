@@ -73,8 +73,8 @@ public class PersonalScoreboard {
             objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
             objectiveSign.setLine(4, "  §8• §7Joueurs: §a" + core.getServer().getOnlinePlayers().size());
             objectiveSign.setLine(5, "§2");
-            objectiveSign.setLine(6, "  §8• §7Recherche en cours: §e" + core.getGameCheck().getGame(player));
-            objectiveSign.setLine(7, "§3");
+            objectiveSign.setLine(6, "  §8• §7Recherche: §e" + core.getGameCheck().getGame(player));
+            objectiveSign.setLine(7, "§4§5");
             objectiveSign.setLine(8, " §8➡ " + ip);
         }
         if (core.getInDuel().contains(player))

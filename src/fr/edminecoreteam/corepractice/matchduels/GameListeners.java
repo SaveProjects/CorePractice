@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -80,7 +81,7 @@ public class GameListeners implements Listener
     @EventHandler
     public void onDeath(PlayerDeathEvent e)
     {
-        Player pDeath = e.getEntity();
+        Player pDeath = (Player) e.getEntity();
         if (core.getGameID() != null)
         {
             if (core.getInDuel().contains(pDeath))
@@ -104,6 +105,7 @@ public class GameListeners implements Listener
                 core.getGameID().removeFromGameID(pDeath);
 
                 ItemListeners.getLobbyItems(pVictory);
+                ItemListeners.getLobbyItems(pDeath);
             }
         }
     }
