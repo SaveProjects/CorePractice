@@ -3,6 +3,7 @@ package fr.edminecoreteam.corepractice.listeners;
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -82,48 +83,52 @@ public class ItemListeners implements Listener
     public static void getLobbyItems(Player p)
     {
         p.getInventory().clear();
+        Bukkit.getScheduler().runTaskLater(core, () -> {
+            // Code à exécuter après 1 seconde
+            // Par exemple, envoi d'un message à un joueur
 
-        p.getInventory().setHelmet(null);
-        p.getInventory().setChestplate(null);
-        p.getInventory().setLeggings(null);
-        p.getInventory().setBoots(null);
+            p.getInventory().setHelmet(null);
+            p.getInventory().setChestplate(null);
+            p.getInventory().setLeggings(null);
+            p.getInventory().setBoots(null);
 
-        ItemStack unranked = new ItemStack(Material.IRON_SWORD, 1);
-        ItemMeta unrankedM = unranked.getItemMeta();
-        unrankedM.setDisplayName("§f§lUnranked §7• Clique");
-        unranked.setItemMeta(unrankedM);
-        p.getInventory().setItem(0, unranked);
+            ItemStack unranked = new ItemStack(Material.IRON_SWORD, 1);
+            ItemMeta unrankedM = unranked.getItemMeta();
+            unrankedM.setDisplayName("§f§lUnranked §7• Clique");
+            unranked.setItemMeta(unrankedM);
+            p.getInventory().setItem(0, unranked);
 
-        ItemStack ranked = new ItemStack(Material.DIAMOND_SWORD, 1);
-        ItemMeta rankedM = ranked.getItemMeta();
-        rankedM.setDisplayName("§b§lRanked §7• Clique");
-        ranked.setItemMeta(rankedM);
-        p.getInventory().setItem(1, ranked);
+            ItemStack ranked = new ItemStack(Material.DIAMOND_SWORD, 1);
+            ItemMeta rankedM = ranked.getItemMeta();
+            rankedM.setDisplayName("§b§lRanked §7• Clique");
+            ranked.setItemMeta(rankedM);
+            p.getInventory().setItem(1, ranked);
 
-        ItemStack ffa = new ItemStack(Material.GOLD_AXE, 1);
-        ItemMeta ffaM = ffa.getItemMeta();
-        ffaM.setDisplayName("§e§lFFA §7• Clique");
-        ffa.setItemMeta(ffaM);
-        p.getInventory().setItem(3, ffa);
+            ItemStack ffa = new ItemStack(Material.GOLD_AXE, 1);
+            ItemMeta ffaM = ffa.getItemMeta();
+            ffaM.setDisplayName("§e§lFFA §7• Clique");
+            ffa.setItemMeta(ffaM);
+            p.getInventory().setItem(3, ffa);
 
-        ItemStack party = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-        SkullMeta partyM = (SkullMeta) party.getItemMeta();
-        partyM.setDisplayName("§a§lCréer une partie §7• Clique");
-        partyM.setOwner(p.getName());
-        party.setItemMeta(partyM);
-        p.getInventory().setItem(5, party);
+            ItemStack party = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+            SkullMeta partyM = (SkullMeta) party.getItemMeta();
+            partyM.setDisplayName("§a§lCréer une partie §7• Clique");
+            partyM.setOwner(p.getName());
+            party.setItemMeta(partyM);
+            p.getInventory().setItem(5, party);
 
-        ItemStack settings = new ItemStack(Material.REDSTONE_COMPARATOR, 1);
-        ItemMeta settingsM = settings.getItemMeta();
-        settingsM.setDisplayName("§9§lRéglages §7• Clique");
-        settings.setItemMeta(settingsM);
-        p.getInventory().setItem(6, settings);
+            ItemStack settings = new ItemStack(Material.REDSTONE_COMPARATOR, 1);
+            ItemMeta settingsM = settings.getItemMeta();
+            settingsM.setDisplayName("§9§lRéglages §7• Clique");
+            settings.setItemMeta(settingsM);
+            p.getInventory().setItem(6, settings);
 
-        ItemStack kitEditor = new ItemStack(Material.BOOK, 1);
-        ItemMeta kitEditorM = kitEditor.getItemMeta();
-        kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
-        kitEditor.setItemMeta(kitEditorM);
-        p.getInventory().setItem(8, kitEditor);
+            ItemStack kitEditor = new ItemStack(Material.BOOK, 1);
+            ItemMeta kitEditorM = kitEditor.getItemMeta();
+            kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
+            kitEditor.setItemMeta(kitEditorM);
+            p.getInventory().setItem(8, kitEditor);
+        }, 20);
     }
 
 
