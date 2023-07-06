@@ -107,16 +107,17 @@ public class GameListeners implements Listener
                 core.getGameID().removeFromGameID(pDeath);
 
                 ItemListeners.getLobbyItems(pVictory);
+                ItemListeners.getLobbyItems(pDeath);
             }
         }
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onPlayerRespawnAfterDeath(PlayerRespawnEvent e)
     {
         Player p = e.getPlayer();
         ItemListeners.getLobbyItems(p);
-    }
+    }*/
 
     public static void leaveGame(Player p)
     {
