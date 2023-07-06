@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -106,9 +107,15 @@ public class GameListeners implements Listener
                 core.getGameID().removeFromGameID(pDeath);
 
                 ItemListeners.getLobbyItems(pVictory);
-                ItemListeners.getLobbyItems(pDeath);
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerRespawnAfterDeath(PlayerRespawnEvent e)
+    {
+        Player p = e.getPlayer();
+        ItemListeners.getLobbyItems(p);
     }
 
     public static void leaveGame(Player p)
