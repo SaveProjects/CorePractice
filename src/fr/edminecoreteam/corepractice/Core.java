@@ -10,6 +10,8 @@ import fr.edminecoreteam.corepractice.listeners.EventListeners;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.listeners.JoinEvent;
 import fr.edminecoreteam.corepractice.listeners.QuitEvent;
+import fr.edminecoreteam.corepractice.matchduels.GameID;
+import fr.edminecoreteam.corepractice.matchduels.TypeGame;
 import fr.edminecoreteam.corepractice.matchmaking.FoundGame;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import fr.edminecoreteam.corepractice.scoreboard.JoinScoreboardEvent;
@@ -46,6 +48,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     private List<Player> inDuel;
 
     private GameCheck gameCheck;
+    private TypeGame typeGame;
+    private GameID gameID;
 
     public Core() {
         inLobby = new ArrayList<Player>();
@@ -53,6 +57,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
         inWaiting = new ArrayList<Player>();
         inDuel = new ArrayList<Player>();
         gameCheck = new GameCheck();
+        typeGame = new TypeGame();
+        gameID = new GameID();
     }
 
     public List<Player> getInLobby() { return this.inLobby; }
@@ -167,6 +173,9 @@ public class Core extends JavaPlugin implements PluginMessageListener
      * Méthode de retournement de l'instance.
      */
     public GameCheck getGameCheck() { return this.gameCheck; }
+    public TypeGame getGameType() { return this.typeGame; }
+    public GameID getGameID() { return this.gameID; }
+
     public ScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;
     }

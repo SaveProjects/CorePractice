@@ -2,6 +2,7 @@ package fr.edminecoreteam.corepractice.matchmaking;
 
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.kits.LoadKits;
+import fr.edminecoreteam.corepractice.matchduels.GameListeners;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -38,19 +39,8 @@ public class FoundGame
                         Player p2 = gameList.get(1);
                         p1.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + p2.getName() + "§f va commencer...");
                         p2.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + p1.getName() + "§f va commencer...");
-                        core.getInWaiting().remove(p1);
-                        core.getInWaiting().remove(p2);
-                        core.getInLobby().remove(p1);
-                        core.getInLobby().remove(p2);
 
-                        LoadKits p1Kit = new LoadKits(p1);
-                        LoadKits p2Kit = new LoadKits(p2);
-                        p1Kit.equipUnrankedDefaultKit(gameCheck.getGame(p1));
-                        p2Kit.equipUnrankedDefaultKit(gameCheck.getGame(p2));
-                        gameCheck.removeSerchGame(p1);
-                        gameCheck.removeSerchGame(p2);
-                        core.getInDuel().add(p1);
-                        core.getInDuel().add(p2);
+                        GameListeners.startGame(p1, p2);
                     }
                 }
 
