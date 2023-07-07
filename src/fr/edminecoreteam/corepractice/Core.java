@@ -68,6 +68,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         gameID = new GameID();
         worldName = new WorldName();
         matchOppenant = new MatchOppenant();
+        timerData = new TimerDataManager();
     }
 
     public List<Player> getInLobby() { return this.inLobby; }
