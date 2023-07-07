@@ -41,7 +41,7 @@ public class QuitEvent implements Listener
 
         if (core.getGameID().getGameID(p) != null)
         {
-            if (core.getInDuel().contains(p))
+            if (core.getInDuel().contains(p) || core.getInPreDuel().contains(p))
             {
                 Player pVictory = core.getMatchOppenant().getMatchOppenant(p);
 

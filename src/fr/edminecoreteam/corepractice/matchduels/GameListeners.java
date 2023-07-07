@@ -81,6 +81,9 @@ public class GameListeners implements Listener
         p2.setAllowFlight(false);
         p2.setFlying(false);
 
+        p1.setHealth(20);
+        p2.setHealth(20);
+
         ItemListeners.getStartedKit(p1);
         ItemListeners.getStartedKit(p2);
 
@@ -234,6 +237,7 @@ public class GameListeners implements Listener
         p.getActivePotionEffects().removeAll(p.getActivePotionEffects());
         p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
+        p.setHealth(20);
         p.teleport(lobbySpawn);
 
         core.resetTime(p);
