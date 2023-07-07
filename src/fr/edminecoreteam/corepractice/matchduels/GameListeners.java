@@ -84,7 +84,7 @@ public class GameListeners implements Listener
         ItemListeners.getStartedKit(p2);
 
         new BukkitRunnable() {
-            int t = 6;
+            int t = 8;
             public void run() {
 
                 if (t == 5)
@@ -130,18 +130,19 @@ public class GameListeners implements Listener
 
                 --t;
                 if (t == 0) {
+                    core.getInPreDuel().add(p1);
+                    core.getInPreDuel().add(p2);
                     core.getInDuel().add(p1);
                     core.getInDuel().add(p2);
 
                     p1.sendMessage("§6§l➡ §e§lLancement du jeu !");
                     p2.sendMessage("§6§l➡ §e§lLancement du jeu !");
+                    core.getGameCheck().removeSerchGame(p1);
+                    core.getGameCheck().removeSerchGame(p2);
                     cancel();
                 }
             }
         }.runTaskTimer((Plugin)core, 0L, 20L);
-
-        core.getGameCheck().removeSerchGame(p1);
-        core.getGameCheck().removeSerchGame(p2);
     }
 
     @EventHandler
@@ -168,10 +169,10 @@ public class GameListeners implements Listener
                 pVictory.playSound(pVictory.getLocation(), Sound.FIREWORK_LAUNCH, 1.0f, 1.0f);
 
                 core.getInDuel().remove(pVictory);
-                core.getInLobby().add(pVictory);
-
                 core.getInDuel().remove(pDeath);
-                core.getInLobby().add(pDeath);
+
+                core.getInEndDuel().add(pVictory);
+                core.getInEndDuel().add(pDeath);
 
                 endGame(pVictory);
 
@@ -186,9 +187,6 @@ public class GameListeners implements Listener
                     }
 
                     UnloadWorld.deleteWorld(core.getGameID().getIDString(pVictory));
-
-                    core.getGameID().removeFromGameID(pVictory);
-                    core.getGameID().removeFromGameID(pDeath);
                 }, 100);
             }
         }
@@ -196,8 +194,27 @@ public class GameListeners implements Listener
 
     public static void leaveGame(Player p)
     {
-        core.getWorldName().removeWorldName(p);
-        core.getGameType().removeFromTypeGame(p);
+        if (core.getWorldName().getWorldName(p) != null)
+        {
+            core.getWorldName().removeWorldName(p);
+        }
+        if (core.getGameType().getTypeGame(p) != null)
+        {
+            core.getGameType().removeFromTypeGame(p);
+        }
+        if (core.getGameID().getGameID(p) != null)
+        {
+            core.getGameID().removeFromGameID(p);
+        }
+
+        if (core.getInEndDuel().contains(p))
+        {
+            core.getInEndDuel().remove(p);
+        }
+        if (!core.getInLobby().contains(p))
+        {
+            core.getInLobby().add(p);
+        }
 
         Location lobbySpawn = new Location(Bukkit.getWorld(core.getConfig().getString("Lobby.world")),
                 (float) core.getConfig().getDouble("Lobby.x")
