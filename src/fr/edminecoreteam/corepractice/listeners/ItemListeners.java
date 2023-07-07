@@ -96,7 +96,21 @@ public class ItemListeners implements Listener
             e.setCancelled(true);
             LoadKits pKit = new LoadKits(p);
 
-            pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
+            if (core.getGameCheck().getGame(p) != null)
+            {
+                pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
+            }
+            else if (core.getGameCheck().getGame(p) == null)
+            {
+                if (core.getGameType().getTypeGame(p) != null)
+                {
+                    pKit.equipUnrankedDefaultKit(core.getGameType().getTypeGame(p));
+                }
+                else if (core.getGameType().getTypeGame(p) == null)
+                {
+                    p.sendMessage("§cErreur vous n'êtes pas en jeu pour faire cela...");
+                }
+            }
         }
     }
 
