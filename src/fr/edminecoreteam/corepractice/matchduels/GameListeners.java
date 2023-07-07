@@ -130,15 +130,20 @@ public class GameListeners implements Listener
 
                 --t;
                 if (t == 0) {
-                    core.getInPreDuel().add(p1);
-                    core.getInPreDuel().add(p2);
+                    core.getInPreDuel().remove(p1);
+                    core.getInPreDuel().remove(p2);
                     core.getInDuel().add(p1);
                     core.getInDuel().add(p2);
 
+                    p1.sendTitle("§r", "§r");
+                    p2.sendTitle("§r", "§r");
                     p1.sendMessage("§6§l➡ §e§lLancement du jeu !");
                     p2.sendMessage("§6§l➡ §e§lLancement du jeu !");
+                    p1.playSound(p1.getLocation(), Sound.ENDERDRAGON_GROWL, 0.7f, 1.0f);
+                    p2.playSound(p2.getLocation(), Sound.ENDERDRAGON_GROWL, 0.7f, 1.0f);
                     core.getGameCheck().removeSerchGame(p1);
                     core.getGameCheck().removeSerchGame(p2);
+                    startTimingMatch(p1, p2);
                     cancel();
                 }
             }
@@ -228,6 +233,8 @@ public class GameListeners implements Listener
         p.setFoodLevel(20);
         p.teleport(lobbySpawn);
 
+        core.resetTime(p);
+
         ItemListeners.getLobbyItems(p);
     }
 
@@ -247,5 +254,34 @@ public class GameListeners implements Listener
             ItemListeners.getEndUnrankedItems(p);
 
         }, 3);
+    }
+
+    private static void startTimingMatch(Player p1, Player p2)
+    {
+        new BukkitRunnable() {
+            int t = 0;
+            public void run() {
+
+                if (core.getInDuel().contains(p1))
+                {
+                    core.addTime(p1, 1);
+                }
+                else
+                {
+                    cancel();
+                }
+
+                if (core.getInDuel().contains(p2))
+                {
+                    core.addTime(p2, 1);
+                }
+                else
+                {
+                    cancel();
+                }
+
+                ++t;
+            }
+        }.runTaskTimer((Plugin)core, 0L, 20L);
     }
 }

@@ -11,6 +11,7 @@ import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.listeners.JoinEvent;
 import fr.edminecoreteam.corepractice.listeners.QuitEvent;
 import fr.edminecoreteam.corepractice.matchduels.*;
+import fr.edminecoreteam.corepractice.matchduels.timer.TimerDataManager;
 import fr.edminecoreteam.corepractice.matchmaking.FoundGame;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import fr.edminecoreteam.corepractice.scoreboard.JoinScoreboardEvent;
@@ -53,6 +54,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
     private GameID gameID;
     private WorldName worldName;
     private MatchOppenant matchOppenant;
+    private TimerDataManager timerData;
 
     public Core() {
         inLobby = new ArrayList<Player>();
@@ -178,6 +180,18 @@ public class Core extends JavaPlugin implements PluginMessageListener
             // Use the code sample in the 'Response' sections below to read
             // the data.
         }
+    }
+
+    public void addTime(Player player, int amount) {
+        timerData.addTime(player.getUniqueId(), amount);
+    }
+
+    public void removeTime(Player player, int amount) { timerData.removeTime(player.getUniqueId(), amount); }
+
+    public void resetTime(Player player) { timerData.resetTime(player.getUniqueId()); }
+
+    public int getTime(Player player) {
+        return timerData.getPlayerData(player.getUniqueId()).getTime();
     }
 
     /*
