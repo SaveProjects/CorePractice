@@ -18,7 +18,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class GameListeners implements Listener
 {
@@ -119,10 +121,13 @@ public class GameListeners implements Listener
                 endGame(pDeath);
 
                 Bukkit.getScheduler().runTaskLater(core, () -> {
-
-                    for (Player pLeaves : core.getServer().getWorld(worldName).getPlayers())
+                    
+                    for (Player pLeaves : Bukkit.getOnlinePlayers())
                     {
-                        leaveGame(pLeaves);
+                        if (pLeaves.getWorld().equals(worldName))
+                        {
+                            leaveGame(pLeaves);
+                        }
                     }
 
                     UnloadWorld.deleteWorld(core.getGameID().getIDString(pVictory));
