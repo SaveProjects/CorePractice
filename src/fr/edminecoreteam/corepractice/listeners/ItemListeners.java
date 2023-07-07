@@ -176,6 +176,15 @@ public class ItemListeners implements Listener
             p.setAllowFlight(false);
             p.setFlying(false);
 
+            if (JoinEvent.getCanDoubleJump().contains(p)) {
+                p.setAllowFlight(true);
+                p.setFlying(false);
+            }
+            else {
+                p.setAllowFlight(false);
+                p.setFlying(false);
+            }
+
             ItemStack unranked = new ItemStack(Material.IRON_SWORD, 1);
             ItemMeta unrankedM = unranked.getItemMeta();
             unrankedM.setDisplayName("§f§lUnranked §7• Clique");

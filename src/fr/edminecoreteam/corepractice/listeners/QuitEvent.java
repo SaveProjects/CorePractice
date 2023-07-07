@@ -39,6 +39,11 @@ public class QuitEvent implements Listener
             }
         }
 
+        if (JoinEvent.getCanDoubleJump().contains(p))
+        {
+            JoinEvent.getCanDoubleJump().remove(p);
+        }
+
         if (core.getGameID().getGameID(p) != null)
         {
             if (core.getInDuel().contains(p) || core.getInPreDuel().contains(p))

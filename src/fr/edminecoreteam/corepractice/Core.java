@@ -6,10 +6,7 @@ import fr.edminecoreteam.corepractice.edorm.MySQL;
 import fr.edminecoreteam.corepractice.edorm.SQLState;
 import fr.edminecoreteam.corepractice.edorm.SQLTasks;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
-import fr.edminecoreteam.corepractice.listeners.EventListeners;
-import fr.edminecoreteam.corepractice.listeners.ItemListeners;
-import fr.edminecoreteam.corepractice.listeners.JoinEvent;
-import fr.edminecoreteam.corepractice.listeners.QuitEvent;
+import fr.edminecoreteam.corepractice.listeners.*;
 import fr.edminecoreteam.corepractice.matchduels.*;
 import fr.edminecoreteam.corepractice.matchduels.timer.TimerDataManager;
 import fr.edminecoreteam.corepractice.matchmaking.FoundGame;
@@ -145,6 +142,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
 
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new QuitEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new DoubleJumpListener(), this);
         Bukkit.getPluginManager().registerEvents(new EventListeners(), this);
         Bukkit.getPluginManager().registerEvents(new ItemListeners(), this);
         Bukkit.getPluginManager().registerEvents(new GameListeners(), this);

@@ -1,6 +1,7 @@
 package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
+import fr.edminecoreteam.corepractice.data.ranks.RankInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -10,20 +11,30 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JoinEvent implements Listener
 {
 
     private static Core core = Core.getInstance();
 
+    public static List<Player> candoublejump;
+    public JoinEvent() { candoublejump = new ArrayList<Player>(); }
+    public static List<Player> getCanDoubleJump() { return JoinEvent.candoublejump; }
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
-
+        RankInfo rankInfo  = new RankInfo(p);
         if (!core.getInLobby().contains(p))
         {
             core.getInLobby().add(p);
         }
+
+        if (rankInfo.getRankID() >= 3) { getCanDoubleJump().add(p); }
+        if (rankInfo.getRankModule() >= 10) { getCanDoubleJump().add(p); }
 
         Location lobbySpawn = new Location(Bukkit.getWorld(core.getConfig().getString("Lobby.world")),
                 (float) core.getConfig().getDouble("Lobby.x")
