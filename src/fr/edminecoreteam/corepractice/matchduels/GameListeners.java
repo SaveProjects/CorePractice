@@ -158,6 +158,7 @@ public class GameListeners implements Listener
         Location pDeathLoc = pDeathEvent.getLocation();
         World pDeathWorld = pDeathEvent.getWorld();
         String worldName = core.getWorldName().getWorldName(pDeathEvent);
+        String gameID = core.getGameID().getIDString(pDeathEvent);
         if (core.getGameID() != null)
         {
             if (core.getInDuel().contains(pDeathEvent))
@@ -192,7 +193,7 @@ public class GameListeners implements Listener
                         leaveGame(pWorld);
                     }
 
-                    UnloadWorld.deleteWorld(core.getGameID().getIDString(pVictory));
+                    UnloadWorld.deleteWorld(gameID);
                 }, 100);
             }
         }
