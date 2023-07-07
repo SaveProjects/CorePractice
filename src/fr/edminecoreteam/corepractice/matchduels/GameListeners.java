@@ -124,7 +124,7 @@ public class GameListeners implements Listener
                     
                     for (Player pLeaves : Bukkit.getOnlinePlayers())
                     {
-                        if (pLeaves.getWorld().equals(worldName))
+                        if (pLeaves.getWorld().getName().equalsIgnoreCase(worldName))
                         {
                             leaveGame(pLeaves);
                         }
