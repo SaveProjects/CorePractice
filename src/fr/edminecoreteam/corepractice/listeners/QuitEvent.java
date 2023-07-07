@@ -43,12 +43,11 @@ public class QuitEvent implements Listener
             core.getInDuel().remove(p);
         }
 
-        if (core.getGameID() != null)
+        if (core.getGameID().getGameID(p) != null)
         {
             if (core.getInDuel().contains(p))
             {
                 Player pVictory = core.getMatchOppenant().getMatchOppenant(p);
-                Player pDeath = core.getMatchOppenant().getMatchOppenant(pVictory);
 
                 World pVictoryWorld = pVictory.getWorld();
                 String worldName = core.getWorldName().getWorldName(pVictory);

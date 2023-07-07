@@ -159,7 +159,7 @@ public class GameListeners implements Listener
         World pDeathWorld = pDeathEvent.getWorld();
         String worldName = core.getWorldName().getWorldName(pDeathEvent);
         String gameID = core.getGameID().getIDString(pDeathEvent);
-        if (core.getGameID() != null)
+        if (core.getGameID().getGameID(pDeathEvent) != null)
         {
             if (core.getInDuel().contains(pDeathEvent))
             {
