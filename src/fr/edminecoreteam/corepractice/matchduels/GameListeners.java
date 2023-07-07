@@ -92,6 +92,7 @@ public class GameListeners implements Listener
     {
         Player pDeathEvent = (Player) e.getEntity();
         Location pDeathLoc = pDeathEvent.getLocation();
+        World pDeathWorld = pDeathEvent.getWorld();
         String worldName = core.getWorldName().getWorldName(pDeathEvent);
         if (core.getGameID() != null)
         {
@@ -122,13 +123,9 @@ public class GameListeners implements Listener
 
                 Bukkit.getScheduler().runTaskLater(core, () -> {
                     
-                    if (pDeath.getWorld().getName().equalsIgnoreCase(worldName))
+                    for (Player pWorld : pDeathWorld.getPlayers())
                     {
-                        leaveGame(pDeath);
-                    }
-                    if (pVictory.getWorld().getName().equalsIgnoreCase(worldName))
-                    {
-                        leaveGame(pVictory);
+                        leaveGame(pWorld);
                     }
 
                     UnloadWorld.deleteWorld(core.getGameID().getIDString(pVictory));
