@@ -277,10 +277,14 @@ public class GameListeners implements Listener
                 , (float) core.getConfig().getDouble("Lobby.t")
                 , (float) core.getConfig().getDouble("Lobby.b"));
 
-        p.getActivePotionEffects().removeAll(p.getActivePotionEffects());
+        for (PotionEffect effect : p.getActivePotionEffects ())
+        {
+            p.removePotionEffect(effect.getType());
+        }
         p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
         p.teleport(lobbySpawn);
+        p.setFireTicks(0);
 
         core.resetTime(p);
         UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
@@ -298,7 +302,11 @@ public class GameListeners implements Listener
     {
         Bukkit.getScheduler().runTaskLater(core, () -> {
 
-            p.getActivePotionEffects().removeAll(p.getActivePotionEffects());
+            for (PotionEffect effect : p.getActivePotionEffects ())
+            {
+                p.removePotionEffect(effect.getType());
+            }
+            p.setFireTicks(0);
             p.getInventory().setHelmet(null);
             p.getInventory().setChestplate(null);
             p.getInventory().setLeggings(null);
