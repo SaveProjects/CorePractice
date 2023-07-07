@@ -21,7 +21,7 @@ public class EventListeners implements Listener
         if (e.getEntity() instanceof Player)
         {
             Player p = ((Player) e.getEntity()).getPlayer();
-            if (core.getInLobby().contains(p) || core.getInEditor().contains(p))
+            if (core.getInLobby().contains(p) || core.getInEditor().contains(p) || core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
             {
                 e.setCancelled(true);
                 if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID))
@@ -62,7 +62,7 @@ public class EventListeners implements Listener
         if (e.getEntity() instanceof Player)
         {
             Player p = ((Player) e.getEntity()).getPlayer();
-            if (core.getInLobby().contains(p) || core.getInEditor().contains(p))
+            if (core.getInLobby().contains(p) || core.getInEditor().contains(p) || core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
             {
                 e.setFoodLevel(20);
             }

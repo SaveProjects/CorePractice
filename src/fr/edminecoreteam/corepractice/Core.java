@@ -44,7 +44,9 @@ public class Core extends JavaPlugin implements PluginMessageListener
     private List<Player> inEditor;
     private List<Player> inWaiting;
 
+    private List<Player> inPreDuel;
     private List<Player> inDuel;
+    private List<Player> inEndDuel;
 
     private GameCheck gameCheck;
     private TypeGame typeGame;
@@ -57,6 +59,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
         inEditor = new ArrayList<Player>();
         inWaiting = new ArrayList<Player>();
         inDuel = new ArrayList<Player>();
+        inPreDuel = new ArrayList<Player>();
+        inEndDuel = new ArrayList<Player>();
         gameCheck = new GameCheck();
         typeGame = new TypeGame();
         gameID = new GameID();
@@ -67,7 +71,10 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public List<Player> getInLobby() { return this.inLobby; }
     public List<Player> getInEditor() { return this.inEditor; }
     public List<Player> getInWaiting() { return this.inWaiting; }
+
+    public List<Player> getInPreDuel() { return this.inPreDuel; }
     public List<Player> getInDuel() { return this.inDuel; }
+    public List<Player> getInEndDuel() { return this.inEndDuel; }
 
     @Override
     public void onEnable() {

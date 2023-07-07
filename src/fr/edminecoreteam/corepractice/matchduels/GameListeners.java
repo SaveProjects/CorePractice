@@ -17,7 +17,10 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -43,8 +46,8 @@ public class GameListeners implements Listener
         core.getGameID().putGameID(p1, randomID);
         core.getGameID().putGameID(p2, randomID);
 
-        core.getInDuel().add(p1);
-        core.getInDuel().add(p2);
+        core.getInPreDuel().add(p1);
+        core.getInPreDuel().add(p2);
 
         String world = LoadWorld.getRandomSubfolderName("gameTemplate/");
         LoadWorld.createGameWorld(world, core.getGameID().getIDString(p1));
@@ -77,11 +80,65 @@ public class GameListeners implements Listener
         p2.setAllowFlight(false);
         p2.setFlying(false);
 
-        LoadKits p1Kit = new LoadKits(p1);
-        LoadKits p2Kit = new LoadKits(p2);
+        ItemListeners.getStartedKit(p1);
+        ItemListeners.getStartedKit(p2);
 
-        p1Kit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p1));
-        p2Kit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p2));
+        new BukkitRunnable() {
+            int t = 6;
+            public void run() {
+
+                if (t == 5)
+                {
+                    p1.sendTitle("§a§l" + t, "§7préparez-vous.");
+                    p1.playSound(p1.getLocation(), Sound.NOTE_PLING, 1.0f, 1.5f);
+
+                    p2.sendTitle("§a§l" + t, "§7préparez-vous.");
+                    p2.playSound(p2.getLocation(), Sound.NOTE_PLING, 1.0f, 1.5f);
+                }
+                if (t == 4)
+                {
+                    p1.sendTitle("§6§l" + t, "");
+                    p1.playSound(p1.getLocation(), Sound.NOTE_PLING, 1.0f, 1.2f);
+
+                    p2.sendTitle("§6§l" + t, "");
+                    p2.playSound(p2.getLocation(), Sound.NOTE_PLING, 1.0f, 1.2f);
+                }
+                if (t == 3)
+                {
+                    p1.sendTitle("§e§l" + t, "");
+                    p1.playSound(p1.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+
+                    p2.sendTitle("§e§l" + t, "");
+                    p2.playSound(p2.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+                }
+                if (t == 2)
+                {
+                    p1.sendTitle("§c§l" + t, "");
+                    p1.playSound(p1.getLocation(), Sound.NOTE_PLING, 1.0f, 0.7f);
+
+                    p2.sendTitle("§c§l" + t, "");
+                    p2.playSound(p2.getLocation(), Sound.NOTE_PLING, 1.0f, 0.7f);
+                }
+                if (t == 1)
+                {
+                    p1.sendTitle("§4§l" + t, "");
+                    p1.playSound(p1.getLocation(), Sound.NOTE_PLING, 1.0f, 0.5f);
+
+                    p2.sendTitle("§4§l" + t, "");
+                    p2.playSound(p2.getLocation(), Sound.NOTE_PLING, 1.0f, 0.5f);
+                }
+
+                --t;
+                if (t == 0) {
+                    core.getInDuel().add(p1);
+                    core.getInDuel().add(p2);
+
+                    p1.sendMessage("§6§l➡ §e§lLancement du jeu !");
+                    p2.sendMessage("§6§l➡ §e§lLancement du jeu !");
+                    cancel();
+                }
+            }
+        }.runTaskTimer((Plugin)core, 0L, 20L);
 
         core.getGameCheck().removeSerchGame(p1);
         core.getGameCheck().removeSerchGame(p2);

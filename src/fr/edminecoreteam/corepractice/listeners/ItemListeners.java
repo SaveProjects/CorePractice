@@ -2,6 +2,7 @@ package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
+import fr.edminecoreteam.corepractice.kits.LoadKits;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -56,6 +57,19 @@ public class ItemListeners implements Listener
                 UnrankedGui.gui(p);
             }
         }
+        if (core.getInPreDuel().contains(p) || core.getInDuel().contains(p))
+        {
+            ItemStack it = e.getCurrentItem();
+            if (it == null) {
+                return;
+            }
+            if (it.getType() == Material.BOOK && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§d§lKit par défaut §7• Clique")) {
+                e.setCancelled(true);
+                LoadKits pKit = new LoadKits(p);
+
+                pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
+            }
+        }
     }
 
     @EventHandler
@@ -77,6 +91,12 @@ public class ItemListeners implements Listener
         if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
             e.setCancelled(true);
             UnrankedGui.gui(p);
+        }
+        if (it.getType() == Material.BOOK && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lKit par défaut §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            e.setCancelled(true);
+            LoadKits pKit = new LoadKits(p);
+
+            pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
         }
     }
 
@@ -170,5 +190,16 @@ public class ItemListeners implements Listener
             leave.setItemMeta(leaveM);
             p.getInventory().setItem(8, leave);
         }, 5);
+    }
+
+    public static void getStartedKit(Player p)
+    {
+        p.getInventory().clear();
+
+        ItemStack defaultKit = new ItemStack(Material.BOOK, 1);
+        ItemMeta defaultKitM = defaultKit.getItemMeta();
+        defaultKitM.setDisplayName("§d§lKit par défaut §7• Clique");
+        defaultKit.setItemMeta(defaultKitM);
+        p.getInventory().setItem(8, defaultKit);
     }
 }
