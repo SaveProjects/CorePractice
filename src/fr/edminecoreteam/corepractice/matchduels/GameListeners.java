@@ -4,6 +4,7 @@ import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.kits.LoadKits;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
+import fr.edminecoreteam.corepractice.matchmaking.UnrankedMatchMaking;
 import fr.edminecoreteam.corepractice.utils.LoadWorld;
 import fr.edminecoreteam.corepractice.utils.UnloadWorld;
 import org.bukkit.*;
@@ -236,6 +237,50 @@ public class GameListeners implements Listener
         core.resetTime(p);
 
         ItemListeners.getLobbyItems(p);
+    }
+
+    public static void replayGame(Player p)
+    {
+        if (core.getWorldName().getWorldName(p) != null)
+        {
+            core.getWorldName().removeWorldName(p);
+        }
+        if (core.getGameID().getGameID(p) != null)
+        {
+            core.getGameID().removeFromGameID(p);
+        }
+
+        if (core.getInEndDuel().contains(p))
+        {
+            core.getInEndDuel().remove(p);
+        }
+        if (!core.getInLobby().contains(p))
+        {
+            core.getInLobby().add(p);
+        }
+
+        Location lobbySpawn = new Location(Bukkit.getWorld(core.getConfig().getString("Lobby.world")),
+                (float) core.getConfig().getDouble("Lobby.x")
+                , (float) core.getConfig().getDouble("Lobby.y")
+                , (float) core.getConfig().getDouble("Lobby.z")
+                , (float) core.getConfig().getDouble("Lobby.t")
+                , (float) core.getConfig().getDouble("Lobby.b"));
+
+        p.getActivePotionEffects().removeAll(p.getActivePotionEffects());
+        p.setGameMode(GameMode.ADVENTURE);
+        p.setFoodLevel(20);
+        p.teleport(lobbySpawn);
+
+        core.resetTime(p);
+        UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
+
+        matchMaking.start(core.getGameType().getTypeGame(p));
+        ItemListeners.foundGameItems(p);
+
+        if (core.getGameType().getTypeGame(p) != null)
+        {
+            core.getGameType().removeFromTypeGame(p);
+        }
     }
 
     public static void endGame(Player p)

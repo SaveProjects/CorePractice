@@ -3,6 +3,7 @@ package fr.edminecoreteam.corepractice.listeners;
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
 import fr.edminecoreteam.corepractice.kits.LoadKits;
+import fr.edminecoreteam.corepractice.matchduels.GameListeners;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -27,7 +28,7 @@ public class ItemListeners implements Listener
     public void onDrop(PlayerDropItemEvent e)
     {
         Player p = e.getPlayer();
-        if (core.getInLobby().contains(p) || core.getInEditor().contains(p))
+        if (core.getInLobby().contains(p) || core.getInEditor().contains(p) || core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
         {
             e.setCancelled(true);
         }
@@ -67,7 +68,36 @@ public class ItemListeners implements Listener
                 e.setCancelled(true);
                 LoadKits pKit = new LoadKits(p);
 
-                pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
+                if (core.getGameCheck().getGame(p) != null)
+                {
+                    pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
+                }
+                else if (core.getGameCheck().getGame(p) == null)
+                {
+                    if (core.getGameType().getTypeGame(p) != null)
+                    {
+                        pKit.equipUnrankedDefaultKit(core.getGameType().getTypeGame(p));
+                    }
+                    else if (core.getGameType().getTypeGame(p) == null)
+                    {
+                        p.sendMessage("§cErreur vous n'êtes pas en jeu pour faire cela...");
+                    }
+                }
+            }
+        }
+        if (core.getInEndDuel().contains(p))
+        {
+            ItemStack it = e.getCurrentItem();
+            if (it == null) {
+                return;
+            }
+            if (it.getType() == Material.BED && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique")) {
+                e.setCancelled(true);
+                GameListeners.leaveGame(p);
+            }
+            if (it.getType() == Material.PAPER && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§d§lRejouer §7• Clique")) {
+                e.setCancelled(true);
+                GameListeners.replayGame(p);
             }
         }
     }
@@ -80,36 +110,53 @@ public class ItemListeners implements Listener
         if (it == null) {
             return;
         }
-        if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
-            e.setCancelled(true);
-            GameCheck gameCheck = core.getGameCheck();
-            gameCheck.removeSerchGame(p);
-            core.getInWaiting().remove(p);
-            p.sendMessage("§cRecherche annulée...");
-            getLobbyItems(p);
-        }
-        if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
-            e.setCancelled(true);
-            UnrankedGui.gui(p);
-        }
-        if (it.getType() == Material.BOOK && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lKit par défaut §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
-            e.setCancelled(true);
-            LoadKits pKit = new LoadKits(p);
-
-            if (core.getGameCheck().getGame(p) != null)
-            {
-                pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
+        if (core.getInLobby().contains(p))
+        {
+            if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                GameCheck gameCheck = core.getGameCheck();
+                gameCheck.removeSerchGame(p);
+                core.getInWaiting().remove(p);
+                p.sendMessage("§cRecherche annulée...");
+                getLobbyItems(p);
             }
-            else if (core.getGameCheck().getGame(p) == null)
-            {
-                if (core.getGameType().getTypeGame(p) != null)
+            if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                UnrankedGui.gui(p);
+            }
+        }
+        if (core.getInPreDuel().contains(p) || core.getInDuel().contains(p))
+        {
+            if (it.getType() == Material.BOOK && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lKit par défaut §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                LoadKits pKit = new LoadKits(p);
+
+                if (core.getGameCheck().getGame(p) != null)
                 {
-                    pKit.equipUnrankedDefaultKit(core.getGameType().getTypeGame(p));
+                    pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
                 }
-                else if (core.getGameType().getTypeGame(p) == null)
+                else if (core.getGameCheck().getGame(p) == null)
                 {
-                    p.sendMessage("§cErreur vous n'êtes pas en jeu pour faire cela...");
+                    if (core.getGameType().getTypeGame(p) != null)
+                    {
+                        pKit.equipUnrankedDefaultKit(core.getGameType().getTypeGame(p));
+                    }
+                    else if (core.getGameType().getTypeGame(p) == null)
+                    {
+                        p.sendMessage("§cErreur vous n'êtes pas en jeu pour faire cela...");
+                    }
                 }
+            }
+        }
+        if (core.getInEndDuel().contains(p))
+        {
+            if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                GameListeners.leaveGame(p);
+            }
+            if (it.getType() == Material.PAPER && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lRejouer §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                GameListeners.replayGame(p);
             }
         }
     }
