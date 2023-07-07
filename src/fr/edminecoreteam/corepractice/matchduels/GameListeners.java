@@ -122,12 +122,13 @@ public class GameListeners implements Listener
 
                 Bukkit.getScheduler().runTaskLater(core, () -> {
                     
-                    for (Player pLeaves : Bukkit.getOnlinePlayers())
+                    if (pDeath.getWorld().getName().equalsIgnoreCase(worldName))
                     {
-                        if (pLeaves.getWorld().getName().equalsIgnoreCase(worldName))
-                        {
-                            leaveGame(pLeaves);
-                        }
+                        leaveGame(pDeath);
+                    }
+                    if (pVictory.getWorld().getName().equalsIgnoreCase(worldName))
+                    {
+                        leaveGame(pVictory);
                     }
 
                     UnloadWorld.deleteWorld(core.getGameID().getIDString(pVictory));
