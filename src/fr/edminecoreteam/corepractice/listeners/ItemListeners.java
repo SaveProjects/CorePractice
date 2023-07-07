@@ -92,6 +92,9 @@ public class ItemListeners implements Listener
             p.getInventory().setLeggings(null);
             p.getInventory().setBoots(null);
 
+            p.setAllowFlight(false);
+            p.setFlying(false);
+
             ItemStack unranked = new ItemStack(Material.IRON_SWORD, 1);
             ItemMeta unrankedM = unranked.getItemMeta();
             unrankedM.setDisplayName("§f§lUnranked §7• Clique");

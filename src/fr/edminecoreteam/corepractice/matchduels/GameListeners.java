@@ -69,6 +69,12 @@ public class GameListeners implements Listener
         p1.setGameMode(GameMode.SURVIVAL);
         p2.setGameMode(GameMode.SURVIVAL);
 
+        p1.setAllowFlight(false);
+        p1.setFlying(false);
+
+        p2.setAllowFlight(false);
+        p2.setFlying(false);
+
         LoadKits p1Kit = new LoadKits(p1);
         LoadKits p2Kit = new LoadKits(p2);
 
@@ -100,6 +106,12 @@ public class GameListeners implements Listener
                 pVictory.sendTitle("§a§lVictoire !", "§7C'étais moins une !");
                 pVictory.playSound(pVictory.getLocation(), Sound.FIREWORK_LAUNCH, 1.0f, 1.0f);
 
+                core.getInDuel().remove(pVictory);
+                core.getInLobby().add(pVictory);
+
+                core.getInDuel().remove(pDeath);
+                core.getInLobby().add(pDeath);
+
                 endGame(pVictory);
 
                 pDeath.teleport(pDeathLoc);
@@ -125,9 +137,6 @@ public class GameListeners implements Listener
     {
         core.getWorldName().removeWorldName(p);
         core.getGameType().removeFromTypeGame(p);
-        core.getInDuel().remove(p);
-
-        core.getInLobby().add(p);
 
         Location lobbySpawn = new Location(Bukkit.getWorld(core.getConfig().getString("Lobby.world")),
                 (float) core.getConfig().getDouble("Lobby.x")
@@ -154,10 +163,11 @@ public class GameListeners implements Listener
             p.getInventory().setLeggings(null);
             p.getInventory().setBoots(null);
 
+            p.setAllowFlight(true);
             p.setFlying(true);
             p.setGameMode(GameMode.ADVENTURE);
             ItemListeners.getEndUnrankedItems(p);
 
-        }, 5);
+        }, 3);
     }
 }
