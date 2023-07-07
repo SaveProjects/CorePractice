@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -234,11 +235,15 @@ public class GameListeners implements Listener
                 , (float) core.getConfig().getDouble("Lobby.t")
                 , (float) core.getConfig().getDouble("Lobby.b"));
 
-        p.getActivePotionEffects().removeAll(p.getActivePotionEffects());
+        for (PotionEffect effect : p.getActivePotionEffects ())
+        {
+            p.removePotionEffect(effect.getType());
+        }
         p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
         p.setHealth(20);
         p.teleport(lobbySpawn);
+        p.setFireTicks(0);
 
         core.resetTime(p);
 
