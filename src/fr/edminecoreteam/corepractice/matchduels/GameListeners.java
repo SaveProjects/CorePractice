@@ -163,6 +163,7 @@ public class GameListeners implements Listener
         {
             if (core.getInDuel().contains(pDeathEvent))
             {
+                e.setDeathMessage(null);
                 e.getDrops().clear();
                 e.getEntity().spigot().respawn();
 
