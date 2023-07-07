@@ -95,6 +95,7 @@ public class GameListeners implements Listener
         {
             if (core.getInDuel().contains(pDeathEvent))
             {
+                e.getDrops().clear();
                 e.getEntity().spigot().respawn();
 
                 Player pVictory = core.getMatchOppenant().getMatchOppenant(pDeathEvent);
@@ -119,7 +120,7 @@ public class GameListeners implements Listener
 
                 Bukkit.getScheduler().runTaskLater(core, () -> {
 
-                    for (Player pLeaves : Bukkit.getWorld(worldName).getPlayers())
+                    for (Player pLeaves : core.getServer().getWorld(worldName).getPlayers())
                     {
                         leaveGame(pLeaves);
                     }
