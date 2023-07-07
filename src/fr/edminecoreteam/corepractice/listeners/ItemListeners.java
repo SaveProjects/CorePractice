@@ -128,7 +128,7 @@ public class ItemListeners implements Listener
             kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
             kitEditor.setItemMeta(kitEditorM);
             p.getInventory().setItem(8, kitEditor);
-        }, 5);
+        }, 3);
     }
 
 
@@ -141,5 +141,31 @@ public class ItemListeners implements Listener
         leaveM.setDisplayName("§c§lQuitter §7• Clique");
         leave.setItemMeta(leaveM);
         p.getInventory().setItem(8, leave);
+    }
+
+    public static void getEndUnrankedItems(Player p)
+    {
+        p.getInventory().clear();
+        Bukkit.getScheduler().runTaskLater(core, () -> {
+            // Code à exécuter après 1 seconde
+            // Par exemple, envoi d'un message à un joueur
+
+            p.getInventory().setHelmet(null);
+            p.getInventory().setChestplate(null);
+            p.getInventory().setLeggings(null);
+            p.getInventory().setBoots(null);
+
+            ItemStack replay = new ItemStack(Material.PAPER, 1);
+            ItemMeta replayM = replay.getItemMeta();
+            replayM.setDisplayName("§d§lRejouer §7• Clique");
+            replay.setItemMeta(replayM);
+            p.getInventory().setItem(0, replay);
+
+            ItemStack leave = new ItemStack(Material.BED, 1);
+            ItemMeta leaveM = leave.getItemMeta();
+            leaveM.setDisplayName("§c§lQuitter §7• Clique");
+            leave.setItemMeta(leaveM);
+            p.getInventory().setItem(8, leave);
+        }, 5);
     }
 }

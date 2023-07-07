@@ -6,10 +6,7 @@ import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import fr.edminecoreteam.corepractice.utils.LoadWorld;
 import fr.edminecoreteam.corepractice.utils.UnloadWorld;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,6 +14,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -83,6 +83,8 @@ public class GameListeners implements Listener
     public void onDeath(PlayerDeathEvent e)
     {
         Player pDeathEvent = (Player) e.getEntity();
+        Location pDeathLoc = pDeathEvent.getLocation();
+        String worldName = core.getWorldName().getWorldName(pDeathEvent);
         if (core.getGameID() != null)
         {
             if (core.getInDuel().contains(pDeathEvent))
@@ -92,32 +94,32 @@ public class GameListeners implements Listener
                 Player pVictory = core.getMatchOppenant().getMatchOppenant(pDeathEvent);
                 Player pDeath = core.getMatchOppenant().getMatchOppenant(pVictory);
 
-                leaveGame(pVictory);
-                leaveGame(pDeath);
-
                 pDeath.sendTitle("§c§lDéfaite...", "§7Peut-être une prochaine fois.");
                 pDeath.playSound(pVictory.getLocation(), Sound.VILLAGER_NO, 1.0f, 1.0f);
 
                 pVictory.sendTitle("§a§lVictoire !", "§7C'étais moins une !");
                 pVictory.playSound(pVictory.getLocation(), Sound.FIREWORK_LAUNCH, 1.0f, 1.0f);
 
-                UnloadWorld.deleteWorld(core.getGameID().getIDString(pVictory));
+                endGame(pVictory);
 
-                core.getGameID().removeFromGameID(pVictory);
-                core.getGameID().removeFromGameID(pDeath);
+                pDeath.teleport(pDeathLoc);
+                endGame(pDeath);
 
-                ItemListeners.getLobbyItems(pVictory);
-                ItemListeners.getLobbyItems(pDeath);
+                Bukkit.getScheduler().runTaskLater(core, () -> {
+
+                    for (Player pLeaves : Bukkit.getWorld(worldName).getPlayers())
+                    {
+                        leaveGame(pLeaves);
+                    }
+
+                    UnloadWorld.deleteWorld(core.getGameID().getIDString(pVictory));
+
+                    core.getGameID().removeFromGameID(pVictory);
+                    core.getGameID().removeFromGameID(pDeath);
+                }, 100);
             }
         }
     }
-
-    /*@EventHandler
-    public void onPlayerRespawnAfterDeath(PlayerRespawnEvent e)
-    {
-        Player p = e.getPlayer();
-        ItemListeners.getLobbyItems(p);
-    }*/
 
     public static void leaveGame(Player p)
     {
@@ -134,9 +136,28 @@ public class GameListeners implements Listener
                 , (float) core.getConfig().getDouble("Lobby.t")
                 , (float) core.getConfig().getDouble("Lobby.b"));
 
-        p.getActivePotionEffects().clear();
+        p.getActivePotionEffects().removeAll(p.getActivePotionEffects());
         p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
         p.teleport(lobbySpawn);
+
+        ItemListeners.getLobbyItems(p);
+    }
+
+    public static void endGame(Player p)
+    {
+        Bukkit.getScheduler().runTaskLater(core, () -> {
+
+            p.getActivePotionEffects().removeAll(p.getActivePotionEffects());
+            p.getInventory().setHelmet(null);
+            p.getInventory().setChestplate(null);
+            p.getInventory().setLeggings(null);
+            p.getInventory().setBoots(null);
+
+            p.setFlying(true);
+            p.setGameMode(GameMode.ADVENTURE);
+            ItemListeners.getEndUnrankedItems(p);
+
+        }, 5);
     }
 }
