@@ -38,10 +38,6 @@ public class QuitEvent implements Listener
                 core.getGameCheck().removeSerchGame(p);
             }
         }
-        if (core.getInDuel().contains(p))
-        {
-            core.getInDuel().remove(p);
-        }
 
         if (core.getGameID().getGameID(p) != null)
         {
