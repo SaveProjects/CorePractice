@@ -27,8 +27,10 @@ import fr.edminecoreteam.corepractice.scoreboard.JoinScoreboardEvent;
 import fr.edminecoreteam.corepractice.scoreboard.LeaveScoreboardEvent;
 import fr.edminecoreteam.corepractice.scoreboard.ScoreboardManager;
 import fr.edminecoreteam.corepractice.utils.SoupUtils;
+import fr.edminecoreteam.corepractice.utils.TablistRankJoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -191,6 +193,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new GameListeners(), this);
         Bukkit.getPluginManager().registerEvents(new BlocsListener(), this);
         Bukkit.getPluginManager().registerEvents(new SoupUtils(), this);
+        Bukkit.getPluginManager().registerEvents(new TablistRankJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
 
         Bukkit.getPluginManager().registerEvents(new UnrankedGui(), this);
         Bukkit.getPluginManager().registerEvents(new RankedGui(), this);
