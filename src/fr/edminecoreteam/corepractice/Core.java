@@ -2,6 +2,8 @@ package fr.edminecoreteam.corepractice;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import fr.edminecoreteam.corepractice.blocs.BlocsListener;
+import fr.edminecoreteam.corepractice.blocs.BlocsToWorld;
 import fr.edminecoreteam.corepractice.edorm.MySQL;
 import fr.edminecoreteam.corepractice.edorm.SQLState;
 import fr.edminecoreteam.corepractice.edorm.SQLTasks;
@@ -53,6 +55,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     private MatchOppenant matchOppenant;
     private TimerDataManager timerData;
 
+    private BlocsToWorld blocsToWorld;
+
     public Core() {
         inLobby = new ArrayList<Player>();
         inEditor = new ArrayList<Player>();
@@ -66,6 +70,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         worldName = new WorldName();
         matchOppenant = new MatchOppenant();
         timerData = new TimerDataManager();
+        blocsToWorld = new BlocsToWorld();
     }
 
     public List<Player> getInLobby() { return this.inLobby; }
@@ -146,6 +151,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new EventListeners(), this);
         Bukkit.getPluginManager().registerEvents(new ItemListeners(), this);
         Bukkit.getPluginManager().registerEvents(new GameListeners(), this);
+        Bukkit.getPluginManager().registerEvents(new BlocsListener(), this);
 
         Bukkit.getPluginManager().registerEvents(new UnrankedGui(), this);
         FoundGame.start();
@@ -201,6 +207,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public GameID getGameID() { return this.gameID; }
     public WorldName getWorldName() { return this.worldName; }
     public MatchOppenant getMatchOppenant() { return this.matchOppenant; }
+
+    public BlocsToWorld getBlocsToWorld() { return this.blocsToWorld; }
 
     public ScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;

@@ -53,6 +53,7 @@ public class GameListeners implements Listener
 
         String world = LoadWorld.getRandomSubfolderName("gameTemplate/");
         LoadWorld.createGameWorld(world, core.getGameID().getIDString(p1));
+        core.getBlocsToWorld().addBlocksToWorld(core.getGameID().getIDString(p1));
         core.getWorldName().putWorldName(p1, world);
         core.getWorldName().putWorldName(p2, world);
 
