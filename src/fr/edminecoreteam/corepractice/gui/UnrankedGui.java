@@ -105,7 +105,7 @@ public class UnrankedGui implements Listener
                         loregamemode.add("");
                         loregamemode.add(" §dInformation:");
                         loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.unranked." + gameMode + ".id")));
-                        loregamemode.add(" §f▶ §7En jeu: " + core.getGameType().getListWhereGame(core.getConfig().getString("kits.unranked." + gameMode + ".id")));
+                        loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.unranked." + gameMode + ".id")));
                         loregamemode.add("");
                         loregamemode.add("§8➡ §fCliquez pour rejoindre.");
                         gamemodeM.setLore(loregamemode);
