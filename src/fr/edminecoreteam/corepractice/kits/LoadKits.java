@@ -26,7 +26,7 @@ public class LoadKits
     {
         List<String> list = new ArrayList<String>();
 
-        for(String sKitName : core.getConfig().getConfigurationSection("kits.unranked").getKeys(false))
+        for(String sKitName : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
         {
             list.add(sKitName);
         }
