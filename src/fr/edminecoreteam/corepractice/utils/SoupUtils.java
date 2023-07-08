@@ -26,6 +26,10 @@ public class SoupUtils implements Listener
             if (it.getType() == Material.MUSHROOM_SOUP && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
             }
+            else
+            {
+                return;
+            }
         }
         if (core.getInDuel().contains(p))
         {
@@ -75,6 +79,10 @@ public class SoupUtils implements Listener
                     ItemStack soup = new ItemStack(Material.BOWL, 1);
                     p.getInventory().setItem(inventoryslot, soup);
                 }
+            }
+            else
+            {
+                return;
             }
         }
     }
