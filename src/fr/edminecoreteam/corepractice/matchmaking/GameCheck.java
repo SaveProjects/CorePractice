@@ -57,15 +57,6 @@ public class GameCheck
             }
         }
 
-
-        for (String sGame : gameCheck.values())
-        {
-            if (sGame == game)
-            {
-                i++;
-            }
-        }
-
         return i;
     }
 
