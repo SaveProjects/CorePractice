@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -26,6 +27,23 @@ public class ItemListeners implements Listener
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent e)
+    {
+        Player p = e.getPlayer();
+        if (core.getInLobby().contains(p) || core.getInEditor().contains(p) || core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
+        {
+            e.setCancelled(true);
+        }
+        if (core.getInDuel().contains(p))
+        {
+            if (e.getItemDrop().getItemStack().getType() == Material.BOWL || e.getItemDrop().getItemStack().getType() == Material.POTION)
+            {
+                e.getItemDrop().remove();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onHeld(PlayerItemHeldEvent e)
     {
         Player p = e.getPlayer();
         if (core.getInLobby().contains(p) || core.getInEditor().contains(p) || core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
