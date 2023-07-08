@@ -81,6 +81,9 @@ public class GameListeners implements Listener
         ItemListeners.getStartedKit(p1);
         ItemListeners.getStartedKit(p2);
 
+        core.getGameCheck().removeSerchGame(p1);
+        core.getGameCheck().removeSerchGame(p2);
+
         new BukkitRunnable() {
             int t = 8;
             public void run() {
@@ -139,8 +142,6 @@ public class GameListeners implements Listener
                     p2.sendMessage("§6§l➡ §e§lLancement du jeu !");
                     p1.playSound(p1.getLocation(), Sound.ENDERDRAGON_GROWL, 0.7f, 1.0f);
                     p2.playSound(p2.getLocation(), Sound.ENDERDRAGON_GROWL, 0.7f, 1.0f);
-                    core.getGameCheck().removeSerchGame(p1);
-                    core.getGameCheck().removeSerchGame(p2);
                     startTimingMatch(p1, p2);
                     cancel();
                 }

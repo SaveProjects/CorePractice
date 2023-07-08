@@ -80,6 +80,8 @@ public class FoundGame
                                         pRranked2.getInventory().clear();
                                         pRanked1.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pRranked2.getName() + "§f va commencer...");
                                         pRranked2.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pRanked1.getName() + "§f va commencer...");
+
+                                        GameListeners.startGame(pRanked1, pRranked2);
                                     } else {
                                         System.out.println("int1 ne satisfait aucune des conditions spécifiées.");
                                         if (eloP1 >= eloP2 - 800 && eloP1 <= eloP2 + 800) {
@@ -88,6 +90,8 @@ public class FoundGame
                                             pRranked2.getInventory().clear();
                                             pRanked1.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pRranked2.getName() + "§f va commencer...");
                                             pRranked2.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pRanked1.getName() + "§f va commencer...");
+
+                                            GameListeners.startGame(pRanked1, pRranked2);
                                         }
                                         else
                                         {
@@ -97,6 +101,8 @@ public class FoundGame
                                                 pRranked2.getInventory().clear();
                                                 pRanked1.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pRranked2.getName() + "§f va commencer...");
                                                 pRranked2.sendMessage("§aJoueur trouvé ! §fVotre match contre §b" + pRanked1.getName() + "§f va commencer...");
+
+                                                GameListeners.startGame(pRanked1, pRranked2);
                                             }
                                         }
                                     }
