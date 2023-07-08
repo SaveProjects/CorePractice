@@ -3,6 +3,7 @@ package fr.edminecoreteam.corepractice.listeners;
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.matchduels.GameListeners;
 import fr.edminecoreteam.corepractice.matchmaking.WhatIsGame;
+import fr.edminecoreteam.corepractice.utils.MessagesListeners;
 import fr.edminecoreteam.corepractice.utils.UnloadWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -64,9 +65,15 @@ public class QuitEvent implements Listener
                 core.getInEndDuel().add(pVictory);
 
                 WhatIsGame gameIs = core.getGameIs();
+                int eloWin = 0;
+                eloWin = generateRandomNumber(7, 10);
+
+                int eloLose = 0;
+                eloLose = generateRandomNumber(10, 15);
 
                 if (gameIs.getGameIs(pVictory).equalsIgnoreCase("unranked"))
                 {
+                    MessagesListeners.endOfflineMessage(pVictory, p.getName(), 0, convertTime(core.getTime(pVictory)));
                     core.getUnrankedPlayedDataManager().addData(pVictory.getUniqueId(), 1);
                     core.getUnrankedPlayedDataManager().addData(p.getUniqueId(), 1);
 
@@ -76,14 +83,15 @@ public class QuitEvent implements Listener
 
                 if (gameIs.getGameIs(pVictory).equalsIgnoreCase("ranked"))
                 {
+                    MessagesListeners.endOfflineMessage(pVictory, p.getName(), eloWin, convertTime(core.getTime(pVictory)));
                     core.getRankedPlayedDataManager().addData(pVictory.getUniqueId(), 1);
                     core.getRankedPlayedDataManager().addData(p.getUniqueId(), 1);
 
                     core.getRankedWinDataManager().addData(pVictory.getUniqueId(), 1);
                     core.getRankedLoseDataManager().addData(p.getUniqueId(), 1);
 
-                    core.getPlayerEloDataManager().addData(pVictory.getUniqueId(), generateRandomNumber(7, 10));
-                    core.getPlayerEloDataManager().removeData(p.getUniqueId(), generateRandomNumber(10, 15));
+                    core.getPlayerEloDataManager().addData(pVictory.getUniqueId(), eloWin);
+                    core.getPlayerEloDataManager().removeData(p.getUniqueId(), eloLose);
                 }
 
                 gameIs.removeGameIs(pVictory);
@@ -132,5 +140,12 @@ public class QuitEvent implements Listener
     private int generateRandomNumber(int minValue, int maxValue) {
         Random random = new Random();
         return random.nextInt((maxValue - minValue) + 1) + minValue;
+    }
+
+    private String convertTime(int timeInSeconds)
+    {
+        int minutes = timeInSeconds / 60;
+        int seconds = timeInSeconds % 60;
+        return String.format("%02dm %02ds", minutes, seconds);
     }
 }

@@ -66,6 +66,19 @@ public class ItemListeners implements Listener
                 e.setCancelled(true);
                 UnrankedGui.gui(p);
             }
+            if (it.getType() == Material.DIAMOND_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lRanked §7• Clique")) {
+                e.setCancelled(true);
+                if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) >= 20)
+                {
+                    RankedGui.gui(p);
+                }
+                else if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) < 20)
+                {
+                    int needMatch = 20 - core.getUnrankedPlayedDataManager().getData(p.getUniqueId());
+
+                    p.sendMessage("§cErreur, avant de jouer en Ranked, veuillez faire encore " + needMatch + " matchs Unranked.");
+                }
+            }
         }
         if (core.getInPreDuel().contains(p) || core.getInDuel().contains(p))
         {

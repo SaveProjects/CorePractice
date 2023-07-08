@@ -51,6 +51,10 @@ public class RankedGui implements Listener
 
                     p.closeInventory();
                 }
+                else
+                {
+                    return;
+                }
             }
         }
     }

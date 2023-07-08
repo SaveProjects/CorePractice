@@ -87,7 +87,7 @@ public class PersonalScoreboard {
             objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
             objectiveSign.setLine(4, "  §8• §7Ping adversaire: §b" + ((CraftPlayer) oppenant).getHandle().ping);
             objectiveSign.setLine(5, "§2");
-            objectiveSign.setLine(6, "  §8• §7Duré: §a" + convertTime(core.getTime(player)));
+            objectiveSign.setLine(6, "  §8• §7Durée: §a" + convertTime(core.getTime(player)));
             objectiveSign.setLine(7, "  §8• §7Carte: §9" + core.getWorldName().getWorldName(player));
             objectiveSign.setLine(8, "§3");
             objectiveSign.setLine(9, " §8➡ " + ip);

@@ -52,6 +52,10 @@ public class UnrankedGui implements Listener
 
                     p.closeInventory();
                 }
+                else
+                {
+                    return;
+                }
             }
         }
     }
