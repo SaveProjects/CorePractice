@@ -45,9 +45,6 @@ public class GameListeners implements Listener
         core.getWorldName().putWorldName(p1, world);
         core.getWorldName().putWorldName(p2, world);
 
-        core.getBlocsToWorld().loadChunks(core.getGameID().getIDString(p1));
-        core.getBlocsToWorld().addBlocksToWorld(core.getGameID().getIDString(p1));
-
         Location p1Spawn = new Location(Bukkit.getWorld(core.getGameID().getIDString(p1)),
                 (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.x")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.y")
