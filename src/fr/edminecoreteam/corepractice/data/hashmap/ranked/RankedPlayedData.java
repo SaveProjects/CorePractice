@@ -1,15 +1,15 @@
-package fr.edminecoreteam.corepractice.matchduels.timer;
+package fr.edminecoreteam.corepractice.data.hashmap.ranked;
 
 import java.util.UUID;
 
-public class TimerData
+public class RankedPlayedData
 {
     private final UUID playerId;
-    private int timer;
+    private int data;
 
-    public TimerData(UUID playerId, int timer) {
+    public RankedPlayedData(UUID playerId, int data) {
         this.playerId = playerId;
-        this.timer = timer;
+        this.data = data;
     }
 
     public UUID getPlayerId() {
@@ -17,18 +17,18 @@ public class TimerData
     }
 
     public int getTime() {
-        return timer;
+        return data;
     }
 
     public void addTime(int amount) {
-        timer += amount;
+        data += amount;
     }
 
     public void removeTime(int amount) {
-        timer -= amount;
+        data -= amount;
     }
 
     public void resetTime() {
-        timer = 0;
+        data = 0;
     }
 }

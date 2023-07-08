@@ -82,7 +82,22 @@ public class MySQL
     public void creatingTablePractice() {
         try
         {
-            PreparedStatement stm = MySQL.connection.prepareStatement("CREATE TABLE IF NOT EXISTS ed_practice (`player_uuid` varchar(255) NOT NULL, `player_name` varchar(255), PRIMARY KEY (`player_uuid`), UNIQUE(`player_uuid`), INDEX(`player_uuid`)) CHARACTER SET utf8");
+            PreparedStatement stm = MySQL.connection.prepareStatement("CREATE TABLE IF NOT EXISTS ed_practice (" +
+                    "`player_uuid` varchar(255) NOT NULL, " +
+                    "`player_name` varchar(255), " +
+
+                    "`unranked_played` int(11), " +
+                    "`unranked_win` int(11), " +
+                    "`unranked_lose` int(11), " +
+
+                    "`ranked_played` int(11), " +
+                    "`ranked_win` int(11), " +
+                    "`ranked_lose` int(11), " +
+
+                    "`player_elo` int(11), " +
+                    "`player_rank` int(11), " +
+
+                    "PRIMARY KEY (`player_uuid`), UNIQUE(`player_uuid`), INDEX(`player_uuid`)) CHARACTER SET utf8");
             stm.execute();
             stm.close();
             System.out.println("ED-NETWORK API");
