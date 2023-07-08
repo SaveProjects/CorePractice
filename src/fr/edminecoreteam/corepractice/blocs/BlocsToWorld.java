@@ -1,5 +1,6 @@
 package fr.edminecoreteam.corepractice.blocs;
 
+import net.minecraft.server.v1_8_R3.ChunkProviderServer;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -47,5 +48,21 @@ public class BlocsToWorld
 
     public boolean isBlockProtected(Block block) {
         return protectedBlocks.contains(block);
+    }
+
+    public void loadChunks(String worldName) {
+        World world = Bukkit.getWorld(worldName);
+        if (world != null) {
+            int chunkCount = 0;
+            for (org.bukkit.Chunk chunk : world.getLoadedChunks()) {
+                if (!chunk.isLoaded()) {
+                    world.loadChunk(chunk.getX(), chunk.getZ());
+                    chunkCount++;
+                }
+            }
+            Bukkit.getLogger().info("Chunks chargés pour le monde " + worldName + " : " + chunkCount);
+        } else {
+            Bukkit.getLogger().warning("Le monde spécifié n'existe pas !");
+        }
     }
 }

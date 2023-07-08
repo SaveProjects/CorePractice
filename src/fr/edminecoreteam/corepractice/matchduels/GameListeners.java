@@ -45,6 +45,9 @@ public class GameListeners implements Listener
         core.getWorldName().putWorldName(p1, world);
         core.getWorldName().putWorldName(p2, world);
 
+        core.getBlocsToWorld().loadChunks(core.getGameID().getIDString(p1));
+        core.getBlocsToWorld().addBlocksToWorld(core.getGameID().getIDString(p1));
+
         Location p1Spawn = new Location(Bukkit.getWorld(core.getGameID().getIDString(p1)),
                 (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.x")
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.y")
@@ -62,7 +65,6 @@ public class GameListeners implements Listener
         p1.teleport(p1Spawn);
         p2.teleport(p2Spawn);
 
-        core.getBlocsToWorld().addBlocksToWorld(core.getGameID().getIDString(p1));
 
         p1.setGameMode(GameMode.SURVIVAL);
         p2.setGameMode(GameMode.SURVIVAL);
