@@ -3,10 +3,10 @@ package fr.edminecoreteam.corepractice.gui;
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.kits.LoadKits;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
+import fr.edminecoreteam.corepractice.matchmaking.RankedMatchMaking;
 import fr.edminecoreteam.corepractice.matchmaking.UnrankedMatchMaking;
 import fr.edminecoreteam.corepractice.utils.ItemStackSerializer;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -18,19 +18,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
-public class UnrankedGui implements Listener
+public class RankedGui implements Listener
 {
     private static Core core = Core.getInstance();
 
     @EventHandler
     public void inventoryClick(InventoryClickEvent e) {
-        if (e.getView().getTopInventory().getTitle().equals("§8Unranked")) {
+        if (e.getView().getTopInventory().getTitle().equals("§8Ranked")) {
             Player p = (Player)e.getWhoClicked();
             if (e.getCurrentItem() == null) {
                 return;
@@ -45,7 +44,7 @@ public class UnrankedGui implements Listener
                 if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
                 {
                     e.setCancelled(true);
-                    UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
+                    RankedMatchMaking matchMaking = new RankedMatchMaking(p);
 
                     matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
                     ItemListeners.foundGameItems(p);
@@ -58,9 +57,9 @@ public class UnrankedGui implements Listener
 
     public static void gui(Player p) {
 
-        Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked");
+        Inventory inv = Bukkit.createInventory(null, 54, "§8Ranked");
 
-        ItemStack deco = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0);
+        ItemStack deco = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)3);
         ItemMeta decoM = deco.getItemMeta();
         decoM.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
         decoM.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS });
@@ -75,7 +74,7 @@ public class UnrankedGui implements Listener
             int t = 0;
             public void run() {
 
-                if (!p.getOpenInventory().getTitle().contains("§8Unranked")) { cancel(); }
+                if (!p.getOpenInventory().getTitle().contains("§8Ranked")) { cancel(); }
                 LoadKits kits = new LoadKits(p);
 
                 for (String gameMode : kits.getUnrankedKitList())

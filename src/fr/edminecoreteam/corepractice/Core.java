@@ -15,12 +15,14 @@ import fr.edminecoreteam.corepractice.edorm.MySQL;
 import fr.edminecoreteam.corepractice.edorm.PlayerJoinQuitSQL;
 import fr.edminecoreteam.corepractice.edorm.SQLState;
 import fr.edminecoreteam.corepractice.edorm.SQLTasks;
+import fr.edminecoreteam.corepractice.gui.RankedGui;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
 import fr.edminecoreteam.corepractice.listeners.*;
 import fr.edminecoreteam.corepractice.matchduels.*;
 import fr.edminecoreteam.corepractice.matchduels.timer.TimerDataManager;
 import fr.edminecoreteam.corepractice.matchmaking.FoundGame;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
+import fr.edminecoreteam.corepractice.matchmaking.WhatIsGame;
 import fr.edminecoreteam.corepractice.scoreboard.JoinScoreboardEvent;
 import fr.edminecoreteam.corepractice.scoreboard.LeaveScoreboardEvent;
 import fr.edminecoreteam.corepractice.scoreboard.ScoreboardManager;
@@ -76,6 +78,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
 
     private final PlayerEloDataManager playerEloDataManager;
 
+    private final WhatIsGame gameIs;
+
     public Core() {
 
         inLobby = new ArrayList<Player>();
@@ -92,6 +96,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         matchOppenant = new MatchOppenant();
         timerData = new TimerDataManager();
         blocsToWorld = new BlocsToWorld();
+        gameIs = new WhatIsGame();
 
         unrankedPlayedDataManager = new UnrankedPlayedDataManager();
         unrankedWinDataManager = new UnrankedWinDataManager();
@@ -188,6 +193,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new SoupUtils(), this);
 
         Bukkit.getPluginManager().registerEvents(new UnrankedGui(), this);
+        Bukkit.getPluginManager().registerEvents(new RankedGui(), this);
         FoundGame.start();
     }
 
@@ -253,6 +259,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public MatchOppenant getMatchOppenant() { return this.matchOppenant; }
 
     public BlocsToWorld getBlocsToWorld() { return this.blocsToWorld; }
+
+    public WhatIsGame getGameIs() { return this.gameIs; }
 
     public ScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;

@@ -2,7 +2,9 @@ package fr.edminecoreteam.corepractice.matchduels;
 
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
+import fr.edminecoreteam.corepractice.matchmaking.RankedMatchMaking;
 import fr.edminecoreteam.corepractice.matchmaking.UnrankedMatchMaking;
+import fr.edminecoreteam.corepractice.matchmaking.WhatIsGame;
 import fr.edminecoreteam.corepractice.utils.LoadWorld;
 import fr.edminecoreteam.corepractice.utils.UnloadWorld;
 import org.bukkit.*;
@@ -14,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameListeners implements Listener
@@ -176,6 +179,30 @@ public class GameListeners implements Listener
                 core.getInEndDuel().add(pVictory);
                 core.getInEndDuel().add(pDeath);
 
+
+                WhatIsGame gameIs = core.getGameIs();
+
+                if (gameIs.getGameIs(pVictory).equalsIgnoreCase("unranked"))
+                {
+                    core.getUnrankedPlayedDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getUnrankedPlayedDataManager().addData(pDeath.getUniqueId(), 1);
+
+                    core.getUnrankedWinDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getUnrankedLoseDataManager().addData(pDeath.getUniqueId(), 1);
+                }
+
+                if (gameIs.getGameIs(pVictory).equalsIgnoreCase("ranked"))
+                {
+                    core.getRankedPlayedDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getRankedPlayedDataManager().addData(pDeath.getUniqueId(), 1);
+
+                    core.getRankedWinDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getRankedLoseDataManager().addData(pDeath.getUniqueId(), 1);
+
+                    core.getPlayerEloDataManager().addData(pVictory.getUniqueId(), generateRandomNumber(7, 10));
+                    core.getPlayerEloDataManager().removeData(pDeath.getUniqueId(), generateRandomNumber(10, 15));
+                }
+
                 endGame(pVictory);
 
                 pDeath.teleport(pDeathLoc);
@@ -229,6 +256,11 @@ public class GameListeners implements Listener
         {
             p.removePotionEffect(effect.getType());
         }
+
+        WhatIsGame gameIs = core.getGameIs();
+
+        gameIs.removeGameIs(p);
+
         p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
         p.setHealth(20);
@@ -277,14 +309,32 @@ public class GameListeners implements Listener
         p.setFireTicks(0);
 
         core.resetTime(p);
-        UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
+        WhatIsGame gameIs = core.getGameIs();
 
-        matchMaking.start(core.getGameType().getTypeGame(p));
-        ItemListeners.foundGameItems(p);
-
-        if (core.getGameType().getTypeGame(p) != null)
+        if (gameIs.getGameIs(p).equalsIgnoreCase("unranked"))
         {
-            core.getGameType().removeFromTypeGame(p);
+            UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
+
+            matchMaking.start(core.getGameType().getTypeGame(p));
+            ItemListeners.foundGameItems(p);
+
+            if (core.getGameType().getTypeGame(p) != null)
+            {
+                core.getGameType().removeFromTypeGame(p);
+            }
+        }
+
+        if (gameIs.getGameIs(p).equalsIgnoreCase("ranked"))
+        {
+            RankedMatchMaking matchMaking = new RankedMatchMaking(p);
+
+            matchMaking.start(core.getGameType().getTypeGame(p));
+            ItemListeners.foundGameItems(p);
+
+            if (core.getGameType().getTypeGame(p) != null)
+            {
+                core.getGameType().removeFromTypeGame(p);
+            }
         }
     }
 
@@ -338,5 +388,10 @@ public class GameListeners implements Listener
                 ++t;
             }
         }.runTaskTimer((Plugin)core, 0L, 20L);
+    }
+
+    private int generateRandomNumber(int minValue, int maxValue) {
+        Random random = new Random();
+        return random.nextInt((maxValue - minValue) + 1) + minValue;
     }
 }

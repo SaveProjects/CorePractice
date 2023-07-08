@@ -2,6 +2,7 @@ package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.matchduels.GameListeners;
+import fr.edminecoreteam.corepractice.matchmaking.WhatIsGame;
 import fr.edminecoreteam.corepractice.utils.UnloadWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -12,6 +13,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.Random;
 
 public class QuitEvent implements Listener
 {
@@ -60,6 +63,32 @@ public class QuitEvent implements Listener
                 core.getInDuel().remove(pVictory);
                 core.getInEndDuel().add(pVictory);
 
+                WhatIsGame gameIs = core.getGameIs();
+
+                if (gameIs.getGameIs(pVictory).equalsIgnoreCase("unranked"))
+                {
+                    core.getUnrankedPlayedDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getUnrankedPlayedDataManager().addData(p.getUniqueId(), 1);
+
+                    core.getUnrankedWinDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getUnrankedLoseDataManager().addData(p.getUniqueId(), 1);
+                }
+
+                if (gameIs.getGameIs(pVictory).equalsIgnoreCase("ranked"))
+                {
+                    core.getRankedPlayedDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getRankedPlayedDataManager().addData(p.getUniqueId(), 1);
+
+                    core.getRankedWinDataManager().addData(pVictory.getUniqueId(), 1);
+                    core.getRankedLoseDataManager().addData(p.getUniqueId(), 1);
+
+                    core.getPlayerEloDataManager().addData(pVictory.getUniqueId(), generateRandomNumber(7, 10));
+                    core.getPlayerEloDataManager().removeData(p.getUniqueId(), generateRandomNumber(10, 15));
+                }
+
+                gameIs.removeGameIs(pVictory);
+                gameIs.removeGameIs(p);
+
                 GameListeners.endGame(pVictory);
 
                 Bukkit.getScheduler().runTaskLater(core, () -> {
@@ -98,5 +127,10 @@ public class QuitEvent implements Listener
 
         p.getInventory().clear();
         e.setQuitMessage(null);
+    }
+
+    private int generateRandomNumber(int minValue, int maxValue) {
+        Random random = new Random();
+        return random.nextInt((maxValue - minValue) + 1) + minValue;
     }
 }

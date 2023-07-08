@@ -27,11 +27,15 @@ public class UnrankedMatchMaking
     public void start(String game)
     {
         GameCheck gameCheck = core.getGameCheck();
+        WhatIsGame gameIs = core.getGameIs();
 
         if (gameCheck.getGame(p) == null)
         {
             core.getInWaiting().add(p);
+            gameIs.removeGameIs(p);
+            gameIs.putGameIs(p, "unranked");
             gameCheck.searchGame(p, game);
+
             p.sendMessage("§fRecherche d'une partie en cours sur le mode §e§l" + game + "§f...");
             ItemListeners.foundGameItems(p);
         }

@@ -42,7 +42,7 @@ Arenas:
       b: -1.5
 
 kits:
-  unranked:
+  1vs1:
     nodebuff:
       name: '&d&lNodebuff'
       id: 'nodebuff'

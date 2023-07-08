@@ -1,10 +1,12 @@
 package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
+import fr.edminecoreteam.corepractice.gui.RankedGui;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
 import fr.edminecoreteam.corepractice.kits.LoadKits;
 import fr.edminecoreteam.corepractice.matchduels.GameListeners;
 import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
+import fr.edminecoreteam.corepractice.matchmaking.WhatIsGame;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -123,6 +125,10 @@ public class ItemListeners implements Listener
                 e.setCancelled(true);
                 GameCheck gameCheck = core.getGameCheck();
                 gameCheck.removeSerchGame(p);
+
+                WhatIsGame gameIs = core.getGameIs();
+                gameIs.removeGameIs(p);
+
                 core.getInWaiting().remove(p);
                 p.sendMessage("§cRecherche annulée...");
                 getLobbyItems(p);
@@ -130,6 +136,19 @@ public class ItemListeners implements Listener
             if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 UnrankedGui.gui(p);
+            }
+            if (it.getType() == Material.DIAMOND_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§b§lRanked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) >= 20)
+                {
+                    RankedGui.gui(p);
+                }
+                else if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) < 20)
+                {
+                    int needMatch = 20 - core.getUnrankedPlayedDataManager().getData(p.getUniqueId());
+
+                    p.sendMessage("§cErreur, avant de jouer en Ranked, veuillez faire encore " + needMatch + " matchs Unranked.");
+                }
             }
         }
         if (core.getInPreDuel().contains(p) || core.getInDuel().contains(p))
