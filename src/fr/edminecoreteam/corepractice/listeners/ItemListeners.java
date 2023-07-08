@@ -133,12 +133,14 @@ public class ItemListeners implements Listener
 
                 if (core.getGameCheck().getGame(p) != null)
                 {
+                    p.getInventory().clear();
                     pKit.equipUnrankedDefaultKit(core.getGameCheck().getGame(p));
                 }
                 else if (core.getGameCheck().getGame(p) == null)
                 {
                     if (core.getGameType().getTypeGame(p) != null)
                     {
+                        p.getInventory().clear();
                         pKit.equipUnrankedDefaultKit(core.getGameType().getTypeGame(p));
                     }
                     else if (core.getGameType().getTypeGame(p) == null)

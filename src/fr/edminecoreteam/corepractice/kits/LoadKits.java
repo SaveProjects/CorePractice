@@ -38,7 +38,7 @@ public class LoadKits
     {
         for(String sKitName : core.getConfig().getConfigurationSection("kits.unranked").getKeys(false)) {
             if (kitName.equals(sKitName)) {
-                p.sendMessage(sKitName);
+                p.sendMessage("§aKit " + sKitName + " reçu.");
                 for (String content : core.getConfig().getConfigurationSection("kits.unranked." + sKitName + ".content.items").getKeys(false)) {
                     if (core.getConfig().getString("kits.unranked." + sKitName + ".content.items." + content + ".specialid").equalsIgnoreCase("no")) {
                         ItemStack items = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.unranked." + sKitName + ".content.items." + content + ".item")).getType(), core.getConfig().getInt("kits.unranked." + sKitName + ".content.items." + content + ".amount"));
@@ -108,10 +108,6 @@ public class LoadKits
                     boots.setItemMeta(bootsM);
                     p.getEquipment().setBoots(boots);
                 }
-            }
-            else
-            {
-                p.sendMessage("§cErreur, aucun kit trouvé...");
             }
         }
     }
