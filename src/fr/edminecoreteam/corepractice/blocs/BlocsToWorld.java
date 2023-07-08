@@ -12,25 +12,34 @@ public class BlocsToWorld
 {
     private Map<Player, List<Block>> playerBlocks;
 
-    public BlocsToWorld() {
+    public BlocsToWorld()
+    {
         playerBlocks = new HashMap<>();
     }
 
     public boolean isBlockPlaced(Block block) {
-        for (List<Block> blocks : playerBlocks.values()) {
-            if (blocks.contains(block)) {
+        for (List<Block> blocks : playerBlocks.values())
+        {
+            if (blocks.contains(block))
+            {
                 return true;
             }
         }
         return false;
     }
 
-    public List<Block> getPlayerBlocks(Player player) {
+    public List<Block> getPlayerBlocks(Player player)
+    {
         return playerBlocks.getOrDefault(player, new ArrayList<>());
     }
 
     public Map<Player, List<Block>> getPlayerBlocks()
     {
         return playerBlocks;
+    }
+
+    public void clearPlayerBlocks(Player player)
+    {
+        playerBlocks.remove(player);
     }
 }

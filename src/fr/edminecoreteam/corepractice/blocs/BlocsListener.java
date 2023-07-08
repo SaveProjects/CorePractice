@@ -22,6 +22,11 @@ public class BlocsListener implements Listener
 
         Player p = event.getPlayer();
 
+        if (core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
+        {
+            event.setCancelled(true);
+        }
+
         if (core.getInDuel().contains(p))
         {
             if (!core.getBlocsToWorld().getPlayerBlocks(p).contains(event.getBlock()))
@@ -33,16 +38,23 @@ public class BlocsListener implements Listener
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
+        Player p = event.getPlayer();
         Block block = event.getBlock();
 
-        // Vérifier si le joueur est déjà dans la map
-        if (core.getBlocsToWorld().getPlayerBlocks().containsKey(player)) {
-            core.getBlocsToWorld().getPlayerBlocks().get(player).add(block);
-        } else {
-            List<Block> blocks = new ArrayList<>();
-            blocks.add(block);
-            core.getBlocsToWorld().getPlayerBlocks().put(player, blocks);
+        if (core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
+        {
+            event.setCancelled(true);
+        }
+
+        if (core.getInDuel().contains(p))
+        {
+            if (core.getBlocsToWorld().getPlayerBlocks().containsKey(p)) {
+                core.getBlocsToWorld().getPlayerBlocks().get(p).add(block);
+            } else {
+                List<Block> blocks = new ArrayList<>();
+                blocks.add(block);
+                core.getBlocsToWorld().getPlayerBlocks().put(p, blocks);
+            }
         }
     }
 

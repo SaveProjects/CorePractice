@@ -296,6 +296,7 @@ public class GameListeners implements Listener
             {
                 p.removePotionEffect(effect.getType());
             }
+            core.getBlocsToWorld().clearPlayerBlocks(p);
             p.setFireTicks(0);
             p.getInventory().setHelmet(null);
             p.getInventory().setChestplate(null);
