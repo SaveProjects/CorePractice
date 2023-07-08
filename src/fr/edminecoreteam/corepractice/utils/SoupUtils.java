@@ -32,7 +32,24 @@ public class SoupUtils implements Listener
             if (it.getType() == Material.MUSHROOM_SOUP && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 if (p.getHealth() == 20)
                 {
-                    e.setCancelled(true);
+                    if (p.getFoodLevel() == 20)
+                    {
+                        e.setCancelled(true);
+                    }
+                    else if (p.getFoodLevel() < 20)
+                    {
+                        e.setCancelled(true);
+                        int newFood= (int) (p.getFoodLevel() + 6);
+                        if (newFood > 20)
+                        {
+                            newFood = 20;
+                        }
+                        p.setFoodLevel(newFood);
+
+                        int inventoryslot = p.getInventory().getHeldItemSlot();
+                        ItemStack soup = new ItemStack(Material.BOWL, 1);
+                        p.getInventory().setItem(inventoryslot, soup);
+                    }
                 }
                 else if (p.getHealth() < 20)
                 {
@@ -43,6 +60,16 @@ public class SoupUtils implements Listener
                         newHealth = 20;
                     }
                     p.setHealth(newHealth);
+
+                    int newFood= (int) (p.getFoodLevel() + 6);
+                    if (p.getFoodLevel() < 20)
+                    {
+                        if (newFood > 20)
+                        {
+                            newFood = 20;
+                        }
+                        p.setFoodLevel(newFood);
+                    }
 
                     int inventoryslot = p.getInventory().getHeldItemSlot();
                     ItemStack soup = new ItemStack(Material.BOWL, 1);
