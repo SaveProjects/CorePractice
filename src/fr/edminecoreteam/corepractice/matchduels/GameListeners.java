@@ -1,31 +1,20 @@
 package fr.edminecoreteam.corepractice.matchduels;
 
 import fr.edminecoreteam.corepractice.Core;
-import fr.edminecoreteam.corepractice.kits.LoadKits;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
-import fr.edminecoreteam.corepractice.matchmaking.GameCheck;
 import fr.edminecoreteam.corepractice.matchmaking.UnrankedMatchMaking;
 import fr.edminecoreteam.corepractice.utils.LoadWorld;
 import fr.edminecoreteam.corepractice.utils.UnloadWorld;
 import org.bukkit.*;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 public class GameListeners implements Listener
 {
@@ -53,7 +42,6 @@ public class GameListeners implements Listener
 
         String world = LoadWorld.getRandomSubfolderName("gameTemplate/");
         LoadWorld.createGameWorld(world, core.getGameID().getIDString(p1));
-        core.getBlocsToWorld().addBlocksToWorld(core.getGameID().getIDString(p1));
         core.getWorldName().putWorldName(p1, world);
         core.getWorldName().putWorldName(p2, world);
 
@@ -73,6 +61,8 @@ public class GameListeners implements Listener
 
         p1.teleport(p1Spawn);
         p2.teleport(p2Spawn);
+
+        core.getBlocsToWorld().addBlocksToWorld(core.getGameID().getIDString(p1));
 
         p1.setGameMode(GameMode.SURVIVAL);
         p2.setGameMode(GameMode.SURVIVAL);

@@ -1,6 +1,7 @@
 package fr.edminecoreteam.corepractice.blocs;
 
 import fr.edminecoreteam.corepractice.Core;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -20,7 +21,7 @@ public class BlocsListener implements Listener
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        for (org.bukkit.block.Block block : event.blockList()) {
+        for (Block block : event.blockList()) {
             if (core.getBlocsToWorld().isBlockProtected(block)) {
                 event.setCancelled(true);
                 return;

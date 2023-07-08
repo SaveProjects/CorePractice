@@ -1,6 +1,7 @@
 package fr.edminecoreteam.corepractice.blocs;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
@@ -20,7 +21,7 @@ public class BlocsToWorld
         if (world != null) {
             int chunkCount = world.getLoadedChunks().length;
             for (int i = 0; i < chunkCount; i++) {
-                org.bukkit.Chunk chunk = world.getLoadedChunks()[i];
+                Chunk chunk = world.getLoadedChunks()[i];
                 for (int x = 0; x < 16; x++) {
                     for (int y = 0; y < world.getMaxHeight(); y++) {
                         for (int z = 0; z < 16; z++) {
