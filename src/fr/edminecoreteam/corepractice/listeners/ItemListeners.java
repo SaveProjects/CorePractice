@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -39,16 +38,6 @@ public class ItemListeners implements Listener
             {
                 e.getItemDrop().remove();
             }
-        }
-    }
-
-    @EventHandler
-    public void onHeld(PlayerItemHeldEvent e)
-    {
-        Player p = e.getPlayer();
-        if (core.getInLobby().contains(p) || core.getInEditor().contains(p) || core.getInPreDuel().contains(p) || core.getInEndDuel().contains(p))
-        {
-            e.setCancelled(true);
         }
     }
 
