@@ -32,7 +32,7 @@ public class BlocsListener implements Listener
             if (!core.getBlocsToWorld().getPlayerBlocks(p).contains(event.getBlock()))
             {
                 Player oppenant = core.getMatchOppenant().getMatchOppenant(p);
-                if (!core.getBlocsToWorld().getPlayerBlocks(p).contains(event.getBlock()))
+                if (!core.getBlocsToWorld().getPlayerBlocks(oppenant).contains(event.getBlock()))
                 {
                     event.setCancelled(true);
                 }
