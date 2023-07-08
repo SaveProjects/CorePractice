@@ -22,6 +22,8 @@ public class UnrankedPlayedDataManager
 
     public void resetData(UUID playerId) { getPlayerData(playerId).resetTime(); }
 
+    public int getData(UUID playerId) { return getPlayerData(playerId).getTime(); }
+
     public Map<UUID, UnrankedPlayedData> returnPlayers()
     {
         return this.players;

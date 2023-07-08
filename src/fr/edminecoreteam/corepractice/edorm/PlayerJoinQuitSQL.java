@@ -21,13 +21,42 @@ public class PlayerJoinQuitSQL implements Listener
         data.createData();
         data.updatePlayerName();
 
+        core.getUnrankedPlayedDataManager().addData(p.getUniqueId(), data.getUnrankedPlayed());
+        core.getUnrankedWinDataManager().addData(p.getUniqueId(), data.getUnrankedWin());
+        core.getUnrankedLoseDataManager().addData(p.getUniqueId(), data.getUnrankedLose());
 
+        core.getRankedPlayedDataManager().addData(p.getUniqueId(), data.getRankedPlayed());
+        core.getRankedWinDataManager().addData(p.getUniqueId(), data.getRankedWin());
+        core.getRankedLoseDataManager().addData(p.getUniqueId(), data.getRankedLose());
+
+        core.getPlayerEloDataManager().addData(p.getUniqueId(), data.getPlayerElo());
     }
 
     @EventHandler
     private void onQuit(PlayerQuitEvent e)
     {
+        Player p = e.getPlayer();
+        PracticeData data = new PracticeData(p);
 
+        data.setUnrankedPlayed(core.getUnrankedPlayedDataManager().getData(p.getUniqueId()));
+        data.setUnrankedWin(core.getUnrankedWinDataManager().getData(p.getUniqueId()));
+        data.setUnrankedLose(core.getUnrankedLoseDataManager().getData(p.getUniqueId()));
+
+        data.setRankedPlayed(core.getRankedPlayedDataManager().getData(p.getUniqueId()));
+        data.setRankedWin(core.getRankedWinDataManager().getData(p.getUniqueId()));
+        data.setRankedLose(core.getRankedLoseDataManager().getData(p.getUniqueId()));
+
+        data.setPlayerElo(core.getPlayerEloDataManager().getData(p.getUniqueId()));
+
+        core.getUnrankedPlayedDataManager().resetData(p.getUniqueId());
+        core.getUnrankedWinDataManager().resetData(p.getUniqueId());
+        core.getUnrankedLoseDataManager().resetData(p.getUniqueId());
+
+        core.getRankedPlayedDataManager().resetData(p.getUniqueId());
+        core.getRankedWinDataManager().resetData(p.getUniqueId());
+        core.getRankedLoseDataManager().resetData(p.getUniqueId());
+
+        core.getPlayerEloDataManager().resetData(p.getUniqueId());
     }
 
 }

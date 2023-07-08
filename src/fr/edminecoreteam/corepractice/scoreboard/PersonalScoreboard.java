@@ -60,7 +60,7 @@ public class PersonalScoreboard {
             objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
             objectiveSign.setLine(4, "  §8• §7Joueurs: §a" + core.getServer().getOnlinePlayers().size());
             objectiveSign.setLine(5, "§2");
-            objectiveSign.setLine(6, "  §8• §7Elo: §e");
+            objectiveSign.setLine(6, "  §8• §7Elo: §e" + core.getPlayerEloDataManager().getData(player.getUniqueId()));
             objectiveSign.setLine(7, "  §8• §7Classement: §f");
             objectiveSign.setLine(8, "§3");
             objectiveSign.setLine(9, " §8➡ " + ip);

@@ -24,6 +24,8 @@ public class PlayerEloDataManager
 
     public void resetData(UUID playerId) { getPlayerData(playerId).resetTime(); }
 
+    public int getData(UUID playerId) { return getPlayerData(playerId).getTime(); }
+
     public Map<UUID, PlayerEloData> returnPlayers()
     {
         return this.players;

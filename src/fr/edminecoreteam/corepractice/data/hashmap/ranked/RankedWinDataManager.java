@@ -24,6 +24,8 @@ public class RankedWinDataManager
 
     public void resetData(UUID playerId) { getPlayerData(playerId).resetTime(); }
 
+    public int getData(UUID playerId) { return getPlayerData(playerId).getTime(); }
+
     public Map<UUID, RankedWinData> returnPlayers()
     {
         return this.players;

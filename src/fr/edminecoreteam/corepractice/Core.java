@@ -4,7 +4,15 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import fr.edminecoreteam.corepractice.blocs.BlocsListener;
 import fr.edminecoreteam.corepractice.blocs.BlocsToWorld;
+import fr.edminecoreteam.corepractice.data.hashmap.elo.PlayerEloDataManager;
+import fr.edminecoreteam.corepractice.data.hashmap.ranked.RankedLoseDataManager;
+import fr.edminecoreteam.corepractice.data.hashmap.ranked.RankedPlayedDataManager;
+import fr.edminecoreteam.corepractice.data.hashmap.ranked.RankedWinDataManager;
+import fr.edminecoreteam.corepractice.data.hashmap.unranked.UnrankedLoseDataManager;
+import fr.edminecoreteam.corepractice.data.hashmap.unranked.UnrankedPlayedDataManager;
+import fr.edminecoreteam.corepractice.data.hashmap.unranked.UnrankedWinDataManager;
 import fr.edminecoreteam.corepractice.edorm.MySQL;
+import fr.edminecoreteam.corepractice.edorm.PlayerJoinQuitSQL;
 import fr.edminecoreteam.corepractice.edorm.SQLState;
 import fr.edminecoreteam.corepractice.edorm.SQLTasks;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
@@ -41,30 +49,42 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public MySQL database;
     public SQLState sqlState;
 
-    private List<Player> inLobby;
-    private List<Player> inEditor;
-    private List<Player> inWaiting;
+    private final List<Player> inLobby;
+    private final List<Player> inEditor;
+    private final List<Player> inWaiting;
 
-    private List<Player> inPreDuel;
-    private List<Player> inDuel;
-    private List<Player> inEndDuel;
+    private final List<Player> inPreDuel;
+    private final List<Player> inDuel;
+    private final List<Player> inEndDuel;
 
-    private GameCheck gameCheck;
-    private TypeGame typeGame;
-    private GameID gameID;
-    private WorldName worldName;
-    private MatchOppenant matchOppenant;
-    private TimerDataManager timerData;
+    private final GameCheck gameCheck;
+    private final TypeGame typeGame;
+    private final GameID gameID;
+    private final WorldName worldName;
+    private final MatchOppenant matchOppenant;
+    private final TimerDataManager timerData;
 
-    private BlocsToWorld blocsToWorld;
+    private final BlocsToWorld blocsToWorld;
+
+    private final UnrankedPlayedDataManager unrankedPlayedDataManager;
+    private final UnrankedWinDataManager unrankedWinDataManager;
+    private final UnrankedLoseDataManager unrankedLoseDataManager;
+
+    private final RankedPlayedDataManager rankedPlayedDataManager;
+    private final RankedWinDataManager rankedWinDataManager;
+    private final RankedLoseDataManager rankedLoseDataManager;
+
+    private final PlayerEloDataManager playerEloDataManager;
 
     public Core() {
+
         inLobby = new ArrayList<Player>();
         inEditor = new ArrayList<Player>();
         inWaiting = new ArrayList<Player>();
         inDuel = new ArrayList<Player>();
         inPreDuel = new ArrayList<Player>();
         inEndDuel = new ArrayList<Player>();
+
         gameCheck = new GameCheck();
         typeGame = new TypeGame();
         gameID = new GameID();
@@ -72,6 +92,16 @@ public class Core extends JavaPlugin implements PluginMessageListener
         matchOppenant = new MatchOppenant();
         timerData = new TimerDataManager();
         blocsToWorld = new BlocsToWorld();
+
+        unrankedPlayedDataManager = new UnrankedPlayedDataManager();
+        unrankedWinDataManager = new UnrankedWinDataManager();
+        unrankedLoseDataManager = new UnrankedLoseDataManager();
+
+        rankedPlayedDataManager = new RankedPlayedDataManager();
+        rankedWinDataManager = new RankedWinDataManager();
+        rankedLoseDataManager = new RankedLoseDataManager();
+
+        playerEloDataManager = new PlayerEloDataManager();
     }
 
     public List<Player> getInLobby() { return this.inLobby; }
@@ -89,7 +119,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         saveDefaultConfig();
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this::onPluginMessageReceived);
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
         MySQLConnect();
         ScoreboardManager();
@@ -146,6 +176,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     {
         instance = this;
 
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitSQL(), this);
+
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new QuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new DoubleJumpListener(), this);
@@ -200,6 +232,16 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public int getTime(Player player) {
         return timerData.getPlayerData(player.getUniqueId()).getTime();
     }
+
+    public UnrankedPlayedDataManager getUnrankedPlayedDataManager() { return this.unrankedPlayedDataManager; }
+    public UnrankedWinDataManager getUnrankedWinDataManager() { return this.unrankedWinDataManager; }
+    public UnrankedLoseDataManager getUnrankedLoseDataManager() { return this.unrankedLoseDataManager; }
+
+    public RankedPlayedDataManager getRankedPlayedDataManager() { return this.rankedPlayedDataManager; }
+    public RankedWinDataManager getRankedWinDataManager() { return this.rankedWinDataManager; }
+    public RankedLoseDataManager getRankedLoseDataManager() { return this.rankedLoseDataManager; }
+
+    public PlayerEloDataManager getPlayerEloDataManager() { return this.playerEloDataManager; }
 
     /*
      * Méthode de retournement de l'instance.

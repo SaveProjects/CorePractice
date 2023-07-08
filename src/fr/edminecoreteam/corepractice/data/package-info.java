@@ -1,1 +1,0 @@
-package fr.edminecoreteam.corepractice.data;
