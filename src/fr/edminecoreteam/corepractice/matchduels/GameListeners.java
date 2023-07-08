@@ -167,7 +167,7 @@ public class GameListeners implements Listener
                 pDeath.sendTitle("§c§lDéfaite...", "§7Peut-être une prochaine fois.");
                 pDeath.playSound(pVictory.getLocation(), Sound.VILLAGER_NO, 1.0f, 1.0f);
 
-                pVictory.sendTitle("§a§lVictoire !", "§7C'étais moins une !");
+                pVictory.sendTitle("§a§lVictoire !", "§7C'était moins une !");
                 pVictory.playSound(pVictory.getLocation(), Sound.FIREWORK_LAUNCH, 1.0f, 1.0f);
 
                 core.getInDuel().remove(pVictory);
