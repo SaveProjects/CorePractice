@@ -40,20 +40,23 @@ public class RankedGui implements Listener
 
             for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
             {
-                ItemMeta itM = it.getItemMeta();
-                if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
+                if (it.getType() != null)
                 {
-                    e.setCancelled(true);
-                    RankedMatchMaking matchMaking = new RankedMatchMaking(p);
+                    ItemMeta itM = it.getItemMeta();
+                    if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
+                    {
+                        e.setCancelled(true);
+                        RankedMatchMaking matchMaking = new RankedMatchMaking(p);
 
-                    matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
-                    ItemListeners.foundGameItems(p);
+                        matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
+                        ItemListeners.foundGameItems(p);
 
-                    p.closeInventory();
-                }
-                else
-                {
-                    return;
+                        p.closeInventory();
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
         }
@@ -91,7 +94,7 @@ public class RankedGui implements Listener
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dInformation:");
-                        loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
+                        loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id"), "ranked"));
                         loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
                         loregamemode.add("");
                         loregamemode.add("§8➡ §fCliquez pour rejoindre.");
@@ -107,7 +110,7 @@ public class RankedGui implements Listener
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dInformation:");
-                        loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
+                        loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id"), "ranked"));
                         loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
                         loregamemode.add("");
                         loregamemode.add("§8➡ §fCliquez pour rejoindre.");
