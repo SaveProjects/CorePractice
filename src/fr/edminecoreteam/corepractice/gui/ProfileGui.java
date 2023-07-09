@@ -58,7 +58,7 @@ public class ProfileGui implements Listener
                 {
                     if (core.getConfig().getString("kits.1vs1." + gameMode + ".icon").equalsIgnoreCase("potion"))
                     {
-                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")), (short)core.getConfig().getInt("kits.1vs1." + gameMode + ".potionid"));
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), 1, (short)core.getConfig().getInt("kits.1vs1." + gameMode + ".potionid"));
                         ItemMeta gamemodeM = gamemode.getItemMeta();
                         gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
                         ArrayList<String> loregamemode = new ArrayList<String>();
@@ -81,7 +81,7 @@ public class ProfileGui implements Listener
                     }
                     else
                     {
-                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), 1);
                         ItemMeta gamemodeM = gamemode.getItemMeta();
                         gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
                         ArrayList<String> loregamemode = new ArrayList<String>();
