@@ -32,7 +32,7 @@ public class UnrankedGui implements Listener
     public void inventoryClick(InventoryClickEvent e) {
         if (e.getView().getTopInventory().getTitle().equals("§8Unranked")) {
             Player p = (Player)e.getWhoClicked();
-            if (e.getCurrentItem() == null) {
+            if (e.getCurrentItem().getType() == Material.AIR) {
                 return;
             }
 
@@ -41,23 +41,19 @@ public class UnrankedGui implements Listener
 
             for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
             {
-                if (it.getType() != Material.AIR)
+
+                ItemMeta itM = it.getItemMeta();
+                if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
                 {
-                    ItemMeta itM = it.getItemMeta();
-                    if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
-                    {
-                        e.setCancelled(true);
-                        UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
-
-                        matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
-                        ItemListeners.foundGameItems(p);
-
-                        p.closeInventory();
-                    }
-                    else
-                    {
-                        return;
-                    }
+                    e.setCancelled(true);
+                    UnrankedMatchMaking matchMaking = new UnrankedMatchMaking(p);
+                    matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
+                    ItemListeners.foundGameItems(p);
+                    p.closeInventory();
+                }
+                else
+                {
+                    return;
                 }
             }
         }

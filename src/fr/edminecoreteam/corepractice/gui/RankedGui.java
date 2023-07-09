@@ -31,7 +31,7 @@ public class RankedGui implements Listener
     public void inventoryClick(InventoryClickEvent e) {
         if (e.getView().getTopInventory().getTitle().equals("§8Ranked")) {
             Player p = (Player)e.getWhoClicked();
-            if (e.getCurrentItem() == null) {
+            if (e.getCurrentItem().getType() == Material.AIR) {
                 return;
             }
 
@@ -40,23 +40,18 @@ public class RankedGui implements Listener
 
             for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
             {
-                if (it.getType() != Material.AIR)
+                ItemMeta itM = it.getItemMeta();
+                if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
                 {
-                    ItemMeta itM = it.getItemMeta();
-                    if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
-                    {
-                        e.setCancelled(true);
-                        RankedMatchMaking matchMaking = new RankedMatchMaking(p);
-
-                        matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
-                        ItemListeners.foundGameItems(p);
-
-                        p.closeInventory();
-                    }
-                    else
-                    {
-                        return;
-                    }
+                    e.setCancelled(true);
+                    RankedMatchMaking matchMaking = new RankedMatchMaking(p);
+                    matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
+                    ItemListeners.foundGameItems(p);
+                    p.closeInventory();
+                }
+                else
+                {
+                    return;
                 }
             }
         }
