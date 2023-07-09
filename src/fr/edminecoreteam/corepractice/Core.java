@@ -15,6 +15,7 @@ import fr.edminecoreteam.corepractice.edorm.MySQL;
 import fr.edminecoreteam.corepractice.edorm.PlayerJoinQuitSQL;
 import fr.edminecoreteam.corepractice.edorm.SQLState;
 import fr.edminecoreteam.corepractice.edorm.SQLTasks;
+import fr.edminecoreteam.corepractice.gui.ProfileGui;
 import fr.edminecoreteam.corepractice.gui.RankedGui;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
 import fr.edminecoreteam.corepractice.listeners.*;
@@ -198,6 +199,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
 
         Bukkit.getPluginManager().registerEvents(new UnrankedGui(), this);
         Bukkit.getPluginManager().registerEvents(new RankedGui(), this);
+
+        Bukkit.getPluginManager().registerEvents(new ProfileGui(), this);
         FoundGame.start();
     }
 

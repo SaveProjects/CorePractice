@@ -1,6 +1,7 @@
 package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
+import fr.edminecoreteam.corepractice.gui.ProfileGui;
 import fr.edminecoreteam.corepractice.gui.RankedGui;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
 import fr.edminecoreteam.corepractice.kits.LoadKits;
@@ -162,6 +163,10 @@ public class ItemListeners implements Listener
 
                     p.sendMessage("§cErreur, avant de jouer en Ranked, veuillez faire encore " + needMatch + " matchs Unranked.");
                 }
+            }
+            if (it.getType() == Material.SKULL_ITEM && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lProfil §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                ProfileGui.gui(p);
             }
         }
         if (core.getInPreDuel().contains(p) || core.getInDuel().contains(p))
