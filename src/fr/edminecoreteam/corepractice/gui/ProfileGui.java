@@ -70,7 +70,7 @@ public class ProfileGui implements Listener
                         loregamemode.add(" §fUnranked:");
                         loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
                         loregamemode.add("");
-                        loregamemode.add(" §bRranked:");
+                        loregamemode.add(" §bRanked:");
                         loregamemode.add(" §f▶ §7Elo: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_elo"));
                         loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_win"));
                         loregamemode.add(" §f▶ §7Perdues: §c" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_lose"));
@@ -93,7 +93,7 @@ public class ProfileGui implements Listener
                         loregamemode.add(" §fUnranked:");
                         loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
                         loregamemode.add("");
-                        loregamemode.add(" §bRranked:");
+                        loregamemode.add(" §bRanked:");
                         loregamemode.add(" §f▶ §7Elo: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_elo"));
                         loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_win"));
                         loregamemode.add(" §f▶ §7Perdues: §c" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_lose"));
