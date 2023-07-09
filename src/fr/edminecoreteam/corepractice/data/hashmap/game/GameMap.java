@@ -28,6 +28,13 @@ public class GameMap
         return null;
     }
 
+    public void mettreAJourValeurPourJoueur(Player joueur, String cle, int nouvelleValeur) {
+        HashMap<String, Integer> hashMapJoueur = playerMap.get(joueur);
+        if (hashMapJoueur != null) {
+            hashMapJoueur.put(cle, nouvelleValeur);
+        }
+    }
+
     public HashMap<String, Integer> getHashMapForJoueur(Player joueur) {
         return playerMap.get(joueur);
     }

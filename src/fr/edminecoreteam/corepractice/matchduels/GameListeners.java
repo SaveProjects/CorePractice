@@ -198,6 +198,13 @@ public class GameListeners implements Listener
 
                     core.getUnrankedWinDataManager().addData(pVictory.getUniqueId(), 1);
                     core.getUnrankedLoseDataManager().addData(pDeath.getUniqueId(), 1);
+
+                    int newUnrankedWin = core.getGameMap().rechercherValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_unranked_win") + 1;
+                    core.getGameMap().mettreAJourValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_unranked_win", newUnrankedWin);
+
+                    int newKillStreak = core.getGameMap().rechercherValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_actualwinstreak") + 1;
+                    core.getGameMap().mettreAJourValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_actualwinstreak", newKillStreak);
+                    core.getGameMap().mettreAJourValeurPourJoueur(pDeath, core.getGameType().getTypeGame(pVictory) + "_actualwinstreak", 0);
                 }
 
                 if (gameIs.getGameIs(pVictory).equalsIgnoreCase("ranked"))
@@ -211,6 +218,22 @@ public class GameListeners implements Listener
 
                     core.getPlayerEloDataManager().addData(pVictory.getUniqueId(), eloWin);
                     core.getPlayerEloDataManager().removeData(pDeath.getUniqueId(), eloLose);
+
+                    int newRankedWin = core.getGameMap().rechercherValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_ranked_win") + 1;
+                    core.getGameMap().mettreAJourValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_ranked_win", newRankedWin);
+
+                    int newRankedLose = core.getGameMap().rechercherValeurPourJoueur(pDeath, core.getGameType().getTypeGame(pDeath) + "_ranked_lose") + 1;
+                    core.getGameMap().mettreAJourValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_ranked_lose", newRankedLose);
+
+                    int newKillStreak = core.getGameMap().rechercherValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_actualwinstreak") + 1;
+                    core.getGameMap().mettreAJourValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_actualwinstreak", newKillStreak);
+                    core.getGameMap().mettreAJourValeurPourJoueur(pDeath, core.getGameType().getTypeGame(pDeath) + "_actualwinstreak", 0);
+
+                    int newEloWin = core.getGameMap().rechercherValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_elo") + eloWin;
+                    core.getGameMap().mettreAJourValeurPourJoueur(pVictory, core.getGameType().getTypeGame(pVictory) + "_elo", newEloWin);
+
+                    int newEloLose = core.getGameMap().rechercherValeurPourJoueur(pDeath, core.getGameType().getTypeGame(pDeath) + "_elo") - eloLose;
+                    core.getGameMap().mettreAJourValeurPourJoueur(pDeath, core.getGameType().getTypeGame(pDeath) + "_elo", newEloLose);
                 }
 
                 endGame(pVictory);
