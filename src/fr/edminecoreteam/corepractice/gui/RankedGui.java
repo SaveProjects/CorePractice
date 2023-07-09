@@ -31,7 +31,7 @@ public class RankedGui implements Listener
     public void inventoryClick(InventoryClickEvent e) {
         if (e.getView().getTopInventory().getTitle().equals("§8Ranked")) {
             Player p = (Player)e.getWhoClicked();
-            if (e.getCurrentItem().getType() == Material.AIR) {
+            if (e.getCurrentItem().getType() == Material.AIR || e.getCurrentItem().getType() == null) {
                 return;
             }
 
