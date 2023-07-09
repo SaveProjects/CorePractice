@@ -64,8 +64,8 @@ public class ProfileGui implements Listener
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dGénéral:");
-                        loregamemode.add(" §f▶ §7Win-Streak actuel: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_bestwinstreak"));
-                        loregamemode.add(" §f▶ §7Meilleur Win-Streak: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
+                        loregamemode.add(" §f▶ §7Win-Streak actuel: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_actualwinstreak"));
+                        loregamemode.add(" §f▶ §7Meilleur Win-Streak: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_bestwinstreak"));
                         loregamemode.add("");
                         loregamemode.add(" §fUnranked:");
                         loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
@@ -87,8 +87,8 @@ public class ProfileGui implements Listener
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dGénéral:");
-                        loregamemode.add(" §f▶ §7Win-Streak actuel: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_bestwinstreak"));
-                        loregamemode.add(" §f▶ §7Meilleur Win-Streak: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
+                        loregamemode.add(" §f▶ §7Win-Streak actuel: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_actualwinstreak"));
+                        loregamemode.add(" §f▶ §7Meilleur Win-Streak: §e" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_bestwinstreak"));
                         loregamemode.add("");
                         loregamemode.add(" §fUnranked:");
                         loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
