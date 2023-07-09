@@ -80,6 +80,10 @@ public class ItemListeners implements Listener
                     p.sendMessage("§cErreur, avant de jouer en Ranked, veuillez faire encore " + needMatch + " matchs Unranked.");
                 }
             }
+            if (it.getType() == Material.SKULL_ITEM && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lProfil §7• Clique")) {
+                e.setCancelled(true);
+                ProfileGui.gui(p);
+            }
         }
         if (core.getInPreDuel().contains(p) || core.getInDuel().contains(p))
         {
