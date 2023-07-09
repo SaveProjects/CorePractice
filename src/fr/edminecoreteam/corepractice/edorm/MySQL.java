@@ -108,6 +108,65 @@ public class MySQL
         }
     }
 
+    public void updateColumnsPractice(String gameType)
+    {
+        try
+        {
+            PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_unranked_win INT(11)");
+            stm.execute();
+            stm.close();
+            System.out.println("ED-NETWORK API");
+            System.out.println("DATABASE: column " + gameType + "_unranked_win added to ed_practice .");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try
+        {
+            PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_ranked_win INT(11)");
+            stm.execute();
+            stm.close();
+            System.out.println("ED-NETWORK API");
+            System.out.println("DATABASE: column " + gameType + "_ranked_win added to ed_practice .");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try
+        {
+            PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_ranked_lose INT(11)");
+            stm.execute();
+            stm.close();
+            System.out.println("ED-NETWORK API");
+            System.out.println("DATABASE: column " + gameType + "_ranked_win added to ed_practice .");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try
+        {
+            PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_bestwinstreak INT(11)");
+            stm.execute();
+            stm.close();
+            System.out.println("ED-NETWORK API");
+            System.out.println("DATABASE: column " + gameType + "_bestwinstreak added to ed_practice .");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try
+        {
+            PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_bestwinstreak INT(11)");
+            stm.execute();
+            stm.close();
+            System.out.println("ED-NETWORK API");
+            System.out.println("DATABASE: column " + gameType + "_bestwinstreak added to ed_practice .");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void message(String condition) {
         if (condition == "connectMSG")

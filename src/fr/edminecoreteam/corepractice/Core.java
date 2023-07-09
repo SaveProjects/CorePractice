@@ -154,6 +154,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         (this.database = new MySQL(instance, "jdbc:mysql://", "45.140.165.235", "22728-database", "22728-database", "S5bV5su4p9")).connexion();
 
         database.creatingTablePractice();
+        updateColumnsPractice();
     }
 
     /*
@@ -231,6 +232,14 @@ public class Core extends JavaPlugin implements PluginMessageListener
         {
             // Use the code sample in the 'Response' sections below to read
             // the data.
+        }
+    }
+
+    public void updateColumnsPractice()
+    {
+        for (String modes : this.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+        {
+            database.updateColumnsPractice(this.getConfig().getString("kits.1vs1." + modes + ".id"));
         }
     }
 
