@@ -247,18 +247,23 @@ public class ItemListeners implements Listener
             ranked.setItemMeta(rankedM);
             p.getInventory().setItem(1, ranked);
 
+            ItemStack kitEditor = new ItemStack(Material.BOOK, 1);
+            ItemMeta kitEditorM = kitEditor.getItemMeta();
+            kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
+            kitEditor.setItemMeta(kitEditorM);
+            p.getInventory().setItem(2, kitEditor);
+
             ItemStack ffa = new ItemStack(Material.GOLD_AXE, 1);
             ItemMeta ffaM = ffa.getItemMeta();
             ffaM.setDisplayName("§e§lFFA §7• Clique");
             ffa.setItemMeta(ffaM);
-            p.getInventory().setItem(3, ffa);
+            p.getInventory().setItem(4, ffa);
 
-            ItemStack profile = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-            SkullMeta profileM = (SkullMeta) profile.getItemMeta();
-            profileM.setDisplayName("§c§lProfil §7• Clique");
-            profileM.setOwner(p.getName());
-            profile.setItemMeta(profileM);
-            p.getInventory().setItem(5, profile);
+            ItemStack createParty = new ItemStack(Material.NETHER_STAR, 1);
+            ItemMeta createPartyM = createParty.getItemMeta();
+            createPartyM.setDisplayName("§d§lCréer une partie §7• Clique");
+            createParty.setItemMeta(createPartyM);
+            p.getInventory().setItem(5, createParty);
 
             ItemStack events = new ItemStack(Material.COMMAND_MINECART, 1);
             ItemMeta eventsM = events.getItemMeta();
@@ -266,11 +271,19 @@ public class ItemListeners implements Listener
             events.setItemMeta(eventsM);
             p.getInventory().setItem(6, events);
 
-            ItemStack kitEditor = new ItemStack(Material.BOOK, 1);
-            ItemMeta kitEditorM = kitEditor.getItemMeta();
-            kitEditorM.setDisplayName("§d§lKit Editor §7• Clique");
-            kitEditor.setItemMeta(kitEditorM);
-            p.getInventory().setItem(8, kitEditor);
+            ItemStack profile = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+            SkullMeta profileM = (SkullMeta) profile.getItemMeta();
+            profileM.setDisplayName("§c§lProfil §7• Clique");
+            profileM.setOwner(p.getName());
+            profile.setItemMeta(profileM);
+            p.getInventory().setItem(7, profile);
+
+            ItemStack settings = new ItemStack(Material.REDSTONE_COMPARATOR, 1);
+            ItemMeta settingsM = settings.getItemMeta();
+            settingsM.setDisplayName("§9§lRéglages §7• Clique");
+            settings.setItemMeta(settingsM);
+            p.getInventory().setItem(8, settings);
+
         }, 3);
     }
 
