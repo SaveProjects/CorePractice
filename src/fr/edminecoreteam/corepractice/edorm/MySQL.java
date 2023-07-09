@@ -145,11 +145,11 @@ public class MySQL
         }
         try
         {
-            PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_bestwinstreak INT(11)");
+            PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_elo INT(11)");
             stm.execute();
             stm.close();
             System.out.println("ED-NETWORK API");
-            System.out.println("DATABASE: column " + gameType + "_bestwinstreak added to ed_practice .");
+            System.out.println("DATABASE: column " + gameType + "_elo added to ed_practice .");
         }
         catch (SQLException e) {
             e.printStackTrace();
