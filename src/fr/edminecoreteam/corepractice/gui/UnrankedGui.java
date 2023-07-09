@@ -32,7 +32,7 @@ public class UnrankedGui implements Listener
     public void inventoryClick(InventoryClickEvent e) {
         if (e.getView().getTopInventory().getTitle().equals("§8Unranked")) {
             Player p = (Player)e.getWhoClicked();
-            if (e.getCurrentItem().getType() == Material.AIR) {
+            if (e.getCurrentItem().getType() == null) {
                 return;
             }
 
@@ -41,7 +41,6 @@ public class UnrankedGui implements Listener
 
             for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
             {
-
                 ItemMeta itM = it.getItemMeta();
                 if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
                 {
