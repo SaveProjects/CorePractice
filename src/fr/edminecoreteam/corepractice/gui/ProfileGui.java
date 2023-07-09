@@ -54,6 +54,56 @@ public class ProfileGui implements Listener
 
                 if (!p.getOpenInventory().getTitle().contains("§8Profil")) { cancel(); }
 
+                for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+                {
+                    if (core.getConfig().getString("kits.1vs1." + gameMode + ".icon").equalsIgnoreCase("potion"))
+                    {
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")), (short)core.getConfig().getInt("kits.1vs1." + gameMode + ".potionid"));
+                        ItemMeta gamemodeM = gamemode.getItemMeta();
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
+                        ArrayList<String> loregamemode = new ArrayList<String>();
+                        loregamemode.add("");
+                        loregamemode.add(" §dGénéral:");
+                        loregamemode.add(" §f▶ §7Win-Streak actuel: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_bestwinstreak"));
+                        loregamemode.add(" §f▶ §7Meilleur Win-Streak: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
+                        loregamemode.add("");
+                        loregamemode.add(" §fUnranked:");
+                        loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
+                        loregamemode.add("");
+                        loregamemode.add(" §bRranked:");
+                        loregamemode.add(" §f▶ §7Elo: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_elo"));
+                        loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_win"));
+                        loregamemode.add(" §f▶ §7Perdues: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_lose"));
+                        loregamemode.add("");
+                        gamemodeM.setLore(loregamemode);
+                        gamemode.setItemMeta(gamemodeM);
+                        inv.setItem(core.getConfig().getInt("kits.1vs1." + gameMode + ".slot"), gamemode);
+                    }
+                    else
+                    {
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
+                        ItemMeta gamemodeM = gamemode.getItemMeta();
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
+                        ArrayList<String> loregamemode = new ArrayList<String>();
+                        loregamemode.add("");
+                        loregamemode.add(" §dGénéral:");
+                        loregamemode.add(" §f▶ §7Win-Streak actuel: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_bestwinstreak"));
+                        loregamemode.add(" §f▶ §7Meilleur Win-Streak: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
+                        loregamemode.add("");
+                        loregamemode.add(" §fUnranked:");
+                        loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_unranked_win"));
+                        loregamemode.add("");
+                        loregamemode.add(" §bRranked:");
+                        loregamemode.add(" §f▶ §7Elo: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_elo"));
+                        loregamemode.add(" §f▶ §7Gagnées: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_win"));
+                        loregamemode.add(" §f▶ §7Perdues: §a" + core.getGameMap().rechercherValeurPourJoueur(p, gameMode + "_ranked_lose"));
+                        loregamemode.add("");
+                        gamemodeM.setLore(loregamemode);
+                        gamemode.setItemMeta(gamemodeM);
+                        inv.setItem(core.getConfig().getInt("kits.1vs1." + gameMode + ".slot"), gamemode);
+                    }
+                }
+
                 ItemStack unranked = new ItemStack(Material.IRON_SWORD, 1);
                 ItemMeta unrankedM = unranked.getItemMeta();
                 unrankedM.setDisplayName("§f§lUnranked");
@@ -66,7 +116,7 @@ public class ProfileGui implements Listener
                 loreunranked.add("");
                 unrankedM.setLore(loreunranked);
                 unranked.setItemMeta(unrankedM);
-                inv.setItem(29, unranked);
+                inv.setItem(47, unranked);
 
                 ItemStack elo = new ItemStack(Material.DOUBLE_PLANT, 1);
                 ItemMeta eloM = elo.getItemMeta();
@@ -79,7 +129,7 @@ public class ProfileGui implements Listener
                 loreelo.add("");
                 eloM.setLore(loreelo);
                 elo.setItemMeta(eloM);
-                inv.setItem(22, elo);
+                inv.setItem(49, elo);
 
                 ItemStack ranked = new ItemStack(Material.DIAMOND_SWORD, 1);
                 ItemMeta rankedM = ranked.getItemMeta();
@@ -93,7 +143,7 @@ public class ProfileGui implements Listener
                 loreranked.add("");
                 rankedM.setLore(loreranked);
                 ranked.setItemMeta(rankedM);
-                inv.setItem(33, ranked);
+                inv.setItem(51, ranked);
 
                 ++t;
                 if (t == 10) {

@@ -263,26 +263,20 @@ public class ItemListeners implements Listener
             ItemMeta createPartyM = createParty.getItemMeta();
             createPartyM.setDisplayName("§d§lCréer une partie §7• Clique");
             createParty.setItemMeta(createPartyM);
-            p.getInventory().setItem(5, createParty);
+            p.getInventory().setItem(6, createParty);
 
             ItemStack events = new ItemStack(Material.COMMAND_MINECART, 1);
             ItemMeta eventsM = events.getItemMeta();
             eventsM.setDisplayName("§a§lEvents §7• Clique");
             events.setItemMeta(eventsM);
-            p.getInventory().setItem(6, events);
+            p.getInventory().setItem(7, events);
 
             ItemStack profile = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
             SkullMeta profileM = (SkullMeta) profile.getItemMeta();
             profileM.setDisplayName("§c§lProfil §7• Clique");
             profileM.setOwner(p.getName());
             profile.setItemMeta(profileM);
-            p.getInventory().setItem(7, profile);
-
-            ItemStack settings = new ItemStack(Material.REDSTONE_COMPARATOR, 1);
-            ItemMeta settingsM = settings.getItemMeta();
-            settingsM.setDisplayName("§9§lRéglages §7• Clique");
-            settings.setItemMeta(settingsM);
-            p.getInventory().setItem(8, settings);
+            p.getInventory().setItem(8, profile);
 
         }, 3);
     }

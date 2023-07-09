@@ -292,6 +292,28 @@ public class PracticeData
         }
     }
 
+    public int getGameData(String valueToGet)
+    {
+        try
+        {
+            PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT " + valueToGet + " FROM " + table + " WHERE player_uuid = ?");
+            preparedStatement.setString(1, p.getUniqueId().toString());
+            int id = 0;
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next())
+            {
+                id = rs.getInt(valueToGet);
+            }
+            preparedStatement.close();
+            return id;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public void setUnrankedPlayed(int amount)
     {
         try
@@ -426,6 +448,22 @@ public class PracticeData
         {
             PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("UPDATE " + table + " SET player_name = ? WHERE player_uuid = ?");
             preparedStatement.setString(1, p.getName());
+            preparedStatement.setString(2, p.getUniqueId().toString());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateGameData(String valueToChange, int valueToSet)
+    {
+        try
+        {
+            PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("UPDATE " + table + " SET " + valueToChange + " = ? WHERE player_uuid = ?");
+            preparedStatement.setInt(1, valueToSet);
             preparedStatement.setString(2, p.getUniqueId().toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();

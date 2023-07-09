@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import fr.edminecoreteam.corepractice.blocs.BlocsListener;
 import fr.edminecoreteam.corepractice.blocs.BlocsToWorld;
 import fr.edminecoreteam.corepractice.data.hashmap.elo.PlayerEloDataManager;
+import fr.edminecoreteam.corepractice.data.hashmap.game.GameMap;
 import fr.edminecoreteam.corepractice.data.hashmap.ranked.RankedLoseDataManager;
 import fr.edminecoreteam.corepractice.data.hashmap.ranked.RankedPlayedDataManager;
 import fr.edminecoreteam.corepractice.data.hashmap.ranked.RankedWinDataManager;
@@ -83,6 +84,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
 
     private final WhatIsGame gameIs;
 
+    private final GameMap gameMap;
+
     public Core() {
 
         inLobby = new ArrayList<Player>();
@@ -110,6 +113,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         rankedLoseDataManager = new RankedLoseDataManager();
 
         playerEloDataManager = new PlayerEloDataManager();
+        gameMap = new GameMap();
     }
 
     public List<Player> getInLobby() { return this.inLobby; }
@@ -264,6 +268,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
     public RankedLoseDataManager getRankedLoseDataManager() { return this.rankedLoseDataManager; }
 
     public PlayerEloDataManager getPlayerEloDataManager() { return this.playerEloDataManager; }
+
+    public GameMap getGameMap() { return this.gameMap; }
 
     /*
      * Méthode de retournement de l'instance.
