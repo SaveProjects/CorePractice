@@ -42,7 +42,7 @@ public class UnrankedGui implements Listener
             for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
             {
                 ItemMeta itM = it.getItemMeta();
-                if (it.getData().toItemStack() == ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")))
+                if (it == ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")))
                 {
                     if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
                     {
