@@ -136,7 +136,7 @@ public class MySQL
             PreparedStatement stm = MySQL.connection.prepareStatement("ALTER TABLE ed_practice ADD COLUMN IF NOT EXISTS " + gameType + "_ranked_lose INT(11)");
             stm.execute();
             stm.close();
-            System.out.println("DATABASE: column " + gameType + "_ranked_win added to ed_practice.");
+            System.out.println("DATABASE: column " + gameType + "_ranked_lose added to ed_practice.");
         }
         catch (SQLException e) {
             e.printStackTrace();
