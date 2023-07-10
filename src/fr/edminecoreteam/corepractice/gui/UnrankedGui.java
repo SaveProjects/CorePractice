@@ -32,7 +32,7 @@ public class UnrankedGui implements Listener
 
     @EventHandler
     public void inventoryClick(InventoryClickEvent e) {
-        if (e.getView().getTopInventory().getTitle().equals("§8Unranked | 1vs1")) {
+        if (e.getView().getTopInventory().getTitle().equals("§8Unranked ┃ 1vs1")) {
             Player p = (Player)e.getWhoClicked();
             if (e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().getType() != null) {
                 ItemStack it = e.getCurrentItem();
@@ -53,7 +53,7 @@ public class UnrankedGui implements Listener
                 }
             }
         }
-        if (e.getView().getTopInventory().getTitle().equals("§8Unranked | 2vs2")) {
+        if (e.getView().getTopInventory().getTitle().equals("§8Unranked ┃ 2vs2")) {
             Player p = (Player)e.getWhoClicked();
             if (e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().getType() != null) {
                 ItemStack it = e.getCurrentItem();
@@ -80,7 +80,7 @@ public class UnrankedGui implements Listener
 
         if (type.equalsIgnoreCase("1vs1"))
         {
-            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked | 1vs1");
+            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked ┃ 1vs1");
 
             ItemStack deco = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0);
             ItemMeta decoM = deco.getItemMeta();
@@ -147,7 +147,7 @@ public class UnrankedGui implements Listener
                 int t = 0;
                 public void run() {
 
-                    if (!p.getOpenInventory().getTitle().contains("§8Unranked | 1vs1")) { cancel(); }
+                    if (!p.getOpenInventory().getTitle().contains("§8Unranked ┃ 1vs1")) { cancel(); }
                     LoadKits kits = new LoadKits(p);
 
                     for (String gameMode : kits.getUnrankedKitList())
@@ -195,7 +195,7 @@ public class UnrankedGui implements Listener
         }
         if (type.equalsIgnoreCase("2vs2"))
         {
-            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked | 2vs2");
+            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked ┃ 2vs2");
 
             ItemStack deco = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0);
             ItemMeta decoM = deco.getItemMeta();
@@ -252,9 +252,6 @@ public class UnrankedGui implements Listener
             ItemStack soon = getSkull("http://textures.minecraft.net/texture/81fb8ce6408a5851384e1c2ef753851eac18ba4018266cdd669dc944873d42");
             ItemMeta soonM = soon.getItemMeta();
             soonM.setDisplayName("§7...");
-            ArrayList<String> loresoon = new ArrayList<String>();
-            loresoon.add("");
-            soonM.setLore(loresoon);
             soon.setItemMeta(soonM);
             inv.setItem(35, soon);
         }

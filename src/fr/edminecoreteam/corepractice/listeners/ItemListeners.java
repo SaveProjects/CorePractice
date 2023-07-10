@@ -71,7 +71,7 @@ public class ItemListeners implements Listener
                 e.setCancelled(true);
                 if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) >= 20)
                 {
-                    RankedGui.gui(p);
+                    RankedGui.gui(p, "1vs1");
                 }
                 else if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) < 20)
                 {
@@ -159,7 +159,7 @@ public class ItemListeners implements Listener
                 e.setCancelled(true);
                 if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) >= 20)
                 {
-                    RankedGui.gui(p);
+                    RankedGui.gui(p, "1vs1");
                 }
                 else if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) < 20)
                 {
