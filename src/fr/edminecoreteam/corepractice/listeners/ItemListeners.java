@@ -259,15 +259,15 @@ public class ItemListeners implements Listener
             ffa.setItemMeta(ffaM);
             p.getInventory().setItem(4, ffa);
 
-            ItemStack createParty = new ItemStack(Material.NETHER_STAR, 1);
-            ItemMeta createPartyM = createParty.getItemMeta();
-            createPartyM.setDisplayName("§d§lCréer une partie §7• Clique");
-            createParty.setItemMeta(createPartyM);
-            p.getInventory().setItem(6, createParty);
+            ItemStack leaderBoard = new ItemStack(Material.EMERALD, 1);
+            ItemMeta leaderBoardM = leaderBoard.getItemMeta();
+            leaderBoardM.setDisplayName("§a§lLeader-Board §7• Clique");
+            leaderBoard.setItemMeta(leaderBoardM);
+            p.getInventory().setItem(6, leaderBoard);
 
             ItemStack events = new ItemStack(Material.COMMAND_MINECART, 1);
             ItemMeta eventsM = events.getItemMeta();
-            eventsM.setDisplayName("§a§lEvents §7• Clique");
+            eventsM.setDisplayName("§6§lÉvénements §7• Clique");
             events.setItemMeta(eventsM);
             p.getInventory().setItem(7, events);
 
