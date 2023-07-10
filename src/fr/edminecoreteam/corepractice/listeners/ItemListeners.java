@@ -65,7 +65,7 @@ public class ItemListeners implements Listener
             }
             if (it.getType() == Material.IRON_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique")) {
                 e.setCancelled(true);
-                UnrankedGui.gui(p);
+                UnrankedGui.gui(p, "1vs1");
             }
             if (it.getType() == Material.DIAMOND_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lRanked §7• Clique")) {
                 e.setCancelled(true);
@@ -153,7 +153,7 @@ public class ItemListeners implements Listener
             }
             if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
                 e.setCancelled(true);
-                UnrankedGui.gui(p);
+                UnrankedGui.gui(p, "1vs1");
             }
             if (it.getType() == Material.DIAMOND_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§b§lRanked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
                 e.setCancelled(true);
