@@ -21,7 +21,7 @@ public class LeaderBoardData
     }
 
     public List<String> getTopPlayers(String getValue) {
-        List<String> topPlayers = new ArrayList<>();
+        List<String> topPlayers = new ArrayList<String>();
         try {
             PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT player_name FROM ed_practice ORDER BY " + getValue + " DESC LIMIT 10");
             ResultSet rs = preparedStatement.executeQuery();
@@ -32,6 +32,7 @@ public class LeaderBoardData
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return topPlayers;
         }
         return topPlayers;
     }
