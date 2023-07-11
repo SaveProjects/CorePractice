@@ -32,15 +32,13 @@ public class LeaderBoardData
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next())
             {
-                String id = rs.getString(getValue);
-                topPlayers.add(id);
+                topPlayers.add(rs.getString(getValue));
             }
             preparedStatement.close();
-            return topPlayers;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return topPlayers;
     }
 
     public int getGameData(String valueToGet)
