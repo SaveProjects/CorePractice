@@ -126,13 +126,6 @@ public class LeaderBoardGui implements Listener
                 if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion")) {
 
                     List<String> listLead = leadData.getTopPlayers(gameMode + "_unranked_win");
-                    HashMap<String, Integer> leaderboard = new HashMap<String, Integer>();
-
-                    for (String lLead : listLead)
-                    {
-                        LeaderBoardData lLeadData = new LeaderBoardData(lLead);
-                        leaderboard.put(lLead, lLeadData.getGameData(gameMode + "_unranked_win"));
-                    }
                     int count = 0;
 
                     ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"), (short) core.getConfig().getInt("kits.normal." + gameMode + ".potionid"));
@@ -141,10 +134,11 @@ public class LeaderBoardGui implements Listener
                     ArrayList<String> loregamemode = new ArrayList<String>();
                     loregamemode.add("");
                     loregamemode.add(" §dTop 10:");
-                    for (String stringLead : leaderboard.keySet())
+                    for (String stringLead : listLead)
                     {
                         ++count;
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + leaderboard.get(stringLead) + " matchs gagnées.");
+                        LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(stringLead) + " matchs gagnées.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
@@ -153,13 +147,6 @@ public class LeaderBoardGui implements Listener
                 } else {
 
                     List<String> listLead = leadData.getTopPlayers(gameMode + "_unranked_win");
-                    HashMap<String, Integer> leaderboard = new HashMap<String, Integer>();
-
-                    for (String lLead : listLead)
-                    {
-                        LeaderBoardData lLeadData = new LeaderBoardData(lLead);
-                        leaderboard.put(lLead, lLeadData.getGameData(gameMode + "_unranked_win"));
-                    }
                     int count = 0;
 
                     ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
@@ -168,10 +155,11 @@ public class LeaderBoardGui implements Listener
                     ArrayList<String> loregamemode = new ArrayList<String>();
                     loregamemode.add("");
                     loregamemode.add(" §dTop 10:");
-                    for (String stringLead : leaderboard.keySet())
+                    for (String stringLead : listLead)
                     {
                         ++count;
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + leaderboard.get(stringLead) + " matchs gagnées.");
+                        LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_unranked_win") + " matchs gagnées.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
@@ -249,13 +237,6 @@ public class LeaderBoardGui implements Listener
                 if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion")) {
 
                     List<String> listLead = leadData.getTopPlayers(gameMode + "_elo");
-                    HashMap<String, Integer> leaderboard = new HashMap<>();
-
-                    for (String lLead : listLead)
-                    {
-                        LeaderBoardData lLeadData = new LeaderBoardData(lLead);
-                        leaderboard.put(lLead, lLeadData.getGameData(gameMode + "_elo"));
-                    }
                     int count = 0;
 
                     ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"), (short) core.getConfig().getInt("kits.normal." + gameMode + ".potionid"));
@@ -264,10 +245,11 @@ public class LeaderBoardGui implements Listener
                     ArrayList<String> loregamemode = new ArrayList<String>();
                     loregamemode.add("");
                     loregamemode.add(" §dTop 10:");
-                    for (String stringLead : leaderboard.keySet())
+                    for (String stringLead : listLead)
                     {
                         ++count;
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + leaderboard.get(stringLead) + " elo.");
+                        LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_elo") + " elo.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
@@ -276,13 +258,6 @@ public class LeaderBoardGui implements Listener
                 } else {
 
                     List<String> listLead = leadData.getTopPlayers(gameMode + "_elo");
-                    HashMap<String, Integer> leaderboard = new HashMap<>();
-
-                    for (String lLead : listLead)
-                    {
-                        LeaderBoardData lLeadData = new LeaderBoardData(lLead);
-                        leaderboard.put(lLead, lLeadData.getGameData(gameMode + "_elo"));
-                    }
                     int count = 0;
 
                     ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
@@ -291,10 +266,11 @@ public class LeaderBoardGui implements Listener
                     ArrayList<String> loregamemode = new ArrayList<String>();
                     loregamemode.add("");
                     loregamemode.add(" §dTop 10:");
-                    for (String stringLead : leaderboard.keySet())
+                    for (String stringLead : listLead)
                     {
                         ++count;
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + leaderboard.get(stringLead) + " elo.");
+                        LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_elo") + " elo.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);

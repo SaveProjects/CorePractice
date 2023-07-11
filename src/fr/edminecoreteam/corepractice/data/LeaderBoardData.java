@@ -29,7 +29,6 @@ public class LeaderBoardData
         List<String> topPlayers = new ArrayList<String>();
         try {
             PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT player_name FROM " + table + " ORDER BY " + getValue + " DESC LIMIT 10");
-
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next())
             {
