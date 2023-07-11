@@ -1,8 +1,11 @@
 package fr.edminecoreteam.corepractice.matchduels;
 
+import fr.edminecoreteam.corepractice.Core;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TypeGame
 {
@@ -22,15 +25,21 @@ public class TypeGame
 
     public HashMap<Player, String> getTypeGame() { return typeGame; }
 
-    public int getListWhereGame(String game)
+    public int getListWhereGame(String game, String type, String soloOrDuo)
     {
         int i = 0;
 
-        for (String sGame : typeGame.values())
+        for (Player p : Core.getInstance().getInDuel())
         {
-            if (sGame == game)
+            if (getTypeGame(p).equalsIgnoreCase(game))
             {
-                i++;
+                if (Core.getInstance().getGameIs().getGameIs(p).equalsIgnoreCase(type))
+                {
+                    if (Core.getInstance().getIfSoloOrDuo().getIfSoloOrDuo(p).equalsIgnoreCase(soloOrDuo))
+                    {
+                        i++;
+                    }
+                }
             }
         }
 

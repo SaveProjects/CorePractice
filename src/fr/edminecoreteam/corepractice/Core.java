@@ -68,6 +68,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
     private final GameID gameID;
     private final WorldName worldName;
     private final MatchOppenant matchOppenant;
+    private final MatchDuoOppenant matchDuoOppenant;
     private final TimerDataManager timerData;
 
     private final BlocsToWorld blocsToWorld;
@@ -86,6 +87,9 @@ public class Core extends JavaPlugin implements PluginMessageListener
 
     private final GameMap gameMap;
 
+    private final IfSoloOrDuo ifSoloOrDuo;
+    private final DuoGestion duoGestion;
+
     public Core() {
 
         inLobby = new ArrayList<Player>();
@@ -100,6 +104,7 @@ public class Core extends JavaPlugin implements PluginMessageListener
         gameID = new GameID();
         worldName = new WorldName();
         matchOppenant = new MatchOppenant();
+        matchDuoOppenant = new MatchDuoOppenant();
         timerData = new TimerDataManager();
         blocsToWorld = new BlocsToWorld();
         gameIs = new WhatIsGame();
@@ -113,6 +118,8 @@ public class Core extends JavaPlugin implements PluginMessageListener
         rankedLoseDataManager = new RankedLoseDataManager();
 
         playerEloDataManager = new PlayerEloDataManager();
+        duoGestion = new DuoGestion();
+        ifSoloOrDuo = new IfSoloOrDuo();
         gameMap = new GameMap();
     }
 
@@ -269,7 +276,12 @@ public class Core extends JavaPlugin implements PluginMessageListener
 
     public PlayerEloDataManager getPlayerEloDataManager() { return this.playerEloDataManager; }
 
+    public IfSoloOrDuo getIfSoloOrDuo() { return this.ifSoloOrDuo; }
+    public DuoGestion getDuoGestion() { return this.duoGestion; }
+
     public GameMap getGameMap() { return this.gameMap; }
+
+    public MatchDuoOppenant getMatchDuoOppenant() { return this.matchDuoOppenant; }
 
     /*
      * Méthode de retournement de l'instance.

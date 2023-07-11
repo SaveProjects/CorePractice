@@ -52,9 +52,19 @@ public class EventListeners implements Listener
                 {
                     if (core.getInDuel().contains(pA))
                     {
-                        if (!core.getMatchOppenant().getMatchOppenant(p).equals(pA))
+                        if (core.getIfSoloOrDuo().getIfSoloOrDuo(p).equalsIgnoreCase("solo"))
                         {
-                            e.setCancelled(true);
+                            if (!core.getMatchOppenant().getMatchOppenant(p).equals(pA))
+                            {
+                                e.setCancelled(true);
+                            }
+                        }
+                        if (core.getIfSoloOrDuo().getIfSoloOrDuo(p).equalsIgnoreCase("duo"))
+                        {
+                            if (!core.getDuoGestion().getDuo(p).equals(pA))
+                            {
+                                e.setCancelled(true);
+                            }
                         }
                     }
                 }

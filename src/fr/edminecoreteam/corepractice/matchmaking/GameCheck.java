@@ -26,7 +26,7 @@ public class GameCheck
 
     public HashMap<Player, String> getGame() { return gameCheck; }
 
-    public int getListWhereGame(String game, String type)
+    public int getListWhereGame(String game, String type, String soloOrDuo)
     {
         int i = 0;
 
@@ -38,7 +38,10 @@ public class GameCheck
                 {
                     if (Core.getInstance().getGameIs().getGameIs(pGame).equalsIgnoreCase(type))
                     {
-                        i++;
+                        if (Core.getInstance().getIfSoloOrDuo().getIfSoloOrDuo(pGame).equalsIgnoreCase(soloOrDuo))
+                        {
+                            i++;
+                        }
                     }
                 }
             }
@@ -51,7 +54,10 @@ public class GameCheck
                 {
                     if (Core.getInstance().getGameIs().getGameIs(pGame).equalsIgnoreCase(type))
                     {
-                        i++;
+                        if (Core.getInstance().getIfSoloOrDuo().getIfSoloOrDuo(pGame).equalsIgnoreCase(soloOrDuo))
+                        {
+                            i++;
+                        }
                     }
                 }
             }

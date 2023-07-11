@@ -54,13 +54,13 @@ public class ProfileGui implements Listener
 
                 if (!p.getOpenInventory().getTitle().contains("§8Profil")) { cancel(); }
 
-                for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+                for (String gameMode : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
                 {
-                    if (core.getConfig().getString("kits.1vs1." + gameMode + ".icon").equalsIgnoreCase("potion"))
+                    if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion"))
                     {
-                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), 1, (short)core.getConfig().getInt("kits.1vs1." + gameMode + ".potionid"));
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), 1, (short)core.getConfig().getInt("kits.normal." + gameMode + ".potionid"));
                         ItemMeta gamemodeM = gamemode.getItemMeta();
-                        gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§"));
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dGénéral:");
@@ -77,13 +77,13 @@ public class ProfileGui implements Listener
                         loregamemode.add("");
                         gamemodeM.setLore(loregamemode);
                         gamemode.setItemMeta(gamemodeM);
-                        inv.setItem(core.getConfig().getInt("kits.1vs1." + gameMode + ".slot"), gamemode);
+                        inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
                     }
                     else
                     {
-                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), 1);
+                        ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), 1);
                         ItemMeta gamemodeM = gamemode.getItemMeta();
-                        gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
+                        gamemodeM.setDisplayName(core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§"));
                         ArrayList<String> loregamemode = new ArrayList<String>();
                         loregamemode.add("");
                         loregamemode.add(" §dGénéral:");
@@ -100,7 +100,7 @@ public class ProfileGui implements Listener
                         loregamemode.add("");
                         gamemodeM.setLore(loregamemode);
                         gamemode.setItemMeta(gamemodeM);
-                        inv.setItem(core.getConfig().getInt("kits.1vs1." + gameMode + ".slot"), gamemode);
+                        inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
                     }
                 }
 

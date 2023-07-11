@@ -39,14 +39,15 @@ public class RankedGui implements Listener
                 if (it.getType() == Material.STAINED_GLASS_PANE) { e.setCancelled(true); }
                 if (it.getType() == Material.SKULL_ITEM && itM.getDisplayName().equalsIgnoreCase("§b§l2vs2")) { e.setCancelled(true); gui(p, "2vs2"); }
 
-                for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+                for (String gameMode : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
                 {
-                    if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
+                    if (core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
                     {
                         e.setCancelled(true);
                         RankedMatchMaking matchMaking = new RankedMatchMaking(p);
-                        matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
+                        matchMaking.start(core.getConfig().getString("kits.normal." + gameMode + ".id"));
                         ItemListeners.foundGameItems(p);
+                        core.getIfSoloOrDuo().putIfSoloOrDuo(p, "solo");
                         p.closeInventory();
                     }
                 }
@@ -60,17 +61,18 @@ public class RankedGui implements Listener
                 if (it.getType() == Material.STAINED_GLASS_PANE) { e.setCancelled(true); }
                 if (it.getType() == Material.SKULL_ITEM && itM.getDisplayName().equalsIgnoreCase("§b§l1vs1")) { e.setCancelled(true); gui(p, "1vs1"); }
 
-                /*for (String gameMode : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+                for (String gameMode : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
                 {
-                    if (core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
+                    if (core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§").equalsIgnoreCase(itM.getDisplayName()))
                     {
                         e.setCancelled(true);
                         RankedMatchMaking matchMaking = new RankedMatchMaking(p);
-                        matchMaking.start(core.getConfig().getString("kits.1vs1." + gameMode + ".id"));
+                        matchMaking.start(core.getConfig().getString("kits.normal." + gameMode + ".id"));
                         ItemListeners.foundGameItems(p);
+                        core.getIfSoloOrDuo().putIfSoloOrDuo(p, "duo");
                         p.closeInventory();
                     }
-                }*/
+                }
             }
         }
     }
@@ -148,39 +150,39 @@ public class RankedGui implements Listener
                     if (!p.getOpenInventory().getTitle().contains("§8Ranked ┃ 1vs1")) { cancel(); }
                     LoadKits kits = new LoadKits(p);
 
-                    for (String gameMode : kits.getUnrankedKitList())
+                    for (String gameMode : kits.getNormalKitList())
                     {
-                        if (core.getConfig().getString("kits.1vs1." + gameMode + ".icon").equalsIgnoreCase("potion"))
+                        if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion"))
                         {
-                            ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")), (short)core.getConfig().getInt("kits.1vs1." + gameMode + ".potionid"));
+                            ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"), (short)core.getConfig().getInt("kits.normal." + gameMode + ".potionid"));
                             ItemMeta gamemodeM = gamemode.getItemMeta();
-                            gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
+                            gamemodeM.setDisplayName(core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§"));
                             ArrayList<String> loregamemode = new ArrayList<String>();
                             loregamemode.add("");
                             loregamemode.add(" §dInformation:");
-                            loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id"), "ranked"));
-                            loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
+                            loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
+                            loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
                             loregamemode.add("");
                             loregamemode.add("§8➡ §fCliquez pour rejoindre.");
                             gamemodeM.setLore(loregamemode);
                             gamemode.setItemMeta(gamemodeM);
-                            inv.setItem(core.getConfig().getInt("kits.1vs1." + gameMode + ".slot"), gamemode);
+                            inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
                         }
                         else
                         {
-                            ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
+                            ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
                             ItemMeta gamemodeM = gamemode.getItemMeta();
-                            gamemodeM.setDisplayName(core.getConfig().getString("kits.1vs1." + gameMode + ".name").replace("&", "§"));
+                            gamemodeM.setDisplayName(core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§"));
                             ArrayList<String> loregamemode = new ArrayList<String>();
                             loregamemode.add("");
                             loregamemode.add(" §dInformation:");
-                            loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id"), "ranked"));
-                            loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.1vs1." + gameMode + ".id")));
+                            loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
+                            loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
                             loregamemode.add("");
                             loregamemode.add("§8➡ §fCliquez pour rejoindre.");
                             gamemodeM.setLore(loregamemode);
                             gamemode.setItemMeta(gamemodeM);
-                            inv.setItem(core.getConfig().getInt("kits.1vs1." + gameMode + ".slot"), gamemode);
+                            inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
                         }
                     }
 
@@ -252,6 +254,56 @@ public class RankedGui implements Listener
             soonM.setDisplayName("§7...");
             soon.setItemMeta(soonM);
             inv.setItem(35, soon);
+
+            new BukkitRunnable() {
+                int t = 0;
+                public void run() {
+
+                    if (!p.getOpenInventory().getTitle().contains("§8Ranked ┃ 2vs2")) { cancel(); }
+                    LoadKits kits = new LoadKits(p);
+
+                    for (String gameMode : kits.getNormalKitList())
+                    {
+                        if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion"))
+                        {
+                            ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "duo"), (short)core.getConfig().getInt("kits.normal." + gameMode + ".potionid"));
+                            ItemMeta gamemodeM = gamemode.getItemMeta();
+                            gamemodeM.setDisplayName(core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§"));
+                            ArrayList<String> loregamemode = new ArrayList<String>();
+                            loregamemode.add("");
+                            loregamemode.add(" §dInformation:");
+                            loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "duo"));
+                            loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "duo"));
+                            loregamemode.add("");
+                            loregamemode.add("§8➡ §fCliquez pour rejoindre.");
+                            gamemodeM.setLore(loregamemode);
+                            gamemode.setItemMeta(gamemodeM);
+                            inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
+                        }
+                        else
+                        {
+                            ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "duo"));
+                            ItemMeta gamemodeM = gamemode.getItemMeta();
+                            gamemodeM.setDisplayName(core.getConfig().getString("kits.normal." + gameMode + ".name").replace("&", "§"));
+                            ArrayList<String> loregamemode = new ArrayList<String>();
+                            loregamemode.add("");
+                            loregamemode.add(" §dInformation:");
+                            loregamemode.add(" §f▶ §7En attente: §e" + core.getGameCheck().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "duo"));
+                            loregamemode.add(" §f▶ §7En jeu: §e" + core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "duo"));
+                            loregamemode.add("");
+                            loregamemode.add("§8➡ §fCliquez pour rejoindre.");
+                            gamemodeM.setLore(loregamemode);
+                            gamemode.setItemMeta(gamemodeM);
+                            inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
+                        }
+                    }
+
+                    ++t;
+                    if (t == 10) {
+                        t = 0;
+                    }
+                }
+            }.runTaskTimer((Plugin)core, 0L, 10L);
         }
         if (type.equalsIgnoreCase("duel"))
         {

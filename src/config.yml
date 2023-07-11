@@ -42,7 +42,7 @@ Arenas:
       b: -1.5
 
 kits:
-  1vs1:
+  normal:
     nodebuff:
       name: '&d&lNodebuff'
       id: 'nodebuff'

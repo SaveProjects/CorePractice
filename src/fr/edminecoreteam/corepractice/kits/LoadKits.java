@@ -22,11 +22,11 @@ public class LoadKits
         this.p = p;
     }
 
-    public List<String> getUnrankedKitList()
+    public List<String> getNormalKitList()
     {
         List<String> list = new ArrayList<String>();
 
-        for(String sKitName : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+        for(String sKitName : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
         {
             list.add(sKitName);
         }
@@ -36,73 +36,73 @@ public class LoadKits
 
     public void equipUnrankedDefaultKit(String kitName)
     {
-        for(String sKitName : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false)) {
+        for(String sKitName : core.getConfig().getConfigurationSection("kits.normal").getKeys(false)) {
             if (kitName.equals(sKitName)) {
                 p.sendMessage("§aKit " + sKitName + " reçu.");
-                for (String content : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.items").getKeys(false)) {
-                    if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".specialid").equalsIgnoreCase("no")) {
-                        ItemStack items = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".item")).getType(), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.items." + content + ".amount"));
+                for (String content : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.items").getKeys(false)) {
+                    if (core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".specialid").equalsIgnoreCase("no")) {
+                        ItemStack items = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".item")).getType(), core.getConfig().getInt("kits.normal." + sKitName + ".content.items." + content + ".amount"));
                         ItemMeta itemsM = items.getItemMeta();
-                        if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".isenchant").equalsIgnoreCase("yes")) {
-                            for (String enchants : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.items." + content + ".enchants").getKeys(false)) {
-                                itemsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.items." + content + ".enchants." + enchants + ".level"), true);
+                        if (core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".isenchant").equalsIgnoreCase("yes")) {
+                            for (String enchants : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.items." + content + ".enchants").getKeys(false)) {
+                                itemsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.normal." + sKitName + ".content.items." + content + ".enchants." + enchants + ".level"), true);
                             }
                         }
                         items.setItemMeta(itemsM);
-                        for (int slots : core.getConfig().getIntegerList("kits.1vs1." + sKitName + ".content.items." + content + ".slots")) {
+                        for (int slots : core.getConfig().getIntegerList("kits.normal." + sKitName + ".content.items." + content + ".slots")) {
                             p.getInventory().setItem(slots, items);
                         }
                     }
-                    if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".specialid").equalsIgnoreCase("yes")) {
-                        ItemStack items = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".item")).getType(), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.items." + content + ".amount"), (short) core.getConfig().getInt("kits.1vs1." + sKitName + ".content.items." + content + ".id"));
+                    if (core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".specialid").equalsIgnoreCase("yes")) {
+                        ItemStack items = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".item")).getType(), core.getConfig().getInt("kits.normal." + sKitName + ".content.items." + content + ".amount"), (short) core.getConfig().getInt("kits.normal." + sKitName + ".content.items." + content + ".id"));
                         ItemMeta itemsM = items.getItemMeta();
-                        if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".isenchant").equalsIgnoreCase("yes")) {
-                            for (String enchants : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.items." + content + ".enchants").getKeys(false)) {
-                                itemsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.items." + content + ".enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.items." + content + ".enchants." + enchants + ".level"), true);
+                        if (core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".isenchant").equalsIgnoreCase("yes")) {
+                            for (String enchants : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.items." + content + ".enchants").getKeys(false)) {
+                                itemsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.normal." + sKitName + ".content.items." + content + ".enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.normal." + sKitName + ".content.items." + content + ".enchants." + enchants + ".level"), true);
                             }
                         }
                         items.setItemMeta(itemsM);
-                        for (int slots : core.getConfig().getIntegerList("kits.1vs1." + sKitName + ".content.items." + content + ".slots")) {
+                        for (int slots : core.getConfig().getIntegerList("kits.normal." + sKitName + ".content.items." + content + ".slots")) {
                             p.getInventory().setItem(slots, items);
                         }
                     }
                 }
-                for (String armor : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.armor").getKeys(false)) {
-                    ItemStack helmet = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.helmet.item")).getType(), 1);
+                for (String armor : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.armor").getKeys(false)) {
+                    ItemStack helmet = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.helmet.item")).getType(), 1);
                     ItemMeta helmetM = helmet.getItemMeta();
-                    if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.helmet.isenchant").equalsIgnoreCase("yes")) {
-                        for (String enchants : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.armor.helmet.enchants").getKeys(false)) {
-                            helmetM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.helmet.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.armor.helmet.enchants." + enchants + ".level"), true);
+                    if (core.getConfig().getString("kits.normal." + sKitName + ".content.armor.helmet.isenchant").equalsIgnoreCase("yes")) {
+                        for (String enchants : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.armor.helmet.enchants").getKeys(false)) {
+                            helmetM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.helmet.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.normal." + sKitName + ".content.armor.helmet.enchants." + enchants + ".level"), true);
                         }
                     }
                     helmet.setItemMeta(helmetM);
                     p.getEquipment().setHelmet(helmet);
 
-                    ItemStack chestplate = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.chestplate.item")).getType(), 1);
+                    ItemStack chestplate = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.chestplate.item")).getType(), 1);
                     ItemMeta chestplateM = chestplate.getItemMeta();
-                    if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.chestplate.isenchant").equalsIgnoreCase("yes")) {
-                        for (String enchants : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.armor.chestplate.enchants").getKeys(false)) {
-                            chestplateM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.chestplate.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.armor.chestplate.enchants." + enchants + ".level"), true);
+                    if (core.getConfig().getString("kits.normal." + sKitName + ".content.armor.chestplate.isenchant").equalsIgnoreCase("yes")) {
+                        for (String enchants : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.armor.chestplate.enchants").getKeys(false)) {
+                            chestplateM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.chestplate.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.normal." + sKitName + ".content.armor.chestplate.enchants." + enchants + ".level"), true);
                         }
                     }
                     chestplate.setItemMeta(chestplateM);
                     p.getEquipment().setChestplate(chestplate);
 
-                    ItemStack leggings = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.leggings.item")).getType(), 1);
+                    ItemStack leggings = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.leggings.item")).getType(), 1);
                     ItemMeta leggingsM = leggings.getItemMeta();
-                    if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.leggings.isenchant").equalsIgnoreCase("yes")) {
-                        for (String enchants : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.armor.leggings.enchants").getKeys(false)) {
-                            leggingsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.leggings.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.armor.leggings.enchants." + enchants + ".level"), true);
+                    if (core.getConfig().getString("kits.normal." + sKitName + ".content.armor.leggings.isenchant").equalsIgnoreCase("yes")) {
+                        for (String enchants : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.armor.leggings.enchants").getKeys(false)) {
+                            leggingsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.leggings.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.normal." + sKitName + ".content.armor.leggings.enchants." + enchants + ".level"), true);
                         }
                     }
                     leggings.setItemMeta(leggingsM);
                     p.getEquipment().setLeggings(leggings);
 
-                    ItemStack boots = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.boots.item")).getType(), 1);
+                    ItemStack boots = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.boots.item")).getType(), 1);
                     ItemMeta bootsM = boots.getItemMeta();
-                    if (core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.boots.isenchant").equalsIgnoreCase("yes")) {
-                        for (String enchants : core.getConfig().getConfigurationSection("kits.1vs1." + sKitName + ".content.armor.boots.enchants").getKeys(false)) {
-                            bootsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.1vs1." + sKitName + ".content.armor.boots.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.1vs1." + sKitName + ".content.armor.boots.enchants." + enchants + ".level"), true);
+                    if (core.getConfig().getString("kits.normal." + sKitName + ".content.armor.boots.isenchant").equalsIgnoreCase("yes")) {
+                        for (String enchants : core.getConfig().getConfigurationSection("kits.normal." + sKitName + ".content.armor.boots.enchants").getKeys(false)) {
+                            bootsM.addEnchant(EnchantSerializer.serialize(core.getConfig().getString("kits.normal." + sKitName + ".content.armor.boots.enchants." + enchants + ".enchant")), core.getConfig().getInt("kits.normal." + sKitName + ".content.armor.boots.enchants." + enchants + ".level"), true);
                         }
                     }
                     boots.setItemMeta(bootsM);
