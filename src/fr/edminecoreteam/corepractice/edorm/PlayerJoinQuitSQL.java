@@ -36,7 +36,7 @@ public class PlayerJoinQuitSQL implements Listener
 
         GameMap gameMap = core.getGameMap();
         HashMap<String, Integer> gameValues = new HashMap<>();
-        for (String game : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+        for (String game : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
         {
             int getGameUnrankedWin = data.getGameData(game + "_unranked_win");
             int getGameRankedWin = data.getGameData(game + "_ranked_win");
@@ -88,7 +88,7 @@ public class PlayerJoinQuitSQL implements Listener
 
         GameMap gameMap = core.getGameMap();
         HashMap<String, Integer> gameValues = new HashMap<>();
-        for (String game : core.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+        for (String game : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
         {
             int getGameUnrankedWin = gameMap.rechercherValeurPourJoueur(p, game + "_unranked_win");
             int getGameRankedWin = gameMap.rechercherValeurPourJoueur(p, game + "_ranked_win");
