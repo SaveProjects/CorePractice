@@ -55,26 +55,30 @@ public class PersonalScoreboard {
 
         if (core.getInLobby().contains(player))
         {
+            int inLobby = core.getInLobby().size();
+            int inMatchs = core.getInDuel().size() + core.getInPreDuel().size() + core.getInEndDuel().size();
+
             objectiveSign.setLine(0, "§1");
             objectiveSign.setLine(1, " §f➡ §d§lInformations:");
             objectiveSign.setLine(2, "  §8• §7Compte: §f" + player.getName());
-            objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
-            objectiveSign.setLine(4, "  §8• §7Joueurs: §a" + core.getServer().getOnlinePlayers().size());
-            objectiveSign.setLine(5, "§2");
-            objectiveSign.setLine(6, "  §8• §7Elo: §e" + core.getPlayerEloDataManager().getData(player.getUniqueId()));
-            objectiveSign.setLine(7, "  §8• §7Classement: §f");
-            objectiveSign.setLine(8, "§3");
-            objectiveSign.setLine(9, " §8➡ " + ip);
+            objectiveSign.setLine(3, "  §8• §7Elo: §e" + core.getPlayerEloDataManager().getData(player.getUniqueId()));
+            objectiveSign.setLine(4, "  §8• §7Classement: §f");
+            objectiveSign.setLine(5, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
+            objectiveSign.setLine(6, "§2");
+            objectiveSign.setLine(7, "  §8• §7Lobby: §a" + inLobby);
+            objectiveSign.setLine(8, "  §8• §7En match: §d" + inMatchs);
+            objectiveSign.setLine(9, "§3");
+            objectiveSign.setLine(10, " §8➡ " + ip);
         }
         if (core.getInLobby().contains(player) && core.getInWaiting().contains(player))
         {
             objectiveSign.setLine(0, "§1");
-            objectiveSign.setLine(1, " §f➡ §a§lRecherche:");
-            objectiveSign.setLine(2, "  §8• §7Kit: §6" + core.getGameCheck().getGame(player));
-            objectiveSign.setLine(3, "  §8• §7MatchMaking: §a" + core.getGameIs().getGameIs(player));
-            objectiveSign.setLine(4, "  §8• §7Mode: §9" + core.getIfSoloOrDuo().getIfSoloOrDuo(player));
+            objectiveSign.setLine(1, " §f➡ §6§lRecherche:");
+            objectiveSign.setLine(2, "  §8• §7Kit: §6" + Render(core.getGameCheck().getGame(player)));
+            objectiveSign.setLine(3, "  §8• §7MatchMaking: §a" + Render(core.getGameIs().getGameIs(player)));
+            objectiveSign.setLine(4, "  §8• §7Mode: §9" + Render(core.getIfSoloOrDuo().getIfSoloOrDuo(player)));
             objectiveSign.setLine(5, "§2");
-            objectiveSign.setLine(6, "  §8• §7Attente: §e" + convertTime(core.getTime(player)));
+            objectiveSign.setLine(6, "  §8• §7Attente: §b" + convertTime(core.getTime(player)));
             objectiveSign.setLine(7, "§4");
             objectiveSign.setLine(8, " §8➡ " + ip);
         }
@@ -123,5 +127,14 @@ public class PersonalScoreboard {
 
     public void onLogout(){
         objectiveSign.removeReceiver(Bukkit.getServer().getOfflinePlayer(uuid));
+    }
+
+    private String Render(String chaine) {
+        if (chaine == null || chaine.isEmpty()) {
+            return chaine;  // Retourne la chaîne inchangée si elle est vide ou nulle
+        }
+
+        char premierCaractere = Character.toUpperCase(chaine.charAt(0));
+        return premierCaractere + chaine.substring(1);
     }
 }
