@@ -1,6 +1,7 @@
 package fr.edminecoreteam.corepractice.listeners;
 
 import fr.edminecoreteam.corepractice.Core;
+import fr.edminecoreteam.corepractice.gui.LeaderBoardGui;
 import fr.edminecoreteam.corepractice.gui.ProfileGui;
 import fr.edminecoreteam.corepractice.gui.RankedGui;
 import fr.edminecoreteam.corepractice.gui.UnrankedGui;
@@ -66,6 +67,10 @@ public class ItemListeners implements Listener
             if (it.getType() == Material.IRON_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique")) {
                 e.setCancelled(true);
                 UnrankedGui.gui(p, "1vs1");
+            }
+            if (it.getType() == Material.EMERALD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§a§lLeader-Board §7• Clique")) {
+                e.setCancelled(true);
+                LeaderBoardGui.gui(p, "unranked");
             }
             if (it.getType() == Material.DIAMOND_SWORD && e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lRanked §7• Clique")) {
                 e.setCancelled(true);
@@ -139,7 +144,7 @@ public class ItemListeners implements Listener
         }
         if (core.getInLobby().contains(p))
         {
-            if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 GameCheck gameCheck = core.getGameCheck();
                 gameCheck.removeSerchGame(p);
@@ -151,11 +156,11 @@ public class ItemListeners implements Listener
                 p.sendMessage("§cRecherche annulée...");
                 getLobbyItems(p);
             }
-            if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            if (it.getType() == Material.IRON_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§f§lUnranked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 UnrankedGui.gui(p, "1vs1");
             }
-            if (it.getType() == Material.DIAMOND_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§b§lRanked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            if (it.getType() == Material.DIAMOND_SWORD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§b§lRanked §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 if (core.getUnrankedPlayedDataManager().getData(p.getUniqueId()) >= 20)
                 {
@@ -168,14 +173,18 @@ public class ItemListeners implements Listener
                     p.sendMessage("§cErreur, avant de jouer en Ranked, veuillez faire encore " + needMatch + " matchs Unranked.");
                 }
             }
-            if (it.getType() == Material.SKULL_ITEM && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lProfil §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            if (it.getType() == Material.SKULL_ITEM && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lProfil §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 ProfileGui.gui(p);
+            }
+            if (it.getType() == Material.EMERALD && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§a§lLeader-Board §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
+                e.setCancelled(true);
+                LeaderBoardGui.gui(p, "unranked");
             }
         }
         if (core.getInPreDuel().contains(p) || core.getInDuel().contains(p))
         {
-            if (it.getType() == Material.BOOK && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lKit par défaut §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            if (it.getType() == Material.BOOK && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lKit par défaut §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 LoadKits pKit = new LoadKits(p);
 
@@ -200,11 +209,11 @@ public class ItemListeners implements Listener
         }
         if (core.getInEndDuel().contains(p))
         {
-            if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            if (it.getType() == Material.BED && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§c§lQuitter §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 GameListeners.leaveGame(p);
             }
-            if (it.getType() == Material.PAPER && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lRejouer §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK || a == Action.LEFT_CLICK_AIR || a == Action.LEFT_CLICK_BLOCK)) {
+            if (it.getType() == Material.PAPER && it.getItemMeta().hasDisplayName() && it.getItemMeta().getDisplayName().equalsIgnoreCase("§d§lRejouer §7• Clique") && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 GameListeners.replayGame(p);
             }

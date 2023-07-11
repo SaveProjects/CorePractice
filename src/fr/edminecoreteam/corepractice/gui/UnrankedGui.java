@@ -32,13 +32,13 @@ public class UnrankedGui implements Listener
 
     @EventHandler
     public void inventoryClick(InventoryClickEvent e) {
-        if (e.getView().getTopInventory().getTitle().equals("§8Unranked ┃ 1vs1")) {
+        if (e.getView().getTopInventory().getTitle().equals("§8Unranked ┃ Solo")) {
             Player p = (Player)e.getWhoClicked();
             if (e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().getType() != null) {
                 ItemStack it = e.getCurrentItem();
                 ItemMeta itM = it.getItemMeta();
                 if (it.getType() == Material.STAINED_GLASS_PANE) { e.setCancelled(true); }
-                if (it.getType() == Material.SKULL_ITEM && itM.getDisplayName().equalsIgnoreCase("§f§l2vs2")) { e.setCancelled(true); gui(p, "2vs2"); }
+                if (it.getType() == Material.SKULL_ITEM && itM.getDisplayName().equalsIgnoreCase("§f§lDuo")) { e.setCancelled(true); gui(p, "2vs2"); }
 
                 for (String gameMode : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
                 {
@@ -54,13 +54,13 @@ public class UnrankedGui implements Listener
                 }
             }
         }
-        if (e.getView().getTopInventory().getTitle().equals("§8Unranked ┃ 2vs2")) {
+        if (e.getView().getTopInventory().getTitle().equals("§8Unranked ┃ Duo")) {
             Player p = (Player)e.getWhoClicked();
             if (e.getCurrentItem().getType() != Material.AIR && e.getCurrentItem().getType() != null) {
                 ItemStack it = e.getCurrentItem();
                 ItemMeta itM = it.getItemMeta();
                 if (it.getType() == Material.STAINED_GLASS_PANE) { e.setCancelled(true); }
-                if (it.getType() == Material.SKULL_ITEM && itM.getDisplayName().equalsIgnoreCase("§f§l1vs1")) { e.setCancelled(true); gui(p, "1vs1"); }
+                if (it.getType() == Material.SKULL_ITEM && itM.getDisplayName().equalsIgnoreCase("§f§lSolo")) { e.setCancelled(true); gui(p, "1vs1"); }
 
                 for (String gameMode : core.getConfig().getConfigurationSection("kits.normal").getKeys(false))
                 {
@@ -82,7 +82,7 @@ public class UnrankedGui implements Listener
 
         if (type.equalsIgnoreCase("1vs1"))
         {
-            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked ┃ 1vs1");
+            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked ┃ Solo");
 
             ItemStack deco = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0);
             ItemMeta decoM = deco.getItemMeta();
@@ -98,11 +98,11 @@ public class UnrankedGui implements Listener
 
             ItemStack game1vs1 = getSkull("http://textures.minecraft.net/texture/ca516fbae16058f251aef9a68d3078549f48f6d5b683f19cf5a1745217d72cc");
             ItemMeta game1vs1M = game1vs1.getItemMeta();
-            game1vs1M.setDisplayName("§f§l1vs1");
+            game1vs1M.setDisplayName("§f§lSolo");
             ArrayList<String> loregame1vs1 = new ArrayList<String>();
             loregame1vs1.add("");
             loregame1vs1.add(" §aDescription:");
-            loregame1vs1.add(" §f▶ §7Match: §a1vs1");
+            loregame1vs1.add(" §f▶ §7Match: §e1vs1");
             loregame1vs1.add("");
             loregame1vs1.add("§8➡ §fCliquez pour y accéder.");
             game1vs1M.setLore(loregame1vs1);
@@ -111,11 +111,11 @@ public class UnrankedGui implements Listener
 
             ItemStack game2vs2 = getSkull("http://textures.minecraft.net/texture/e4b1e1d426123ce40cd6a54b0f876ad30c08539cf5a6ea63e847dc507950ff");
             ItemMeta game2vs2M = game2vs2.getItemMeta();
-            game2vs2M.setDisplayName("§f§l2vs2");
+            game2vs2M.setDisplayName("§f§lDuo");
             ArrayList<String> loregame2vs2 = new ArrayList<String>();
             loregame2vs2.add("");
             loregame2vs2.add(" §aDescription:");
-            loregame2vs2.add(" §f▶ §7Match: §a2vs2");
+            loregame2vs2.add(" §f▶ §7Match: §e2vs2");
             loregame2vs2.add("");
             loregame2vs2.add("§8➡ §fCliquez pour y accéder.");
             game2vs2M.setLore(loregame2vs2);
@@ -124,7 +124,7 @@ public class UnrankedGui implements Listener
 
             ItemStack duel = getSkull("http://textures.minecraft.net/texture/27e8abb6786cf0c8b7f83da36bf5a452edf54d20e230963298ea77b8c3f2d015");
             ItemMeta duelM = duel.getItemMeta();
-            duelM.setDisplayName("§a§lDuel");
+            duelM.setDisplayName("§a§lDuel Unranked");
             ArrayList<String> loreduel = new ArrayList<String>();
             loreduel.add("");
             loreduel.add(" §aDescription:");
@@ -136,20 +136,25 @@ public class UnrankedGui implements Listener
             duel.setItemMeta(duelM);
             inv.setItem(26, duel);
 
-            ItemStack soon = getSkull("http://textures.minecraft.net/texture/81fb8ce6408a5851384e1c2ef753851eac18ba4018266cdd669dc944873d42");
-            ItemMeta soonM = soon.getItemMeta();
-            soonM.setDisplayName("§7...");
-            ArrayList<String> loresoon = new ArrayList<String>();
-            loresoon.add("");
-            soonM.setLore(loresoon);
-            soon.setItemMeta(soonM);
-            inv.setItem(35, soon);
+            ItemStack ffa = getSkull("http://textures.minecraft.net/texture/633c89a3c529d5136be6c49a62be0383fc3722cc990142e5cb3cc96db199d7d");
+            ItemMeta ffaM = ffa.getItemMeta();
+            ffaM.setDisplayName("§e§lFFA Unranked");
+            ArrayList<String> loreffa = new ArrayList<String>();
+            loreffa.add("");
+            loreffa.add(" §aDescription:");
+            loreffa.add(" §f▶ §7Cliquez ici pour jouer");
+            loreffa.add(" §f  §7sur un mode ffa unranked.");
+            loreffa.add("");
+            loreffa.add("§8➡ §fCliquez pour y accéder.");
+            ffaM.setLore(loreffa);
+            ffa.setItemMeta(ffaM);
+            inv.setItem(35, ffa);
 
             new BukkitRunnable() {
                 int t = 0;
                 public void run() {
 
-                    if (!p.getOpenInventory().getTitle().contains("§8Unranked ┃ 1vs1")) { cancel(); }
+                    if (!p.getOpenInventory().getTitle().contains("§8Unranked ┃ Solo")) { cancel(); }
                     LoadKits kits = new LoadKits(p);
 
                     for (String gameMode : kits.getNormalKitList())
@@ -197,7 +202,7 @@ public class UnrankedGui implements Listener
         }
         if (type.equalsIgnoreCase("2vs2"))
         {
-            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked ┃ 2vs2");
+            Inventory inv = Bukkit.createInventory(null, 54, "§8Unranked ┃ Duo");
 
             ItemStack deco = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0);
             ItemMeta decoM = deco.getItemMeta();
@@ -213,11 +218,11 @@ public class UnrankedGui implements Listener
 
             ItemStack game1vs1 = getSkull("http://textures.minecraft.net/texture/caf1b280cab59f4469dab9f1a2af7927ed96a81df1e24d50a8e3984abfe4044");
             ItemMeta game1vs1M = game1vs1.getItemMeta();
-            game1vs1M.setDisplayName("§f§l1vs1");
+            game1vs1M.setDisplayName("§f§lSolo");
             ArrayList<String> loregame1vs1 = new ArrayList<String>();
             loregame1vs1.add("");
             loregame1vs1.add(" §aDescription:");
-            loregame1vs1.add(" §f▶ §7Match: §a1vs1");
+            loregame1vs1.add(" §f▶ §7Match: §e1vs1");
             loregame1vs1.add("");
             loregame1vs1.add("§8➡ §fCliquez pour y accéder.");
             game1vs1M.setLore(loregame1vs1);
@@ -226,11 +231,11 @@ public class UnrankedGui implements Listener
 
             ItemStack game2vs2 = getSkull("http://textures.minecraft.net/texture/4698add39cf9e4ea92d42fadefdec3be8a7dafa11fb359de752e9f54aecedc9a");
             ItemMeta game2vs2M = game2vs2.getItemMeta();
-            game2vs2M.setDisplayName("§f§l2vs2");
+            game2vs2M.setDisplayName("§f§lDuo");
             ArrayList<String> loregame2vs2 = new ArrayList<String>();
             loregame2vs2.add("");
             loregame2vs2.add(" §aDescription:");
-            loregame2vs2.add(" §f▶ §7Match: §a2vs2");
+            loregame2vs2.add(" §f▶ §7Match: §e2vs2");
             loregame2vs2.add("");
             loregame2vs2.add("§8➡ §fCliquez pour y accéder.");
             game2vs2M.setLore(loregame2vs2);
@@ -239,7 +244,7 @@ public class UnrankedGui implements Listener
 
             ItemStack duel = getSkull("http://textures.minecraft.net/texture/27e8abb6786cf0c8b7f83da36bf5a452edf54d20e230963298ea77b8c3f2d015");
             ItemMeta duelM = duel.getItemMeta();
-            duelM.setDisplayName("§a§lDuel");
+            duelM.setDisplayName("§a§lDuel Unranked");
             ArrayList<String> loreduel = new ArrayList<String>();
             loreduel.add("");
             loreduel.add(" §aDescription:");
@@ -251,17 +256,25 @@ public class UnrankedGui implements Listener
             duel.setItemMeta(duelM);
             inv.setItem(26, duel);
 
-            ItemStack soon = getSkull("http://textures.minecraft.net/texture/81fb8ce6408a5851384e1c2ef753851eac18ba4018266cdd669dc944873d42");
-            ItemMeta soonM = soon.getItemMeta();
-            soonM.setDisplayName("§7...");
-            soon.setItemMeta(soonM);
-            inv.setItem(35, soon);
+            ItemStack ffa = getSkull("http://textures.minecraft.net/texture/633c89a3c529d5136be6c49a62be0383fc3722cc990142e5cb3cc96db199d7d");
+            ItemMeta ffaM = ffa.getItemMeta();
+            ffaM.setDisplayName("§e§lFFA Unranked");
+            ArrayList<String> loreffa = new ArrayList<String>();
+            loreffa.add("");
+            loreffa.add(" §aDescription:");
+            loreffa.add(" §f▶ §7Cliquez ici pour jouer");
+            loreffa.add(" §f  §7sur un mode ffa unranked.");
+            loreffa.add("");
+            loreffa.add("§8➡ §fCliquez pour y accéder.");
+            ffaM.setLore(loreffa);
+            ffa.setItemMeta(ffaM);
+            inv.setItem(35, ffa);
 
             new BukkitRunnable() {
                 int t = 0;
                 public void run() {
 
-                    if (!p.getOpenInventory().getTitle().contains("§8Unranked ┃ 2vs2")) { cancel(); }
+                    if (!p.getOpenInventory().getTitle().contains("§8Unranked ┃ Duo")) { cancel(); }
                     LoadKits kits = new LoadKits(p);
 
                     for (String gameMode : kits.getNormalKitList())
