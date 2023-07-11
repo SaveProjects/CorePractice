@@ -1,7 +1,6 @@
 package fr.edminecoreteam.corepractice.data;
 
 import fr.edminecoreteam.corepractice.edorm.MySQL;
-import fr.edminecoreteam.corepractice.gui.LeaderBoardGui;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,24 +10,17 @@ import java.util.List;
 
 public class LeaderBoardData
 {
-
-    private final String table;
     private String p;
 
-    public LeaderBoardData()
-    {
-        this.table = "ed_practice";
-    }
 
     public LeaderBoardData(String p) {
         this.p = p;
-        this.table = "ed_practice";
     }
 
     public List<String> getTopPlayers(String getValue) {
         List<String> topPlayers = new ArrayList<String>();
         try {
-            PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT player_name FROM " + table + " ORDER BY " + getValue + " DESC LIMIT 10");
+            PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT player_name FROM ed_practice ORDER BY " + getValue + " DESC LIMIT 10");
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next())
             {
@@ -45,7 +37,7 @@ public class LeaderBoardData
     {
         try
         {
-            PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT " + valueToGet + " FROM " + table + " WHERE player_name = ?");
+            PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT " + valueToGet + " FROM ed_practice WHERE player_name = ?");
             preparedStatement.setString(1, p);
             int id = 0;
             ResultSet rs = preparedStatement.executeQuery();
