@@ -587,7 +587,7 @@ public class GameListeners implements Listener
 
                                 core.getInEndDuel().add(loser);
 
-                                core.getDuoGestion().removeDuoGestion(winner);
+                                core.getDuoGestion().removeDuoGestion(loser);
 
 
                                 WhatIsGame gameIs = core.getGameIs();
