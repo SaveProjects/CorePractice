@@ -248,9 +248,9 @@ public class Core extends JavaPlugin implements PluginMessageListener
 
     public void updateColumnsPractice()
     {
-        for (String modes : this.getConfig().getConfigurationSection("kits.1vs1").getKeys(false))
+        for (String modes : this.getConfig().getConfigurationSection("kits.normal").getKeys(false))
         {
-            database.updateColumnsPractice(this.getConfig().getString("kits.1vs1." + modes + ".id"));
+            database.updateColumnsPractice(this.getConfig().getString("kits.normal." + modes + ".id"));
         }
     }
 
