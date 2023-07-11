@@ -126,7 +126,7 @@ public class LeaderBoardGui implements Listener
                 if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion")) {
 
                     List<String> listLead = leadData.getTopPlayers(gameMode + "_unranked_win");
-                    HashMap<String, Integer> leaderboard = new HashMap<>();
+                    HashMap<String, Integer> leaderboard = new HashMap<String, Integer>();
 
                     for (String lLead : listLead)
                     {
@@ -153,7 +153,7 @@ public class LeaderBoardGui implements Listener
                 } else {
 
                     List<String> listLead = leadData.getTopPlayers(gameMode + "_unranked_win");
-                    HashMap<String, Integer> leaderboard = new HashMap<>();
+                    HashMap<String, Integer> leaderboard = new HashMap<String, Integer>();
 
                     for (String lLead : listLead)
                     {
