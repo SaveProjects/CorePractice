@@ -12,6 +12,9 @@ public class LeaderBoardData
 {
     private String p;
 
+    public LeaderBoardData() {
+        //rien
+    }
 
     public LeaderBoardData(String p) {
         this.p = p;
