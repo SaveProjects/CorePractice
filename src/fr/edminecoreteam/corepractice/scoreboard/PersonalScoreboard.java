@@ -53,7 +53,7 @@ public class PersonalScoreboard {
     public void setLines(String ip){
         objectiveSign.setDisplayName("§8● §6§lPractice §8●");
 
-        if (core.getInLobby().contains(player))
+        if (core.getInLobby().contains(player) && !core.getInWaiting().contains(player))
         {
             int inLobby = core.getInLobby().size();
             int inMatchs = core.getInDuel().size() + core.getInPreDuel().size() + core.getInEndDuel().size();
@@ -86,6 +86,7 @@ public class PersonalScoreboard {
 
             objectiveSign.updateLines();
         }
+
         if (core.getInDuel().contains(player) || core.getInPreDuel().contains(player))
         {
             if (core.getIfSoloOrDuo().getIfSoloOrDuo(player).equalsIgnoreCase("solo"))
