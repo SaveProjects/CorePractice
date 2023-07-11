@@ -26,22 +26,22 @@ public class LeaderBoardData
     }
 
     public List<String> getTopPlayers(String getValue) {
-        List<String> topPlayers = new ArrayList<>();
+        List<String> topPlayers = new ArrayList<String>();
         try {
             PreparedStatement preparedStatement = MySQL.getConnection().prepareStatement("SELECT player_name FROM " + table + " ORDER BY " + getValue + " DESC LIMIT 10");
 
-            String id = "";
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next())
             {
-                id = rs.getString(getValue);
+                String id = rs.getString(getValue);
                 topPlayers.add(id);
             }
             preparedStatement.close();
+            return topPlayers;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return topPlayers;
+        return null;
     }
 
     public int getGameData(String valueToGet)
