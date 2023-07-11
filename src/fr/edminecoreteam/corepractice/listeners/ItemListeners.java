@@ -262,11 +262,11 @@ public class ItemListeners implements Listener
             kitEditor.setItemMeta(kitEditorM);
             p.getInventory().setItem(2, kitEditor);
 
-            ItemStack ffa = new ItemStack(Material.GOLD_AXE, 1);
+            /*ItemStack ffa = new ItemStack(Material.GOLD_AXE, 1);
             ItemMeta ffaM = ffa.getItemMeta();
             ffaM.setDisplayName("§e§lFFA §7• Clique");
             ffa.setItemMeta(ffaM);
-            p.getInventory().setItem(4, ffa);
+            p.getInventory().setItem(4, ffa);*/
 
             ItemStack leaderBoard = new ItemStack(Material.EMERALD, 1);
             ItemMeta leaderBoardM = leaderBoard.getItemMeta();
