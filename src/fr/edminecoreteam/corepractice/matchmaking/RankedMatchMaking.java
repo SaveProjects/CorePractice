@@ -3,6 +3,8 @@ package fr.edminecoreteam.corepractice.matchmaking;
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.listeners.ItemListeners;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class RankedMatchMaking
 {
@@ -29,10 +31,32 @@ public class RankedMatchMaking
 
             p.sendMessage("§fRecherche d'une partie en cours sur le mode §e§l" + game + "§f...");
             ItemListeners.foundGameItems(p);
+            startTimingMatch(p);
         }
         else
         {
             p.sendMessage("§cAction impossible, vous êtes déjà dans une file d'attente...");
         }
+    }
+
+    private void startTimingMatch(Player p)
+    {
+        new BukkitRunnable() {
+            int t = 0;
+            public void run() {
+
+                if (core.getInWaiting().contains(p))
+                {
+                    core.addTime(p, 1);
+                }
+                else
+                {
+                    core.resetTime(p);
+                    cancel();
+                }
+
+                ++t;
+            }
+        }.runTaskTimer((Plugin)core, 0L, 20L);
     }
 }

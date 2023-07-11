@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import fr.edminecoreteam.corepractice.Core;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 /*
@@ -68,29 +69,53 @@ public class PersonalScoreboard {
         if (core.getInLobby().contains(player) && core.getInWaiting().contains(player))
         {
             objectiveSign.setLine(0, "§1");
-            objectiveSign.setLine(1, " §f➡ §d§lInformations:");
-            objectiveSign.setLine(2, "  §8• §7Compte: §f" + player.getName());
-            objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
-            objectiveSign.setLine(4, "  §8• §7Joueurs: §a" + core.getServer().getOnlinePlayers().size());
+            objectiveSign.setLine(1, " §f➡ §a§lRecherche:");
+            objectiveSign.setLine(2, "  §8• §7Kit: §6" + core.getGameCheck().getGame(player));
+            objectiveSign.setLine(3, "  §8• §7MatchMaking: §a" + core.getGameIs().getGameIs(player));
+            objectiveSign.setLine(4, "  §8• §7Mode: §9" + core.getIfSoloOrDuo().getIfSoloOrDuo(player));
             objectiveSign.setLine(5, "§2");
-            objectiveSign.setLine(6, "  §8• §7Recherche: §e" + core.getGameCheck().getGame(player));
+            objectiveSign.setLine(6, "  §8• §7Attente: §e" + convertTime(core.getTime(player)));
             objectiveSign.setLine(7, "§4");
             objectiveSign.setLine(8, " §8➡ " + ip);
         }
         if (core.getInDuel().contains(player) || core.getInPreDuel().contains(player))
         {
-            Player oppenant = core.getMatchOppenant().getMatchOppenant(player);
+            if (core.getIfSoloOrDuo().getIfSoloOrDuo(player).equalsIgnoreCase("solo"))
+            {
+                Player oppenant = core.getMatchOppenant().getMatchOppenant(player);
 
-            objectiveSign.setLine(0, "§1");
-            objectiveSign.setLine(1, " §f➡ §b§lMatch en cours:");
-            objectiveSign.setLine(2, "  §8• §7Adversaire: §c" + oppenant.getName());
-            objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
-            objectiveSign.setLine(4, "  §8• §7Ping adversaire: §b" + ((CraftPlayer) oppenant).getHandle().ping);
-            objectiveSign.setLine(5, "§2");
-            objectiveSign.setLine(6, "  §8• §7Durée: §a" + convertTime(core.getTime(player)));
-            objectiveSign.setLine(7, "  §8• §7Carte: §9" + core.getWorldName().getWorldName(player));
-            objectiveSign.setLine(8, "§3");
-            objectiveSign.setLine(9, " §8➡ " + ip);
+                objectiveSign.setLine(0, "§1");
+                objectiveSign.setLine(1, " §f➡ §b§lMatch en cours:");
+                objectiveSign.setLine(2, "  §8• §7Adversaire: §c" + oppenant.getName());
+                objectiveSign.setLine(3, "  §8• §7Votre ping: §b" + ((CraftPlayer) player).getHandle().ping);
+                objectiveSign.setLine(4, "  §8• §7Ping adversaire: §b" + ((CraftPlayer) oppenant).getHandle().ping);
+                objectiveSign.setLine(5, "§2");
+                objectiveSign.setLine(6, "  §8• §7Durée: §a" + convertTime(core.getTime(player)));
+                objectiveSign.setLine(7, "  §8• §7Carte: §9" + core.getWorldName().getWorldName(player));
+                objectiveSign.setLine(8, "§3");
+                objectiveSign.setLine(9, " §8➡ " + ip);
+            }
+            if (core.getIfSoloOrDuo().getIfSoloOrDuo(player).equalsIgnoreCase("duo"))
+            {
+                /*int gameID = core.getGameID().getGameID(player);
+                HashMap<Player, String> getTeams = core.getMatchDuoOppenant().getHashMapForTeam(gameID);
+
+                for (Player pS : getTeams.keySet())
+                {
+
+                }
+
+                objectiveSign.setLine(0, "§1");
+                objectiveSign.setLine(1, " §f➡ §b§lMatch en cours:");
+                objectiveSign.setLine(2, "  §8• §7Adversaires: §c" + oppenant.getName());
+                objectiveSign.setLine(3, "  §8• §7Vos pings: §b" + ((CraftPlayer) player).getHandle().ping);
+                objectiveSign.setLine(4, "  §8• §7Ping adversaire: §b" + ((CraftPlayer) oppenant).getHandle().ping);
+                objectiveSign.setLine(5, "§2");
+                objectiveSign.setLine(6, "  §8• §7Durée: §a" + convertTime(core.getTime(player)));
+                objectiveSign.setLine(7, "  §8• §7Carte: §9" + core.getWorldName().getWorldName(player));
+                objectiveSign.setLine(8, "§3");
+                objectiveSign.setLine(9, " §8➡ " + ip);*/
+            }
         }
 
         objectiveSign.updateLines();

@@ -33,6 +33,8 @@ public class GameListeners implements Listener
         core.getInWaiting().remove(p2);
         core.getInLobby().remove(p1);
         core.getInLobby().remove(p2);
+        core.resetTime(p1);
+        core.resetTime(p2);
 
         int randomID = ThreadLocalRandom.current().nextInt(100000000, 999999999);
 
@@ -164,6 +166,10 @@ public class GameListeners implements Listener
         core.getInLobby().remove(p2);
         core.getInLobby().remove(p3);
         core.getInLobby().remove(p4);
+        core.resetTime(p1);
+        core.resetTime(p2);
+        core.resetTime(p3);
+        core.resetTime(p4);
 
         int randomID = ThreadLocalRandom.current().nextInt(100000000, 999999999);
 
