@@ -27,7 +27,7 @@ public class LeaderBoardData
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next())
             {
-                topPlayers.add(rs.getString(getValue));
+                topPlayers.add(rs.getString("player_name"));
             }
             preparedStatement.close();
             return topPlayers;
