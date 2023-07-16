@@ -121,8 +121,8 @@ public class LeaderBoardGui implements Listener
 
             for (String gameMode : kits.getNormalKitList()) {
 
-                String stats = gameMode + "_unranked_win";
-                List<String> listLead = leadData.getTopPlayers(stats);
+                final String stats = gameMode + "_unranked_win";
+                final List<String> listLead = leadData.getTopPlayers(stats);
                 int count = 0;
 
                 if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion")) {
