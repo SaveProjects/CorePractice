@@ -120,6 +120,11 @@ public class LeaderBoardGui implements Listener
             LeaderBoardData leadData = new LeaderBoardData();
 
             for (String gameMode : kits.getNormalKitList()) {
+
+                String stats = gameMode + "_unranked_win";
+                List<String> listLead = leadData.getTopPlayers(stats);
+                int count = 0;
+
                 if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion")) {
 
                     ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"), (short) core.getConfig().getInt("kits.normal." + gameMode + ".potionid"));
@@ -128,9 +133,6 @@ public class LeaderBoardGui implements Listener
                     ArrayList<String> loregamemode = new ArrayList<String>();
                     loregamemode.add("");
                     loregamemode.add(" §dTop 10:");
-                    String stats = gameMode + "_unranked_win";
-                    List<String> listLead = leadData.getTopPlayers(stats);
-                    int count = 0;
                     for (String stringLead : listLead)
                     {
                         ++count;
@@ -149,9 +151,6 @@ public class LeaderBoardGui implements Listener
                     ArrayList<String> loregamemode = new ArrayList<String>();
                     loregamemode.add("");
                     loregamemode.add(" §dTop 10:");
-                    String stats = gameMode + "_unranked_win";
-                    List<String> listLead = leadData.getTopPlayers(stats);
-                    int count = 0;
                     for (String stringLead : listLead)
                     {
                         ++count;
@@ -231,10 +230,12 @@ public class LeaderBoardGui implements Listener
             LeaderBoardData leadData = new LeaderBoardData();
 
             for (String gameMode : kits.getNormalKitList()) {
+
+                String stats = gameMode + "_elo";
+                List<String> listLead = leadData.getTopPlayers(stats);
+                int count = 0;
+
                 if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion")) {
-                    String stats = gameMode + "_elo";
-                    List<String> listLead = leadData.getTopPlayers(stats);
-                    int count = 0;
 
                     ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"), (short) core.getConfig().getInt("kits.normal." + gameMode + ".potionid"));
                     ItemMeta gamemodeM = gamemode.getItemMeta();
@@ -253,9 +254,6 @@ public class LeaderBoardGui implements Listener
                     gamemode.setItemMeta(gamemodeM);
                     inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
                 } else {
-                    String stats = gameMode + "_elo";
-                    List<String> listLead = leadData.getTopPlayers(stats);
-                    int count = 0;
 
                     ItemStack gamemode = new ItemStack(ItemStackSerializer.deserialize(core.getConfig().getString("kits.normal." + gameMode + ".icon")).getType(), core.getGameType().getListWhereGame(core.getConfig().getString("kits.normal." + gameMode + ".id"), "ranked", "solo"));
                     ItemMeta gamemodeM = gamemode.getItemMeta();
