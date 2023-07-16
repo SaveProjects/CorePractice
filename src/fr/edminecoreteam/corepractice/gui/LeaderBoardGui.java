@@ -247,7 +247,7 @@ public class LeaderBoardGui implements Listener
                     {
                         ++count;
                         LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_elo") + " elo.");
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(stringLead) + " elo.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
@@ -265,7 +265,7 @@ public class LeaderBoardGui implements Listener
                     {
                         ++count;
                         LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_elo") + " elo.");
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(stringLead) + " elo.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
