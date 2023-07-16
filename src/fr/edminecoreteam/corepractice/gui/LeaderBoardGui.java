@@ -137,7 +137,7 @@ public class LeaderBoardGui implements Listener
                     {
                         ++count;
                         LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(stringLead) + " matchs gagnées.");
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_unranked_win") + " matchs gagnées.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
@@ -231,8 +231,8 @@ public class LeaderBoardGui implements Listener
 
             for (String gameMode : kits.getNormalKitList()) {
 
-                String stats = gameMode + "_elo";
-                List<String> listLead = leadData.getTopPlayers(stats);
+                final String stats = gameMode + "_elo";
+                final List<String> listLead = leadData.getTopPlayers(stats);
                 int count = 0;
 
                 if (core.getConfig().getString("kits.normal." + gameMode + ".icon").equalsIgnoreCase("potion")) {
@@ -247,7 +247,7 @@ public class LeaderBoardGui implements Listener
                     {
                         ++count;
                         LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(stringLead) + " elo.");
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_elo") + " elo.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
@@ -265,7 +265,7 @@ public class LeaderBoardGui implements Listener
                     {
                         ++count;
                         LeaderBoardData lLeadData = new LeaderBoardData(stringLead);
-                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(stringLead) + " elo.");
+                        loregamemode.add(" §f▶ §a#" + count + " §7" + stringLead + ": §e" + lLeadData.getGameData(gameMode + "_elo") + " elo.");
                     }
                     loregamemode.add("");
                     gamemodeM.setLore(loregamemode);
