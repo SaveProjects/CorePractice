@@ -75,9 +75,6 @@ public class LeaderBoardGui implements Listener
             inv.setItem(36, deco);
             inv.setItem(44, deco);
 
-            p.openInventory(inv);
-            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1.0f, 2.0f);
-
             ItemStack unranked = getSkull("http://textures.minecraft.net/texture/1f5efe243611d748e6509617429d7d84afcb85c5e2516d8bd5a011b5deb0b373");
             ItemMeta unrankedM = unranked.getItemMeta();
             unrankedM.setDisplayName("§a§lUnranked");
@@ -167,6 +164,9 @@ public class LeaderBoardGui implements Listener
                     inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
                 }
             }
+
+            p.openInventory(inv);
+            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1.0f, 2.0f);
         }
         if (type.equalsIgnoreCase("ranked")) {
             Inventory inv = Bukkit.createInventory(null, 54, "§8LeaderBoard ┃ Ranked");
@@ -185,9 +185,6 @@ public class LeaderBoardGui implements Listener
             inv.setItem(53, deco);
             inv.setItem(36, deco);
             inv.setItem(44, deco);
-
-            p.openInventory(inv);
-            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1.0f, 2.0f);
 
             ItemStack unranked = getSkull("http://textures.minecraft.net/texture/28158d853c948f3df72ed1d8938172c8ac8824b31d42ce4b5f048bd2b5679");
             ItemMeta unrankedM = unranked.getItemMeta();
@@ -278,6 +275,8 @@ public class LeaderBoardGui implements Listener
                     inv.setItem(core.getConfig().getInt("kits.normal." + gameMode + ".slot"), gamemode);
                 }
             }
+            p.openInventory(inv);
+            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1.0f, 2.0f);
         }
     }
 }
