@@ -3,8 +3,6 @@ package fr.edminecoreteam.corepractice.gui;
 import fr.edminecoreteam.corepractice.Core;
 import fr.edminecoreteam.corepractice.data.LeaderBoardData;
 import fr.edminecoreteam.corepractice.kits.LoadKits;
-import fr.edminecoreteam.corepractice.listeners.ItemListeners;
-import fr.edminecoreteam.corepractice.matchmaking.UnrankedMatchMaking;
 import fr.edminecoreteam.corepractice.utils.ItemStackSerializer;
 import fr.edminecoreteam.corepractice.utils.SkullNBT;
 import org.bukkit.Bukkit;
@@ -19,17 +17,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class LeaderBoardGui implements Listener
 {
 
-    private static Core core = Core.getInstance();
+    private static final Core core = Core.getInstance();
     private static ItemStack getSkull(String url) { return SkullNBT.getSkull(url); }
 
     @EventHandler

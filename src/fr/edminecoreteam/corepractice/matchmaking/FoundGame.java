@@ -126,11 +126,11 @@ public class FoundGame
                                 }
                             }
                         }
-                        if (duoList.size() > 3)
+                        if (duoList.size() >= 4)
                         {
                             List<Player> unrankedWait = new ArrayList<Player>();
                             List<Player> rankedWait = new ArrayList<Player>();
-                            for (Player filtreP : soloList)
+                            for (Player filtreP : duoList)
                             {
                                 if (gameIs.getGameIs(filtreP).equalsIgnoreCase("unranked"))
                                 {
