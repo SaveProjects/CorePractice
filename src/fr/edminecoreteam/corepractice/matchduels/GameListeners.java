@@ -221,17 +221,17 @@ public class GameListeners implements Listener
                 , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team1.b"));
 
         Location p2Spawn = new Location(Bukkit.getWorld(core.getGameID().getIDString(p1)),
-                (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.x")
-                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.y")
-                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.z")
-                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.t")
-                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p2) + ".team2.b"));
+                (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team2.x")
+                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team2.y")
+                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team2.z")
+                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team2.t")
+                , (float) core.getConfig().getDouble("Arenas." + core.getWorldName().getWorldName(p1) + ".team2.b"));
 
         p1.teleport(p1Spawn);
         p2.teleport(p1Spawn);
 
-        p1.teleport(p2Spawn);
-        p2.teleport(p2Spawn);
+        p3.teleport(p2Spawn);
+        p4.teleport(p2Spawn);
 
 
         p1.setGameMode(GameMode.SURVIVAL);

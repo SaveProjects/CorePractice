@@ -61,7 +61,7 @@ public class EventListeners implements Listener
                         }
                         if (core.getIfSoloOrDuo().getIfSoloOrDuo(p).equalsIgnoreCase("duo"))
                         {
-                            if (!core.getDuoGestion().getDuo(p).equals(pA))
+                            if (core.getDuoGestion().getDuo(p).equals(pA))
                             {
                                 e.setCancelled(true);
                             }
